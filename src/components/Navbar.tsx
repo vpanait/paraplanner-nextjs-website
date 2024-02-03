@@ -33,7 +33,7 @@ interface IProps {
 }
 
 
-const Navbar = ({ routes , mode = 'light' }: IProps) => {
+const Navbar = ({ routes, mode = 'light' }: IProps) => {
   const theme = useTheme();
   const fullMenuView = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -66,7 +66,7 @@ const Navbar = ({ routes , mode = 'light' }: IProps) => {
         );
       } else {
         return (
-          <ListItemButton key={index} component={NextLink} href={item.path} className="grow-0" passHref>
+          <ListItemButton key={index} component={NextLink} href={item.path} sx={{ flexGrow: 0 }} passHref>
             <ListItemText primary={item.label} />
           </ListItemButton>
         );
@@ -137,7 +137,7 @@ const Navbar = ({ routes , mode = 'light' }: IProps) => {
                 <List
                   component="nav"
                   aria-labelledby="nested-list-subheader"
-                  className="flex flex-row"
+                  sx={{ display: 'flex' }}
                 >
                   {renderMenuItems(routes)}
                 </List>

@@ -6,8 +6,11 @@ import Button from '@mui/material/Button';
 import NextLink from 'next/link';
 import ProTip from '@/components/ProTip';
 import Copyright from '@/components/Copyright';
+import { getDictionary } from 'get-dictionary';
 
-export default function About() {
+export default async function About() {
+  const dictionary = await getDictionary();
+  
   return (
     <Container maxWidth="lg">
       <Box

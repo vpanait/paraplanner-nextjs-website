@@ -7,8 +7,6 @@ import ProTip from '@/components/ProTip';
 import Copyright from '@/components/Copyright';
 import * as React from 'react';
 import "./globals.css";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import MenuIcon from '@mui/icons-material/Menu';
 
 export default function Home() {
 
@@ -23,6 +21,20 @@ export default function Home() {
           alignItems: 'center',
         }}
       >
+        <Typography variant="h1" sx={{ mb: 2 }}>
+          H! Material UI - Next.js App Router example in TypeScript
+        </Typography>
+        <Typography variant="h4" sx={{ mb: 2 }}>
+          :) Material UI - Next.js App Router example in TypeScript
+        </Typography>
+
+        <Link href="/about" color="secondary" component={NextLink}>
+          Go to the about page
+        </Link>
+        <ProTip />
+        <Copyright />
+
+
         <Typography variant="h1" sx={{ mb: 2 }}>
           H! Material UI - Next.js App Router example in TypeScript
         </Typography>

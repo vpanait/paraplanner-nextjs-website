@@ -32,6 +32,26 @@ export default async function About() {
         </Box>
         <ProTip />
         <Copyright />
+        <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
+          Material UI - Next.js example in TypeScriptt
+        </Typography>
+        <Box sx={{ maxWidth: 'sm' }}>
+          <Button variant="contained" component={NextLink} href="/">
+            Go to the home page
+          </Button>
+        </Box>
+        <ProTip />
+        <Copyright />
+        <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
+          Material UI - Next.js example in TypeScriptt
+        </Typography>
+        <Box sx={{ maxWidth: 'sm' }}>
+          <Button variant="contained" component={NextLink} href="/">
+            Go to the home page
+          </Button>
+        </Box>
+        <ProTip />
+        <Copyright />
       </Box>
     </Container>
   );

@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   List,
   ListItem,
@@ -20,6 +20,7 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import MenuIcon from '@mui/icons-material/Menu';
 import NextLink from 'next/link';
 import SectionContainer from "@/components/SectionContainer";
+import { animated, useScroll, useSpring } from "@react-spring/web";
 
 interface MenuItem {
   label: string;
@@ -36,6 +37,8 @@ interface IProps {
 const Navbar = ({ routes, mode = 'light' }: IProps) => {
   const theme = useTheme();
   const fullMenuView = useMediaQuery(theme.breakpoints.up('sm'));
+  const containerRef = useRef<HTMLDivElement>(null!)
+
 
   const [open, setOpen] = useState(false);
   const [openSubMenu, setOpenSubMenu] = React.useState<number | null>(null);
@@ -44,11 +47,14 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
     setOpen(!open);
   };
 
-
   const handleSubItemClick = (index: number) => {
     setOpenSubMenu(openSubMenu === index ? null : index);
   };
 
+  const { scrollY } = useScroll();
+  const { padding } = useSpring({
+    padding: scrollY.to((y) => (y > 5 ? 0 : 40)),
+  });
 
   const renderMenuItems = (items: MenuItem[]) => {
     return items?.map((item, index) => {
@@ -77,76 +83,76 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
 
 
   return (
-    <SectionContainer mode="light">
-      <AppBar position="static">
-        <Toolbar variant="dense">
-          {!fullMenuView && (
-            <>
-              <List>
-                <ListItem>
-                  <Button
-                    onClick={
-                      handleClick
-                    }
+      <SectionContainer
+        mode={mode}
+        sx={{ position: "sticky", top: 0 }}
+        sectionRef={containerRef} 
+      >
+        <AppBar position="static" ref={containerRef}>
+          <Toolbar variant="dense">
+            {!fullMenuView && (
+              <>
+                <List>
+                  <ListItem>
+                    <Button
+                      onClick={
+                        handleClick
+                      }
+                    >
+                      <MenuIcon color="secondary" />
+                      {open ? (
+                        <ExpandLess color="secondary" />
+                      ) : (
+                        <ExpandMore color="secondary" />
+                      )}
+                    </Button>
+                    <Typography
+                      variant="h6"
+                      color="inherit"
+                      onClick={() => {
+                        setOpen(false);
+                      }}
+                    >
+                      paraplanner mobile
+                    </Typography>
+                  </ListItem>
+                  <Collapse
+                    in={open}
+                    timeout="auto"
+                    unmountOnExit
                   >
-                    <MenuIcon color="secondary" />
-                    {open ? (
-                      <ExpandLess color="secondary" />
-                    ) : (
-                      <ExpandMore color="secondary" />
-                    )}
-                  </Button>
-                  <Typography
-                    variant="h6"
-                    color="inherit"
-                    onClick={() => {
-                      setOpen(false);
-                    }}
-                  >
-                    paraplanner mobile
-                  </Typography>
-                </ListItem>
-                <Collapse
-                  in={open}
-                  timeout="auto"
-                  unmountOnExit
+                    <List
+                      component="div"
+                      disablePadding
+                    >
+                      {renderMenuItems(routes)}
+                    </List>
+                  </Collapse>
+                </List>
+              </>
+            )}
+
+            {fullMenuView && (
+              <>
+                <Typography
+                  variant="h6"
                 >
+                  paraplanner.ai
+                </Typography>
+                <animated.div style={{ padding: padding }}>
                   <List
-                    component="div"
-                    disablePadding
+                    component="nav"
+                    aria-labelledby="nested-list-subheader"
+                    sx={{ display: 'flex' }}
                   >
                     {renderMenuItems(routes)}
                   </List>
-                </Collapse>
-              </List>
-            </>
-          )}
-
-          {fullMenuView && (
-            <>
-              <Typography
-                variant="h6"
-                color="inherit"
-              >
-                paraplanner.ai
-              </Typography>
-              <Container
-                // sx={{ display: { xs: 'none', md: 'block' } }}
-                component="div"
-              >
-                <List
-                  component="nav"
-                  aria-labelledby="nested-list-subheader"
-                  sx={{ display: 'flex' }}
-                >
-                  {renderMenuItems(routes)}
-                </List>
-              </Container>
-            </>
-          )}
-        </Toolbar>
-      </AppBar>
-    </SectionContainer>
+                </animated.div>
+              </>
+            )}
+          </Toolbar>
+        </AppBar>
+      </SectionContainer>
   );
 }
 

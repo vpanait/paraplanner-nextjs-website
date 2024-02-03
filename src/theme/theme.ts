@@ -114,6 +114,5 @@ export const getThemeOptions = (mode: PaletteMode) => ({
 });
 
 export const defaultTheme = createTheme(getThemeOptions("light"));
-console.log('defaultTheme :', defaultTheme);
 
 export default theme;

@@ -1,0 +1,14 @@
+{
+    "app": {
+        "name": "paraplanner.ai",
+        "title": "Save 10 hours a week"
+    },
+    "common": {},
+    "section": {
+        "hero": {
+            "title": "Save 10 hours a week",
+            "subtitle": "Delegate admin and planning tasks and focus on more important things",
+            "button": "Sign up and save my first hour"
+        }
+    }
+}

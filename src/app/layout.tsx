@@ -1,11 +1,9 @@
+import "./globals.css";
+import CssBaseline from '@mui/material/CssBaseline';
 import * as React from 'react';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import theme from '@/theme/theme';
-import "./globals.css";
-import Menu from '../components/Menu';
-import ExpandLess from "@mui/icons-material/ExpandLess";
+import theme, { defaultTheme, getThemeOptions } from '@/theme/theme';
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import MenuIcon from '@mui/icons-material/Menu';
 import Navbar from '../components/Navbar';
@@ -20,17 +18,16 @@ export const metadata = {
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   const routes = [
-    { label: 'Home', path: '/', icon: <MenuIcon /> },
+    { label: 'Home', path: '/' },
     {
       label: 'Parent Route',
       path: '/parent',
-      icon: <ExpandMore />,
       subItems: [
-        { label: 'Subroute 1', path: '/parent/subroute1', icon: <ExpandMore /> },
-        { label: 'Subroute 2', path: '/parent/subroute2', icon: <ExpandMore /> },
+        { label: 'Subroute 1', path: '/parent/subroute1' },
+        { label: 'Subroute 2', path: '/parent/subroute2' },
       ],
     },
-    { label: 'About', path: '/about', icon: <ExpandMore /> },
+    { label: 'About', path: '/about' },
   ];
 
 
@@ -38,9 +35,9 @@ export default function RootLayout(props: { children: React.ReactNode }) {
     <html lang="en">
       <body>
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-          <ThemeProvider theme={theme}>
+          <ThemeProvider theme={defaultTheme}>
             <CssBaseline />
-            <Navbar routes={routes}/>
+            <Navbar routes={routes} />
             {props.children}
           </ThemeProvider>
         </AppRouterCacheProvider>

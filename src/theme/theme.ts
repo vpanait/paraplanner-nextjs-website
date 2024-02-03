@@ -72,7 +72,8 @@ const theme = createTheme({
   },
 });
 
-export const getDesignTheme = (mode: PaletteMode) => ({
+export const getThemeOptions = (mode: PaletteMode) => ({
+  typography: theme.typography,
   palette: {
     mode,
     ...(mode === "light"
@@ -111,5 +112,8 @@ export const getDesignTheme = (mode: PaletteMode) => ({
     },
   },
 });
+
+export const defaultTheme = createTheme(getThemeOptions("light"));
+console.log('defaultTheme :', defaultTheme);
 
 export default theme;

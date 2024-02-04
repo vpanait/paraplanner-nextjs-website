@@ -1,5 +1,5 @@
 "use client"
-import React, { useRef, useState } from "react";
+import React, { ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import {
   List,
   ListItem,
@@ -8,19 +8,23 @@ import {
   AppBar,
   Toolbar,
   Button,
-  Typography,
-  useTheme,
   ListItemButton,
   Container,
   PaletteMode,
+  createTheme,
 } from "@mui/material";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import MenuIcon from '@mui/icons-material/Menu';
 import NextLink from 'next/link';
 import SectionContainer from "@/components/SectionContainer";
 import { animated, useScroll, useSpring } from "@react-spring/web";
+import Image from 'next/image';
+import t from '@/app/dictionaries/en.json';
+import { APP_SIGN_UP_URL } from "@/utils/constants";
+import { usePathname } from 'next/navigation'
+import { getThemeOptions } from "@/theme/theme";
+import useWindowPosition from "@/hooks/useWindowPosition";
 
 interface MenuItem {
   label: string;
@@ -33,12 +37,25 @@ interface IProps {
   mode?: PaletteMode;
 }
 
-
 const Navbar = ({ routes, mode = 'light' }: IProps) => {
-  const theme = useTheme();
-  const fullMenuView = useMediaQuery(theme.breakpoints.up('sm'));
-  const containerRef = useRef<HTMLDivElement>(null!)
+  const pathname = usePathname();
+  const theme = useMemo(() => createTheme(getThemeOptions(mode)), [mode]);
 
+  const windowPosition = useWindowPosition();
+  const { padding } = useSpring({
+    padding: windowPosition > 0 ? 0 : 20,
+  });
+
+  const logo = (
+    <Image
+      src="/paraplanner.png"
+      alt="paraplanner.ai"
+      width={200}
+      height={35}
+      priority
+      style={{ cursor: 'pointer' }}
+    />
+  );
 
   const [open, setOpen] = useState(false);
   const [openSubMenu, setOpenSubMenu] = React.useState<number | null>(null);
@@ -51,108 +68,131 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
     setOpenSubMenu(openSubMenu === index ? null : index);
   };
 
-  const { scrollY } = useScroll();
-  const { padding } = useSpring({
-    padding: scrollY.to((y) => (y > 5 ? 0 : 40)),
-  });
+  const renderMenuItems = (items: MenuItem[], isSubmenu?: boolean) => {
+    const renderedItems = items?.map((item, index) => {
+      const hasSubItems = item.subItems && item?.subItems?.length > 0;
+      const isActive = hasSubItems ? pathname.includes(item.path) : pathname === item.path;
 
-  const renderMenuItems = (items: MenuItem[]) => {
-    return items?.map((item, index) => {
-      if (item.subItems && item.subItems.length > 0) {
+      const sx = isActive ? { backgroundColor: theme.palette.secondary.main } : {};
+
+      if (item.subItems && item?.subItems?.length > 0) {
         return (
-          <div key={index}>
-            <ListItemButton onClick={() => handleSubItemClick(index)}>
+          <div key={index} style={{ position: 'relative' }}>
+            <ListItemButton onClick={() => handleSubItemClick(index)} sx={sx}>
               <ListItemText primary={item.label} />
               {openSubMenu === index ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
-            <Collapse in={openSubMenu === index} timeout="auto" unmountOnExit>
-              {renderMenuItems(item.subItems)}
+            <Collapse
+              in={openSubMenu === index}
+              timeout="auto"
+              unmountOnExit
+              sx={{
+                position: 'absolute',
+                background: theme.palette.secondary.main,
+                zIndex: 2,
+                width: '100%'
+              }}
+            >
+              {renderMenuItems(item.subItems, true)}
             </Collapse>
           </div>
         );
       } else {
         return (
-          <ListItemButton key={index} component={NextLink} href={item.path} sx={{ flexGrow: 0 }} passHref>
+          <ListItemButton key={index} component={NextLink} href={item.path} sx={{ flexGrow: 0, ...sx }
+          } passHref >
             <ListItemText primary={item.label} />
-          </ListItemButton>
+          </ListItemButton >
         );
       }
     });
+
+    return isSubmenu ? renderedItems : [...renderedItems, (
+      <>
+        <Button variant="outlined" href={APP_SIGN_UP_URL} target="_blank"
+          sx={{ display: { xs: "none", sm: "flex" }, borderRadius: 48, marginLeft: 2 }}
+        >
+          {t.common.signUp}
+        </Button>
+        <ListItemButton component={NextLink} href={APP_SIGN_UP_URL} target="_blank"
+          sx={{ display: { xs: "block", sm: "none" }, flexGrow: 0 }}
+          passHref
+        >
+          <ListItemText primary={t.common.signUp as ReactNode} />
+        </ListItemButton>
+      </>
+    )];
   };
 
 
 
   return (
+    <AppBar position="sticky">
       <SectionContainer
         mode={mode}
-        sx={{ position: "sticky", top: 0 }}
-        sectionRef={containerRef} 
+        withoutAnimation
+        disablePaddingY
       >
-        <AppBar position="static" ref={containerRef}>
-          <Toolbar variant="dense">
-            {!fullMenuView && (
-              <>
-                <List>
-                  <ListItem>
-                    <Button
-                      onClick={
-                        handleClick
-                      }
-                    >
-                      <MenuIcon color="secondary" />
-                      {open ? (
-                        <ExpandLess color="secondary" />
-                      ) : (
-                        <ExpandMore color="secondary" />
-                      )}
-                    </Button>
-                    <Typography
-                      variant="h6"
-                      color="inherit"
-                      onClick={() => {
-                        setOpen(false);
-                      }}
-                    >
-                      paraplanner mobile
-                    </Typography>
-                  </ListItem>
-                  <Collapse
-                    in={open}
-                    timeout="auto"
-                    unmountOnExit
+        <animated.div style={{ paddingBlock: padding }}>
+          <Toolbar variant="dense" sx={{ padding: { xs: 0 } }}>
+            <Container sx={{ display: { xs: "block", sm: "none" }, padding: { xs: 0 } }}>
+              <List>
+                <ListItem>
+                  <Button
+                    onClick={
+                      handleClick
+                    }
                   >
-                    <List
-                      component="div"
-                      disablePadding
-                    >
-                      {renderMenuItems(routes)}
-                    </List>
-                  </Collapse>
-                </List>
-              </>
-            )}
-
-            {fullMenuView && (
-              <>
-                <Typography
-                  variant="h6"
+                    <MenuIcon color="secondary" />
+                    {open ? (
+                      <ExpandLess color="secondary" />
+                    ) : (
+                      <ExpandMore color="secondary" />
+                    )}
+                  </Button>
+                  <NextLink href="/">
+                    {logo}
+                  </NextLink>
+                </ListItem>
+                <Collapse
+                  in={open}
+                  timeout="auto"
+                  unmountOnExit
                 >
-                  paraplanner.ai
-                </Typography>
-                <animated.div style={{ padding: padding }}>
                   <List
-                    component="nav"
-                    aria-labelledby="nested-list-subheader"
-                    sx={{ display: 'flex' }}
+                    component="div"
+                    disablePadding
                   >
                     {renderMenuItems(routes)}
                   </List>
-                </animated.div>
-              </>
-            )}
+                </Collapse>
+              </List>
+            </Container>
+
+            <Container sx={{
+              display: { xs: "none", sm: "flex" },
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: { xs: 0 }
+            }}>
+              <NextLink href="/">
+                {logo}
+              </NextLink>
+
+              <animated.div>
+                <List
+                  component="nav"
+                  aria-labelledby="nested-list-subheader"
+                  sx={{ display: 'flex', gap: 1 }}
+                >
+                  {renderMenuItems(routes)}
+                </List>
+              </animated.div>
+            </Container>
           </Toolbar>
-        </AppBar>
+        </animated.div>
       </SectionContainer>
+    </AppBar>
   );
 }
 

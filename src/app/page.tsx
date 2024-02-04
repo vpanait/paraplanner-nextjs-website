@@ -7,11 +7,32 @@ import ProTip from '@/components/ProTip';
 import Copyright from '@/components/Copyright';
 import * as React from 'react';
 import "./globals.css";
+import SectionContainer from '@/components/SectionContainer';
+import HomePage from '@/pages/HomePage';
+import { getDictionary } from 'get-dictionary';
 
-export default function Home() {
-
+export default async function Home() {
+  const dic = await getDictionary();
   return (
-    <Container maxWidth="lg">
+    <>
+      <HomePage />
+      ========
+      <SectionContainer >
+        <Typography sx={{ mt: 6, mb: 3, color: 'text.secondary' }}>
+          HomePageHomePageHomePageHomePageHomePageHomePageHomePageHomePage
+          <Link href="https://mui.com/material-ui/getting-started/templates/">templates</Link>
+          {' in the Material UI documentation.'}
+        </Typography>
+      </SectionContainer>
+      <SectionContainer mode="dark">
+        <Typography sx={{ mt: 6, mb: 3, color: 'text.secondary' }}>
+          HomePageHomePageHomePageHomePageHomePageHomePageHomePageHomePage
+          <Link href="https://mui.com/material-ui/getting-started/templates/">templates</Link>
+          {' in the Material UI documentation.'}
+        </Typography>
+      </SectionContainer>
+
+      <HomePage />
       <Box
         sx={{
           my: 4,
@@ -22,9 +43,9 @@ export default function Home() {
         }}
       >
         <Typography variant="h1" sx={{ mb: 2 }}>
-          H! Material UI - Next.js App Router example in TypeScript
+          Workflow automation platform for independent financial advisors
         </Typography>
-        <Typography variant="h4" sx={{ mb: 2 }}>
+        <Typography variant="h4">
           :) Material UI - Next.js App Router example in TypeScript
         </Typography>
 
@@ -73,6 +94,6 @@ export default function Home() {
           </a>
         </div>
       </div> */}
-    </Container>
+    </>
   );
 }

@@ -3,10 +3,10 @@ import CssBaseline from '@mui/material/CssBaseline';
 import * as React from 'react';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import { ThemeProvider } from '@mui/material/styles';
-import theme, { defaultTheme, getThemeOptions } from '@/theme/theme';
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import MenuIcon from '@mui/icons-material/Menu';
+import { defaultTheme } from '@/theme/theme';
 import Navbar from '../components/Navbar';
+import t from '@/app/dictionaries/en.json';
+import { ROUTE } from "@/utils/constants"
 
 export const metadata = {
   title: 'paraplanner.ai',
@@ -16,18 +16,20 @@ export const metadata = {
   },
 }
 
-export default function RootLayout(props: { children: React.ReactNode }) {
+export default async function RootLayout(props: { children: React.ReactNode }) {
   const routes = [
-    { label: 'Home', path: '/' },
     {
-      label: 'Parent Route',
-      path: '/parent',
+      label: t.route.security,
+      path: ROUTE.SECURITY,
+    },
+    {
+      label: t.route.about,
+      path: ROUTE.ABOUT.BASE,
       subItems: [
-        { label: 'Subroute 1', path: '/parent/subroute1' },
-        { label: 'Subroute 2', path: '/parent/subroute2' },
+        { label: t.route.company, path: ROUTE.ABOUT.COMPANY },
+        { label: t.route.team, path: ROUTE.ABOUT.TEAM },
       ],
     },
-    { label: 'About', path: '/about' },
   ];
 
 
@@ -36,9 +38,11 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       <body>
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={defaultTheme}>
-            <CssBaseline />
-            <Navbar routes={routes} />
-            {props.children}
+            <ThemeProvider theme={defaultTheme}>
+              <CssBaseline />
+              <Navbar routes={routes} mode="dark" />
+              {props.children}
+            </ThemeProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

@@ -1,7 +1,16 @@
 "use client";
 import { Theme, createTheme } from "@mui/material/styles";
-import { amber, deepOrange, green, grey, purple } from "@mui/material/colors";
-import { PaletteMode } from "@mui/material";
+import {
+  amber,
+  common,
+  deepOrange,
+  green,
+  grey,
+  purple,
+  red,
+} from "@mui/material/colors";
+import { PaletteMode, ThemeOptions } from "@mui/material";
+import "@fontsource/libre-baskerville";
 
 const styleOverrides = (themeParam: Omit<Theme, "components">) => {
   return `
@@ -30,12 +39,11 @@ const styleOverrides = (themeParam: Omit<Theme, "components">) => {
 
 const theme = createTheme({
   typography: {
-    allVariants: {
-      // color: '#1A1A1A'
-    },
     fontFamily: "Libre Baskerville",
     h1: {
-      fontSize: 89,
+      fontSize: 60,
+      fontWeight: 700,
+      marginBottom: 16
     },
     h2: {
       fontSize: 67,
@@ -53,7 +61,8 @@ const theme = createTheme({
       fontSize: 21,
     },
     subtitle1: {
-      fontSize: 20,
+      fontSize: 18,
+      fontWeight: 400,
     },
     button: {
       textTransform: "none",
@@ -61,9 +70,9 @@ const theme = createTheme({
     },
   },
   palette: {
-    primary: { main: purple[500] },
-    secondary: { main: green[500] },
-    text: { primary: "#1A1A1A" },
+    // primary: { main: purple[500] },
+    // secondary: { main: green[500] },
+    // text: { primary: "#1A1A1A" },
   },
   components: {
     MuiCssBaseline: {
@@ -72,46 +81,127 @@ const theme = createTheme({
   },
 });
 
-export const getThemeOptions = (mode: PaletteMode) => ({
-  typography: theme.typography,
-  palette: {
-    mode,
-    ...(mode === "light"
-      ? {
-          // palette values for light mode
-          primary: amber,
-          divider: amber[200],
-          text: {
-            primary: grey[900],
-            secondary: grey[800],
-          },
-        }
-      : {
-          // palette values for dark mode
-          primary: deepOrange,
-          divider: deepOrange[700],
-          background: {
-            default: deepOrange[900],
-            paper: deepOrange[900],
-          },
-          text: {
-            primary: "#fff",
-            secondary: grey[500],
-          },
-        }),
+interface IThemeColors {
+  DARK: string;
+  LIGHT: string;
+}
+
+export type TThemeMode = "DARK" | "LIGHT";
+
+interface IThemeProps {
+  TEXT: IThemeColors;
+  SUBTITLE: IThemeColors;
+  TEXT_ACCENT: IThemeColors;
+}
+
+export const THEME: IThemeProps = {
+  TEXT: {
+    DARK: common.white,
+    LIGHT: '#171717',
+  },
+  SUBTITLE: {
+    DARK: grey[300],
+    LIGHT: grey[700],
+  },
+  TEXT_ACCENT: {
+    DARK: '#cc0ad6',
+    LIGHT: '#cc0ad6',
+  },
+};
+
+export const getThemeOptions = (mode: PaletteMode) => {
+  const themeMode: TThemeMode = mode.toUpperCase() as TThemeMode;
+  const themeOptions: ThemeOptions = {
+    typography: theme.typography,
+    palette: {
+      // ...theme.palette,
+      mode,
+      ...(mode === "light"
+        ? {
+            // palette values for light mode
+            primary: { main: THEME.TEXT.LIGHT },
+            divider: amber[200],
+            text: {
+              primary: grey[900],
+              secondary: grey[800],
+            },
+            info: {
+              main: THEME.TEXT_ACCENT.LIGHT,
+            },
+          }
+        : {
+            // palette values for dark mode
+            primary: { main: THEME.TEXT.DARK },
+            secondary: { main: grey[800] },
+            divider: deepOrange[700],
+            success: { main: deepOrange[700] },
+            background: {
+              default: grey[900],
+              paper: deepOrange[900],
+            },
+            // text: {
+            //   primary: purple[500],
+            //   secondary: grey[500],
+            // },
+            info: {
+              main: THEME.TEXT_ACCENT.DARK,
+            },
+          }),
+    },
     components: {
+      ...theme.components,
+      MuiTypography: {
+        styleOverrides: {
+          root: {
+            color: THEME.TEXT[themeMode],
+          },
+          subtitle1: {
+            color: THEME.SUBTITLE[themeMode],
+          }
+        },
+      },
       MuiAppBar: {
         styleOverrides: {
           root: () => ({
             ...(true && {
-              background: theme.palette.secondary.main,
+              background: mode === "light" ? green[100] : grey[900],
+              color: mode === "light" ? green[100] : "#fff",
             }),
           }),
         },
       },
+      MuiButtonBase: {
+        styleOverrides: {
+          root: {
+            background: mode === "light" ? green[100] : grey[900],
+            color: mode === "light" ? green[100] : "#fff",
+          },
+        },
+      },
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            // background: mode === "light" ? green[100] : grey[900],
+            color: mode === "light" ? green[100] : "#fff",
+          },
+        },
+      },
+      MuiListItemButton: {
+        styleOverrides: {
+          root: {
+            border: "1px solid transparent",
+            "&:hover": {
+              backgroundColor: mode === "light" ? green[200] : grey[800],
+              borderColor: "#9e9e9e",
+            },
+          },
+        },
+      },
     },
-  },
-});
+  };
+
+  return themeOptions;
+};
 
 export const defaultTheme = createTheme(getThemeOptions("light"));
 

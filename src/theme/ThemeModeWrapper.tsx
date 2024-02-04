@@ -1,5 +1,5 @@
 import { getThemeOptions } from "@/theme/theme";
-import { PaletteMode, ThemeProvider, createTheme } from "@mui/material";
+import { PaletteMode, ThemeOptions, ThemeProvider, createTheme } from "@mui/material";
 import { useMemo } from "react";
 
 interface IProps {
@@ -11,7 +11,7 @@ const ThemeModeWrapper = ({
   children,
   mode = 'light',
 }: IProps) => {
-  const theTheme = useMemo(() => createTheme(getThemeOptions(mode)), [mode]);
+  const theTheme = useMemo(() => createTheme(getThemeOptions(mode) as ThemeOptions), [mode]);
 
   return (
     <ThemeProvider theme={theTheme}>

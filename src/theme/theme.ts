@@ -43,7 +43,7 @@ const theme = createTheme({
     h1: {
       fontSize: 60,
       fontWeight: 700,
-      marginBottom: 16
+      marginBottom: 16,
     },
     h2: {
       fontSize: 67,
@@ -62,6 +62,10 @@ const theme = createTheme({
     },
     subtitle1: {
       fontSize: 18,
+      fontWeight: 400,
+    },
+    body1: {
+      fontSize: 14,
       fontWeight: 400,
     },
     button: {
@@ -89,23 +93,53 @@ interface IThemeColors {
 export type TThemeMode = "DARK" | "LIGHT";
 
 interface IThemeProps {
+  PRIMARY: IThemeColors;
+  SECONDARY: IThemeColors;
   TEXT: IThemeColors;
   SUBTITLE: IThemeColors;
+  BODY: IThemeColors;
   TEXT_ACCENT: IThemeColors;
+  MENU_BUTTON_BACKGROUND: IThemeColors;
+  MENU_BUTTON_BACKGROUND_HOVER: IThemeColors;
+  MENU_BUTTON_BACKGROUND_BORDER: IThemeColors;
 }
 
 export const THEME: IThemeProps = {
+  PRIMARY: {
+    DARK: common.white,
+    LIGHT: purple[500],
+  },
+  SECONDARY: {
+    DARK: common.white,
+    LIGHT: purple[500],
+  },
   TEXT: {
     DARK: common.white,
-    LIGHT: '#171717',
+    LIGHT: "#171717",
   },
   SUBTITLE: {
     DARK: grey[300],
     LIGHT: grey[700],
   },
+  BODY: {
+    DARK: grey[200],
+    LIGHT: grey[700],
+  },
   TEXT_ACCENT: {
-    DARK: '#cc0ad6',
-    LIGHT: '#cc0ad6',
+    DARK: purple[500],
+    LIGHT: purple[500],
+  },
+  MENU_BUTTON_BACKGROUND: {
+    DARK: '#121212',
+    LIGHT: purple[500],
+  },
+  MENU_BUTTON_BACKGROUND_HOVER: {
+    DARK: grey[800],
+    LIGHT: grey[200],
+  },
+  MENU_BUTTON_BACKGROUND_BORDER: {
+    DARK: "#9e9e9e",
+    LIGHT: "#9e9e9e",
   },
 };
 
@@ -119,8 +153,8 @@ export const getThemeOptions = (mode: PaletteMode) => {
       ...(mode === "light"
         ? {
             // palette values for light mode
-            primary: { main: THEME.TEXT.LIGHT },
-            divider: amber[200],
+            primary: { main: THEME.PRIMARY.LIGHT },
+            secondary: { main: green[500] },
             text: {
               primary: grey[900],
               secondary: grey[800],
@@ -131,18 +165,8 @@ export const getThemeOptions = (mode: PaletteMode) => {
           }
         : {
             // palette values for dark mode
-            primary: { main: THEME.TEXT.DARK },
+            primary: { main: THEME.PRIMARY.DARK },
             secondary: { main: grey[800] },
-            divider: deepOrange[700],
-            success: { main: deepOrange[700] },
-            background: {
-              default: grey[900],
-              paper: deepOrange[900],
-            },
-            // text: {
-            //   primary: purple[500],
-            //   secondary: grey[500],
-            // },
             info: {
               main: THEME.TEXT_ACCENT.DARK,
             },
@@ -157,32 +181,37 @@ export const getThemeOptions = (mode: PaletteMode) => {
           },
           subtitle1: {
             color: THEME.SUBTITLE[themeMode],
-          }
+          },
+          body1: {
+            color: THEME.BODY[themeMode],
+          },
         },
       },
       MuiAppBar: {
         styleOverrides: {
           root: () => ({
-            ...(true && {
-              background: mode === "light" ? green[100] : grey[900],
-              color: mode === "light" ? green[100] : "#fff",
-            }),
+            ...(true &&
+              {
+                // background: mode === "light" ? green[100] : 'red',
+                // color: mode === "light" ? green[100] : "#fff",
+              }),
           }),
         },
       },
       MuiButtonBase: {
         styleOverrides: {
           root: {
-            background: mode === "light" ? green[100] : grey[900],
-            color: mode === "light" ? green[100] : "#fff",
+            // background: 'red',
+            // color: mode === "light" ? green[100] : "#fff",
           },
         },
       },
       MuiButton: {
         styleOverrides: {
           root: {
-            // background: mode === "light" ? green[100] : grey[900],
-            color: mode === "light" ? green[100] : "#fff",
+            // background: THEME.BUTTON_BACKGROUND[themeMode],
+            // color: mode === "light" ? green[100] : "#fff",
+            fontSize: 16
           },
         },
       },
@@ -190,9 +219,10 @@ export const getThemeOptions = (mode: PaletteMode) => {
         styleOverrides: {
           root: {
             border: "1px solid transparent",
+            backgroundColor: THEME.MENU_BUTTON_BACKGROUND[themeMode],
             "&:hover": {
-              backgroundColor: mode === "light" ? green[200] : grey[800],
-              borderColor: "#9e9e9e",
+              backgroundColor: THEME.MENU_BUTTON_BACKGROUND_HOVER[themeMode],
+              borderColor: THEME.MENU_BUTTON_BACKGROUND_BORDER[themeMode],
             },
           },
         },

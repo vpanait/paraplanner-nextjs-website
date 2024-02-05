@@ -1,58 +1,157 @@
 "use client"
 import * as React from 'react';
-import Link from '@mui/material/Link';
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
 import SectionContainer from '@/components/SectionContainer';
-import { useTheme } from '@mui/material';
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Button, Card, Divider, Grid, Stack, useTheme
+} from '@mui/material';
 import t from '@/app/dictionaries/en.json';
-import MyComponent from '@/components/Copyright';
+import { APP_SIGN_UP_URL, ROUTE } from '@/utils/constants';
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import ThemeModeWrapper from '@/theme/ThemeModeWrapper';
 
-function LightBulbIcon(props: SvgIconProps) {
-  return (
-    <SvgIcon {...props}>
-      <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z" />
-    </SvgIcon>
-  );
-}
 
 export default function HomePage() {
   const theme = useTheme();
 
   return (
     <>
-      <SectionContainer>
+      <SectionContainer withoutAnimation>
+        <Grid container>
+          <Grid item container md={6} sm={12} sx={{ flexDirection: 'column', justifyContent: 'center', gap: 3 }}>
+            <Typography variant="h1">
+              {t.homePage.hero.titleA} <span style={{ color: theme.palette.info.main }}>{t.homePage.hero.titleB}</span> {t.homePage.hero.titleC}
+            </Typography>
+            <Typography variant="subtitle1">
 
-        <Typography variant="h1">
-          {t.homePage.hero.titleA} <span style={{ color: theme.palette.info.main }}>{t.homePage.hero.titleB}</span> {t.homePage.hero.titleC}
-        </Typography>
-        <Typography variant="subtitle1">
-          {t.homePage.hero.subtitle}
-        </Typography>
+              {t.homePage.hero.subtitle}
+            </Typography>
+            <Button variant='contained' href={APP_SIGN_UP_URL} target="_blank">{t.homePage.hero.button}</Button>
+          </Grid>
 
-        <Typography sx={{ mt: 6, mb: 3, color: 'info.main' }}>
-          <LightBulbIcon sx={{ mr: 1, verticalAlign: 'middle' }} />
-          HomePageHomePageHomePageHomePageHomePageHomePageHomePageHomePage
-          <Link href="https://mui.com/material-ui/getting-started/templates/">templates</Link>
-          {' in the Material UI documentation.'}
-        </Typography>
+          <Grid item container md={6} sm={12} sx={{ flexDirection: 'column', justifyContent: 'center' }}>
+            <Box
+              component="img"
+              sx={{ maxWidth: { xs: 1 } }}
+              src="https://illustrations.popsy.co/yellow/man-riding-a-rocket.svg"
+            />
+          </Grid>
+        </Grid>
       </SectionContainer>
-      
+
       <SectionContainer mode='dark'>
+        <Grid container>
+          <Grid item container xs={12} sm={12} sx={{ justifyContent: 'center' }}>
+            <Typography variant="h1">
+              {t.homePage.howWeSupport.titleA} <span style={{ color: theme.palette.info.main }}>{t.homePage.howWeSupport.titleB}</span>
+            </Typography>
+          </Grid>
 
-        <Typography variant="h1">
-          {t.homePage.hero.titleA}
-        </Typography>
-        <Typography variant="subtitle1">
-          {t.homePage.hero.subtitle}
-        </Typography>
+          <Grid item container xs={12} sm={12} sx={{ justifyContent: 'center' }}>
+            {['planning', 'acquisition', 'delegation'].map(item => {
+              const key = item as 'planning';
+              return (
+                <Grid item container md={4} sm={12} sx={{ flexDirection: 'column', justifyContent: 'center' }}>
+                  <Card variant="outlined" sx={{ height: '100%', marginX: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: 1, p: 2, height: '100%' }}>
+                      <Box>
+                        <Stack direction="row" justifyContent="space-between" alignItems="center">
+                          <Typography gutterBottom variant="h5" component="div">
+                            {t.homePage.howWeSupport[key]?.title}
+                          </Typography>
+                        </Stack>
+                        <Typography color="text.secondary" variant="body1">
+                          {t.homePage.howWeSupport[key]?.bodyA}
+                        </Typography>
+                        <Typography color="text.secondary" variant="body1" sx={{ fontStyle: 'italic' }}>
+                          {t.homePage.howWeSupport[key]?.bodyB}
+                        </Typography>
+                      </Box>
 
-        <Typography sx={{ mt: 6, mb: 3, color: 'info.main' }}>
-          <LightBulbIcon sx={{ mr: 1, verticalAlign: 'middle' }} />
-          HomePageHomePageHomePageHomePageHomePageHomePageHomePageHomePage
-          <Link href="https://mui.com/material-ui/getting-started/templates/">templates</Link>
-          {' in the Material UI documentation.'}
-        </Typography>
+                      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                        <Divider />
+                        <Button variant='outlined' href={APP_SIGN_UP_URL} target="_blank">{t.homePage.howWeSupport.button}</Button>
+                      </Box>
+                    </Box>
+                  </Card>
+                </Grid>
+              )
+            })}
+          </Grid>
+        </Grid>
+      </SectionContainer>
+
+      <SectionContainer>
+        <Grid container>
+          <Grid item container md={6} sm={12} sx={{ flexDirection: 'column', justifyContent: 'center' }}>
+            <Box
+              component="img"
+              sx={{ maxWidth: { xs: 1 } }}
+              src="https://illustrations.popsy.co/yellow/superhero.svg"
+            />
+          </Grid>
+
+          <Grid item container md={6} sm={12} sx={{ flexDirection: 'column', justifyContent: 'center', gap: 3 }}>
+            <Typography variant="h1">
+              {t.homePage.security.titleA} <span style={{ color: theme.palette.info.main }}>{t.homePage.security.titleB}</span>
+            </Typography>
+            <Typography variant="subtitle1">
+
+              {t.homePage.security.subtitle}
+            </Typography>
+            <Button variant='contained' href={ROUTE.SECURITY}>{t.homePage.security.button}</Button>
+          </Grid>
+        </Grid>
+      </SectionContainer>
+
+
+      <SectionContainer mode='dark'>
+        <Grid container>
+          <Grid item container xs={12} sm={12} sx={{ justifyContent: 'center' }}>
+            <Typography variant="h1">
+              <span style={{ color: theme.palette.info.main }}>{t.faqPage.title}</span>
+            </Typography>
+          </Grid>
+
+          <Grid item container xs={12} sm={8} sx={{ justifyContent: 'center' }}>
+            {['q1', 'q2', 'q3'].map((item, index) => {
+              const key = item as 'q1';
+              return (
+                <Box sx={{ marginBottom: 1 }}>
+                  <Accordion defaultExpanded={index === 0}>
+                    <AccordionSummary
+                      expandIcon={<ExpandMore />}
+                      aria-controls="panel1-content"
+                      id="panel1-header"
+                    >
+                      <Typography variant='h5' sx={{ fontSize: 16 }}>
+                        {t.faqPage[key]?.title}
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Typography variant='body1'>
+                        {t.faqPage[key]?.body}
+                      </Typography>
+                    </AccordionDetails>
+                  </Accordion>
+                </Box>
+              )
+            })}
+          </Grid>
+
+          <Grid item container xs={12} sm={4} sx={{ justifyContent: 'center', alignItems: 'center' }}>
+            <Box>
+              <ThemeModeWrapper mode='light'>
+                <Button variant='contained' href={ROUTE.FAQ}>{t.faqPage.button}</Button>
+              </ThemeModeWrapper>
+            </Box>
+          </Grid>
+        </Grid>
       </SectionContainer>
     </>
   );

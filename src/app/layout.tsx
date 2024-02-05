@@ -23,6 +23,10 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       path: ROUTE.SECURITY,
     },
     {
+      label: t.route.faq,
+      path: ROUTE.FAQ,
+    },
+    {
       label: t.route.about,
       path: ROUTE.ABOUT.BASE,
       subItems: [

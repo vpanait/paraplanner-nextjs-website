@@ -7,10 +7,12 @@
         "security": "Security",
         "about": "About",
         "team": "Team",
-        "company": "Company"
+        "company": "Company",
+        "faq": "FAQ"
     },
     "common": {
-        "signUp": "Sign Up"
+        "signUp": "Sign up",
+        "signIn": "Sign in"
     },
     "homePage": {
         "hero": {
@@ -19,6 +21,68 @@
             "titleC": "a week",
             "subtitle": "Delegate admin and planning tasks and focus on more important things",
             "button": "Sign up and save my first hour"
+        },
+        "howWeSupport": {
+            "titleA": "How we ",
+            "titleB": "support",
+            "button": "Try now",
+            "planning": {
+                "title": "Planning support",
+                "bodyA": "Delegate part or all of the tasks related to creating and maintaining financial plans for clients.",
+                "bodyB": "You might have more work than you can personally handle or you might be someone who prefers to focus on the client relationship, spending your time on the human side of money and letting someone else deal with the data, documents, and planning."
+            },
+            "acquisition": {
+                "title": "Client acquisition",
+                "bodyA": "Every advisor needs to prepare for their next phase of growth and increasingly focus on client interactions and less on behind the scenes work. ",
+                "bodyB": "With this solution we assist you from Discovery Meeting to Plan Presentation Meeting, with everything in between (data gathering, data extraction, data entry, email follow up, portfolio analysis and initial plan creation)."
+            },
+            "delegation": {
+                "title": "Tasks Delegation",
+                "bodyA": "In need of limited support or increased efficiency for specific tasks?",
+                "bodyB": "With this offering we have you covered on various tasks: lead matching, foundational digital marketing, report generation, data extraction and entry."
+            }
+        },
+        "security": {
+            "titleA": "We focus on your",
+            "titleB": "data security",
+            "subtitle": "We prioritize your data security through rigorous measures and advanced technologies, ensuring confidentiality and integrity at every step.",
+            "button": "Check out the full security overview"
+        }
+    },
+    "faqPage": {
+        "title": "FAQ",
+        "button": "See the full FAQ list",
+        "q1": {
+            "title": "Can paraplanner.ai customize solutions for specific advisor needs?",
+            "body": "Absolutely! We collaborate closely with advisors to tailor our solutions to their unique requirements, ensuring optimal performance and client satisfaction."
+        },
+        "q2": {
+            "title": "How does paraplanner.ai handle client data privacy?",
+            "body": "We adhere to strict privacy regulations and best practices, implementing robust data protection measures to safeguard client privacy and confidentiality."
+        },
+        "q3": {
+            "title": "How can paraplanner.ai assist financial advisors?",
+            "body": "We provide cutting-edge tools and personalized support to streamline client management and optimize operational efficiency."
+        },
+        "q4": {
+            "title": "What sets paraplanner.ai apart from competitors?",
+            "body": "Our innovative solutions combine advanced technology with industry expertise, empowering financial advisors to outperform in a competitive market."
+        },
+        "q5": {
+            "title": "Can paraplanner.ai integrate with existing advisor platforms?",
+            "body": "Yes, our flexible integration options ensure seamless compatibility with a wide range of advisor platforms for enhanced workflow integration."
+        },
+        "q6": {
+            "title": "Is paraplanner.ai suitable for independent advisors?",
+            "body": "Absolutely! Our tailored solutions cater to the unique needs of independent advisors, offering scalable support to drive business growth and client satisfaction."
+        },
+        "q7": {
+            "title": "How does paraplanner.ai prioritize data security?",
+            "body": "Data security is paramount to us. We employ robust encryption protocols and strict access controls to safeguard sensitive client information."
+        },
+        "q8": {
+            "title": "What support does paraplanner.ai provide during onboarding?",
+            "body": "Our dedicated onboarding team offers comprehensive training and personalized guidance to ensure a smooth transition and maximize platform utilization."
         }
     }
 }

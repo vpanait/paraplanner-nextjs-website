@@ -1,9 +1,8 @@
 import * as React from 'react';
-// import "./globals.css";
-import HomePage from '@/pages/HomePage';
+import FAQPage from '@/pages/FAQPage';
 
 export default async function Home() {
   return (
-    <HomePage />
+    <FAQPage />
   );
 }

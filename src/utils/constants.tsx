@@ -1,6 +1,7 @@
 export const ROUTE = {
     HOME: '/',
     SECURITY: '/security',
+    FAQ: '/faq',
     ABOUT: {
         BASE: '/about',
         COMPANY: '/about/company',
@@ -9,6 +10,7 @@ export const ROUTE = {
 }
 
 export const APP_SIGN_UP_URL = "https://app.paraplanner.ai/sign-up?source=generaladminplanning";
+export const APP_SIGN_IN_URL = "https://app.paraplanner.ai/";
 
 export const CONTENT_WRAPPER_PADDING_Y = 64;
 

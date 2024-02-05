@@ -21,10 +21,11 @@ import SectionContainer from "@/components/SectionContainer";
 import { animated, useScroll, useSpring } from "@react-spring/web";
 import Image from 'next/image';
 import t from '@/app/dictionaries/en.json';
-import { APP_SIGN_UP_URL } from "@/utils/constants";
+import { APP_SIGN_IN_URL, APP_SIGN_UP_URL } from "@/utils/constants";
 import { usePathname } from 'next/navigation'
 import { getThemeOptions } from "@/theme/theme";
 import useWindowPosition from "@/hooks/useWindowPosition";
+import ThemeModeWrapper from "@/theme/ThemeModeWrapper";
 
 interface MenuItem {
   label: string;
@@ -57,11 +58,11 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
     />
   );
 
-  const [open, setOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openSubMenu, setOpenSubMenu] = React.useState<number | null>(null);
 
-  const handleClick = () => {
-    setOpen(!open);
+  const handleToggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
   };
 
   const handleSubItemClick = (index: number) => {
@@ -80,7 +81,7 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
           <div key={index} style={{ position: 'relative' }}>
             <ListItemButton onClick={() => handleSubItemClick(index)} sx={sx}>
               <ListItemText primary={item.label} />
-              {openSubMenu === index ? <ExpandLess /> : <ExpandMore />}
+              {openSubMenu === index ? <ExpandLess sx={{ color: theme.palette.primary.main }} /> : <ExpandMore sx={{ color: theme.palette.primary.main }} />}
             </ListItemButton>
             <Collapse
               in={openSubMenu === index}
@@ -109,13 +110,26 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
 
     return isSubmenu ? renderedItems : [...renderedItems, (
       <>
-        <Button variant="outlined" href={APP_SIGN_UP_URL} target="_blank"
-          sx={{ display: { xs: "none", sm: "flex" }, borderRadius: 48, marginLeft: 2 }}
+        <ThemeModeWrapper>
+          <Button variant="text" href={APP_SIGN_IN_URL} target="_blank"
+            sx={{ display: { xs: "none", md: "flex" }, marginLeft: 2 }}
+          >
+            {t.common.signIn}
+          </Button>
+          <Button variant="outlined" href={APP_SIGN_UP_URL} target="_blank"
+            sx={{ display: { xs: "none", md: "flex" }, borderRadius: 48, marginLeft: 2 }}
+          >
+            {t.common.signUp}
+          </Button>
+        </ThemeModeWrapper>
+        <ListItemButton component={NextLink} href={APP_SIGN_IN_URL} target="_blank"
+          sx={{ display: { xs: "block", md: "none" }, flexGrow: 0 }}
+          passHref
         >
-          {t.common.signUp}
-        </Button>
+          <ListItemText primary={t.common.signIn as ReactNode} />
+        </ListItemButton>
         <ListItemButton component={NextLink} href={APP_SIGN_UP_URL} target="_blank"
-          sx={{ display: { xs: "block", sm: "none" }, flexGrow: 0 }}
+          sx={{ display: { xs: "block", md: "none" }, flexGrow: 0 }}
           passHref
         >
           <ListItemText primary={t.common.signUp as ReactNode} />
@@ -123,7 +137,6 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
       </>
     )];
   };
-
 
 
   return (
@@ -135,27 +148,22 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
       >
         <animated.div style={{ paddingBlock: padding }}>
           <Toolbar variant="dense" sx={{ padding: { xs: 0 } }}>
-            <Container sx={{ display: { xs: "block", sm: "none" }, padding: { xs: 0 } }}>
+            <Container sx={{ display: { xs: "block", md: "none" }, padding: { xs: 0 } }}>
               <List>
-                <ListItem>
+                <ListItem sx={{ padding: 0 }}>
                   <Button
-                    onClick={
-                      handleClick
-                    }
+                    onClick={handleToggleMobileMenu}
+                    sx={{ marginRight: 1, color: 'white' }}
                   >
-                    <MenuIcon color="secondary" />
-                    {open ? (
-                      <ExpandLess color="secondary" />
-                    ) : (
-                      <ExpandMore color="secondary" />
-                    )}
+                    <MenuIcon />
+                    {mobileMenuOpen ? <ExpandLess /> : <ExpandMore />}
                   </Button>
                   <NextLink href="/">
                     {logo}
                   </NextLink>
                 </ListItem>
                 <Collapse
-                  in={open}
+                  in={mobileMenuOpen}
                   timeout="auto"
                   unmountOnExit
                 >
@@ -170,7 +178,7 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
             </Container>
 
             <Container sx={{
-              display: { xs: "none", sm: "flex" },
+              display: { xs: "none", md: "flex" },
               alignItems: 'center',
               justifyContent: 'space-between',
               padding: { xs: 0 }
@@ -179,7 +187,7 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
                 {logo}
               </NextLink>
 
-              <animated.div>
+              <animated.div >
                 <List
                   component="nav"
                   aria-labelledby="nested-list-subheader"

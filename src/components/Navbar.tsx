@@ -71,8 +71,8 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
 
   const renderMenuItems = (items: MenuItem[], isSubmenu?: boolean) => {
     const renderedItems = items?.map((item, index) => {
-      const hasSubItems = item.subItems && item?.subItems?.length > 0;
-      const isActive = hasSubItems ? pathname.includes(item.path) : pathname === item.path;
+      const hasSubItems: boolean = !!item.subItems && item?.subItems?.length > 0;
+      const isActive = hasSubItems ? pathname?.includes(item.path) : pathname === item.path;
 
       const sx = isActive ? { backgroundColor: theme.palette.secondary.main } : {};
 

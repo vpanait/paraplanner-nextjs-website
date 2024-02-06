@@ -1,5 +1,5 @@
 "use client"
-import React, { ReactNode, useEffect, useMemo, useRef, useState } from "react";
+import React, { Fragment, ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import {
   List,
   ListItem,
@@ -69,7 +69,7 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
     setOpenSubMenu(openSubMenu === index ? null : index);
   };
 
-  const renderMenuItems = (items: MenuItem[], isSubmenu?: boolean) => {
+  const renderMenuItems = (keyPrefix: string, items: MenuItem[], isSubmenu?: boolean) => {
     const renderedItems = items?.map((item, index) => {
       const hasSubItems: boolean = !!item.subItems && item?.subItems?.length > 0;
       const isActive = hasSubItems ? pathname?.includes(item.path) : pathname === item.path;
@@ -78,9 +78,9 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
 
       if (item.subItems && item?.subItems?.length > 0) {
         return (
-          <div key={index} style={{ position: 'relative' }}>
+          <div key={`${item?.path}-${item?.label}`} style={{ position: 'relative' }}>
             <ListItemButton onClick={() => handleSubItemClick(index)} sx={sx}>
-              <ListItemText primary={item.label} />
+              <ListItemText primary={item?.label} />
               {openSubMenu === index ? <ExpandLess sx={{ color: theme.palette.primary.main }} /> : <ExpandMore sx={{ color: theme.palette.primary.main }} />}
             </ListItemButton>
             <Collapse
@@ -94,22 +94,22 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
                 width: '100%'
               }}
             >
-              {renderMenuItems(item.subItems, true)}
+              {renderMenuItems(keyPrefix, item.subItems, true)}
             </Collapse>
           </div>
         );
       } else {
         return (
-          <ListItemButton key={index} component={NextLink} href={item.path} sx={{ flexGrow: 0, ...sx }
+          <ListItemButton key={`${item?.path}-${item?.label}`} component={NextLink} href={item.path} sx={{ flexGrow: 0, ...sx }
           } passHref >
-            <ListItemText primary={item.label} />
+            <ListItemText primary={item?.label} />
           </ListItemButton >
         );
       }
     });
 
     return isSubmenu ? renderedItems : [...renderedItems, (
-      <>
+      <Fragment key={`buttons`}>
         <ThemeModeWrapper>
           <Button variant="text" href={APP_SIGN_IN_URL} target="_blank"
             sx={{ display: { xs: "none", md: "flex" }, marginLeft: 2 }}
@@ -134,7 +134,7 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
         >
           <ListItemText primary={t.common.signUp as ReactNode} />
         </ListItemButton>
-      </>
+      </Fragment>
     )];
   };
 
@@ -171,7 +171,7 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
                     component="div"
                     disablePadding
                   >
-                    {renderMenuItems(routes)}
+                    {renderMenuItems('smallMenu', routes)}
                   </List>
                 </Collapse>
               </List>
@@ -193,7 +193,7 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
                   aria-labelledby="nested-list-subheader"
                   sx={{ display: 'flex', gap: 1 }}
                 >
-                  {renderMenuItems(routes)}
+                  {renderMenuItems('largeMenu',routes)}
                 </List>
               </animated.div>
             </Container>

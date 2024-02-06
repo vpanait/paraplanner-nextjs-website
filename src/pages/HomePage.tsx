@@ -55,8 +55,9 @@ export default function HomePage() {
           <Grid item container xs={12} sm={12} sx={{ justifyContent: 'center' }}>
             {['planning', 'acquisition', 'delegation'].map(item => {
               const key = item as 'planning';
+
               return (
-                <Grid item container md={4} sm={12} sx={{ flexDirection: 'column', justifyContent: 'center' }}>
+                <Grid key={key} item container md={4} sm={12} sx={{ flexDirection: 'column', justifyContent: 'center' }}>
                   <Card variant="outlined" sx={{ height: '100%', marginX: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: 1, p: 2, height: '100%' }}>
                       <Box>
@@ -121,8 +122,9 @@ export default function HomePage() {
           <Grid item container xs={12} sm={8} sx={{ justifyContent: 'center' }}>
             {['q1', 'q2', 'q3'].map((item, index) => {
               const key = item as 'q1';
+
               return (
-                <Box sx={{ marginBottom: 1 }}>
+                <Box key={key} sx={{ marginBottom: 1 }}>
                   <Accordion defaultExpanded={index === 0}>
                     <AccordionSummary
                       expandIcon={<ExpandMore />}

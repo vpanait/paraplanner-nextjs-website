@@ -107,11 +107,11 @@ interface IThemeProps {
 export const THEME: IThemeProps = {
   PRIMARY: {
     DARK: common.white,
-    LIGHT: purple[500],
+    LIGHT: "#e89a00",
   },
   SECONDARY: {
     DARK: common.white,
-    LIGHT: purple[500],
+    LIGHT: "#e89a00",
   },
   TEXT: {
     DARK: common.white,
@@ -126,12 +126,12 @@ export const THEME: IThemeProps = {
     LIGHT: grey[700],
   },
   TEXT_ACCENT: {
-    DARK: purple[500],
-    LIGHT: purple[500],
+    DARK: "#e89a00",
+    LIGHT: "#e89a00",
   },
   MENU_BUTTON_BACKGROUND: {
     DARK: '#121212',
-    LIGHT: purple[500],
+    LIGHT: "#e89a00",
   },
   MENU_BUTTON_BACKGROUND_HOVER: {
     DARK: grey[800],

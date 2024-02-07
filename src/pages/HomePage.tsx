@@ -10,10 +10,11 @@ import {
   Box,
   Button, Card, Divider, Grid, Stack, useTheme
 } from '@mui/material';
-import t from '@/app/dictionaries/en.json';
+import t from '@/dictionaries/en.json';
 import { APP_SIGN_UP_URL, ROUTE } from '@/utils/constants';
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import ThemeModeWrapper from '@/theme/ThemeModeWrapper';
+import Carousel from '@/components/Carousel';
 
 
 export default function HomePage() {
@@ -22,7 +23,7 @@ export default function HomePage() {
   return (
     <>
       <SectionContainer withoutAnimation>
-        <Grid container>
+        <Grid container sx={{ justifyContent: 'space-between', rowGap: 2 }}>
           <Grid item container md={6} sm={12} sx={{ flexDirection: 'column', justifyContent: 'center', gap: 3 }}>
             <Typography variant="h1">
               {t.homePage.hero.titleA} <span style={{ color: theme.palette.info.main }}>{t.homePage.hero.titleB}</span> {t.homePage.hero.titleC}
@@ -34,18 +35,20 @@ export default function HomePage() {
             <Button variant='contained' href={APP_SIGN_UP_URL} target="_blank">{t.homePage.hero.button}</Button>
           </Grid>
 
-          <Grid item container md={6} sm={12} sx={{ flexDirection: 'column', justifyContent: 'center' }}>
+          <Grid item container md={5} sm={12} sx={{ flexDirection: 'column', justifyContent: 'center' }}>
             <Box
               component="img"
               sx={{ maxWidth: { xs: 1 } }}
-              src="https://illustrations.popsy.co/yellow/man-riding-a-rocket.svg"
+              src="/img/undraw_home_run_acyh.svg"
             />
           </Grid>
         </Grid>
       </SectionContainer>
 
+      <Carousel />
+
       <SectionContainer mode='dark'>
-        <Grid container>
+        <Grid container sx={{ justifyContent: 'space-between', rowGap: 2 }}>
           <Grid item container xs={12} sm={12} sx={{ justifyContent: 'center' }}>
             <Typography variant="h1">
               {t.homePage.howWeSupport.titleA} <span style={{ color: theme.palette.info.main }}>{t.homePage.howWeSupport.titleB}</span>
@@ -88,12 +91,12 @@ export default function HomePage() {
       </SectionContainer>
 
       <SectionContainer>
-        <Grid container>
-          <Grid item container md={6} sm={12} sx={{ flexDirection: 'column', justifyContent: 'center' }}>
+        <Grid container sx={{ justifyContent: 'space-between', rowGap: 2 }}>
+          <Grid item container md={5} sm={12} sx={{ flexDirection: 'column', justifyContent: 'center' }}>
             <Box
               component="img"
               sx={{ maxWidth: { xs: 1 } }}
-              src="https://illustrations.popsy.co/yellow/superhero.svg"
+              src="/img/undraw_secure_login_pdn4.svg"
             />
           </Grid>
 
@@ -112,46 +115,54 @@ export default function HomePage() {
 
 
       <SectionContainer mode='dark'>
-        <Grid container>
-          <Grid item container xs={12} sm={12} sx={{ justifyContent: 'center' }}>
+        <Grid container sx={{ justifyContent: 'space-between', rowGap: 2 }}>
+          <Grid item container sx={{ justifyContent: 'center' }}>
             <Typography variant="h1">
               <span style={{ color: theme.palette.info.main }}>{t.faqPage.title}</span>
             </Typography>
           </Grid>
 
-          <Grid item container xs={12} sm={8} sx={{ justifyContent: 'center' }}>
-            {['q1', 'q2', 'q3'].map((item, index) => {
-              const key = item as 'q1';
+          <Grid container sx={{ justifyContent: 'space-between', rowGap: 2 }}>
+            <Grid item container xs={12} sm={7} sx={{ justifyContent: 'center' }}>
+              {['q1', 'q2', 'q3'].map((item, index) => {
+                const key = item as 'q1';
 
-              return (
-                <Box key={key} sx={{ marginBottom: 1 }}>
-                  <Accordion defaultExpanded={index === 0}>
-                    <AccordionSummary
-                      expandIcon={<ExpandMore />}
-                      aria-controls="panel1-content"
-                      id="panel1-header"
-                    >
-                      <Typography variant='h5' sx={{ fontSize: 16 }}>
-                        {t.faqPage[key]?.title}
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography variant='body1'>
-                        {t.faqPage[key]?.body}
-                      </Typography>
-                    </AccordionDetails>
-                  </Accordion>
-                </Box>
-              )
-            })}
-          </Grid>
+                return (
+                  <Box key={key} sx={{ marginBottom: 1 }}>
+                    <Accordion defaultExpanded={index === 0}>
+                      <AccordionSummary
+                        expandIcon={<ExpandMore />}
+                        aria-controls="panel1-content"
+                        id="panel1-header"
+                      >
+                        <Typography variant='h5' sx={{ fontSize: 16 }}>
+                          {t.faqPage[key]?.title}
+                        </Typography>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <Typography variant='body1'>
+                          {t.faqPage[key]?.body}
+                        </Typography>
+                      </AccordionDetails>
+                    </Accordion>
+                  </Box>
+                )
+              })}
+            </Grid>
 
-          <Grid item container xs={12} sm={4} sx={{ justifyContent: 'center', alignItems: 'center' }}>
-            <Box>
-              <ThemeModeWrapper mode='light'>
-                <Button variant='contained' href={ROUTE.FAQ}>{t.faqPage.button}</Button>
-              </ThemeModeWrapper>
-            </Box>
+            <Grid item container xs={12} sm={4} sx={{ justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'column', rowGap: 2 }}>
+              <Box
+                component="img"
+                sx={{ maxWidth: { xs: 1 } }}
+                src="/img/undraw_questions_re_1fy7.svg"
+              />
+
+              <Box>
+                <ThemeModeWrapper mode='light'>
+                  <Button variant='contained' href={ROUTE.FAQ}>{t.faqPage.button}</Button>
+                </ThemeModeWrapper>
+              </Box>
+            </Grid>
           </Grid>
         </Grid>
       </SectionContainer>

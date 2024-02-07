@@ -58,7 +58,8 @@ const theme = createTheme({
       fontSize: 28,
     },
     h6: {
-      fontSize: 21,
+      fontSize: 20,
+      fontWeight: 700,
     },
     subtitle1: {
       fontSize: 18,
@@ -80,7 +81,7 @@ const theme = createTheme({
   },
   components: {
     MuiCssBaseline: {
-      styleOverrides: (themeParam) => styleOverrides(themeParam),
+      // styleOverrides: (themeParam) => styleOverrides(themeParam),
     },
   },
 });
@@ -187,30 +188,9 @@ export const getThemeOptions = (mode: PaletteMode) => {
           },
         },
       },
-      MuiAppBar: {
-        styleOverrides: {
-          root: () => ({
-            ...(true &&
-              {
-                // background: mode === "light" ? green[100] : 'red',
-                // color: mode === "light" ? green[100] : "#fff",
-              }),
-          }),
-        },
-      },
-      MuiButtonBase: {
-        styleOverrides: {
-          root: {
-            // background: 'red',
-            // color: mode === "light" ? green[100] : "#fff",
-          },
-        },
-      },
       MuiButton: {
         styleOverrides: {
           root: {
-            // background: THEME.BUTTON_BACKGROUND[themeMode],
-            // color: mode === "light" ? green[100] : "#fff",
             fontSize: 16
           },
         },

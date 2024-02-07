@@ -5,8 +5,9 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import { ThemeProvider } from '@mui/material/styles';
 import { defaultTheme } from '@/theme/theme';
 import Navbar from '../components/Navbar';
-import t from '@/app/dictionaries/en.json';
+import t from '@/dictionaries/en.json';
 import { ROUTE } from "@/utils/constants"
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: 'paraplanner.ai',
@@ -46,6 +47,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
               <CssBaseline />
               <Navbar routes={routes} mode="dark" />
               {props.children}
+              <Footer mode={'dark'} />
             </ThemeProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>

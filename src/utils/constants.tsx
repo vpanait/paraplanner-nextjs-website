@@ -23,3 +23,12 @@ export const CONTENT_WRAPPER_HIDDEN_ANIMATION = {
     y: CONTENT_WRAPPER_PADDING_Y,
     opacity: 0,
 };
+
+export const FOOTER = {
+    EMAIL: "hello@paraplanner.ai",
+    PHONE: "(737) 373-3353",
+    LINKEDIN: 'https://linkedin.com/company/paraplannerai',
+    TWITTER: 'https://twitter.com/paraplannerai',
+    TERMS: 'https://docs.google.com/document/d/1ux_Fa1C688s_Q8knfiDp9lQuTS0-tQyP/edit?usp=sharing&ouid=110062069340887754675&rtpof=true&sd=true',
+    PRIVACY: 'https://docs.google.com/document/d/1XzDV4J_Vl85oh5fMuuhMPARfnGgEV4u8/edit?usp=sharing&ouid=110062069340887754675&rtpof=true&sd=true'
+}

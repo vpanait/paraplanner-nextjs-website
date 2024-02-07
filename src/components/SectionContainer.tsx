@@ -57,7 +57,7 @@ const SectionContainer = ({
         }}
       >
         <Grid item lg={1.5} md={0.5} sm={0.5} xs={0.25} />
-        <Grid item lg={9} md={11} sm={11} xs={11.5}>
+        <Grid item lg={9} md={11} sm={11} xs={11.5} >
           <animated.div ref={ref} style={animatedStyles}>
             {children}
           </animated.div>

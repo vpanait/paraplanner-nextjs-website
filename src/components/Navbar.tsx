@@ -20,7 +20,7 @@ import NextLink from 'next/link';
 import SectionContainer from "@/components/SectionContainer";
 import { animated, useScroll, useSpring } from "@react-spring/web";
 import Image from 'next/image';
-import t from '@/app/dictionaries/en.json';
+import t from '@/dictionaries/en.json';
 import { APP_SIGN_IN_URL, APP_SIGN_UP_URL } from "@/utils/constants";
 import { usePathname } from 'next/navigation'
 import { getThemeOptions } from "@/theme/theme";

@@ -22,7 +22,8 @@
         "negotiator": "0.6.3",
         "next": "latest",
         "react": "latest",
-        "react-dom": "latest"
+        "react-dom": "latest",
+        "react-spring-carousel": "^2.0.19"
     },
     "devDependencies": {
         "@types/negotiator": "0.6.1",

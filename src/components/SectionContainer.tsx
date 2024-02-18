@@ -1,8 +1,6 @@
 "use client"
-import { Grid, PaletteMode, SxProps, Theme, ThemeOptions, createTheme } from "@mui/material";
-import ThemeModeWrapper from "@/theme/ThemeModeWrapper";
-import { RefObject, useEffect, useMemo } from "react";
-import { getThemeOptions } from "@/theme/theme";
+import { Grid, SxProps, Theme } from "@mui/material";
+import { RefObject, useEffect } from "react";
 import { animated, useInView, useSpring } from "@react-spring/web";
 import { CONTENT_WRAPPER_HIDDEN_ANIMATION, CONTENT_WRAPPER_PADDING_Y, CONTENT_WRAPPER_VISIBLE_ANIMATION } from "@/utils/constants";
 
@@ -10,8 +8,8 @@ import { CONTENT_WRAPPER_HIDDEN_ANIMATION, CONTENT_WRAPPER_PADDING_Y, CONTENT_WR
 
 interface IProps {
   children: React.ReactNode;
-  mode?: PaletteMode;
   sx?: SxProps<Theme>;
+  innerSx?: SxProps<Theme>;
   sectionRef?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined,
   withoutAnimation?: boolean
   disablePaddingY?: boolean
@@ -19,17 +17,17 @@ interface IProps {
 
 const SectionContainer = ({
   children,
-  mode = 'light',
   sx,
+  innerSx,
   sectionRef,
   withoutAnimation = false,
   disablePaddingY = false
 }: IProps) => {
-  const theme = useMemo(() => createTheme(getThemeOptions(mode) as ThemeOptions), [mode]);
 
   const [ref, inView] = useInView({ amount: 0.2 });
   const [animatedStyles, api] = useSpring(() => ({
     from: withoutAnimation ? CONTENT_WRAPPER_VISIBLE_ANIMATION : CONTENT_WRAPPER_HIDDEN_ANIMATION,
+    height: '100%'
   }));
 
   useEffect(() => {
@@ -46,25 +44,27 @@ const SectionContainer = ({
   }, [withoutAnimation, inView, api]);
 
   return (
-    <ThemeModeWrapper mode={mode} >
-      <Grid
-        container
-        ref={sectionRef}
-        sx={{
-          backgroundColor: theme.palette.background.default,
-          paddingY: (disablePaddingY ? 0 : `${CONTENT_WRAPPER_PADDING_Y}px`),
-          ...sx
-        }}
-      >
-        <Grid item lg={1.5} md={0.5} sm={0.5} xs={0.25} />
-        <Grid item lg={9} md={11} sm={11} xs={11.5} >
+    <Grid
+      container
+      ref={sectionRef}
+      sx={{
+        // backgroundColor: theme.palette.background.default,
+        paddingY: (disablePaddingY ? 0 : `${CONTENT_WRAPPER_PADDING_Y}px`),
+        ...sx
+      }}
+    >
+      <Grid item lg={1.5} md={0.5} sm={0.5} xs={0.25} />
+      <Grid item lg={9} md={11} sm={11} xs={11.5} sx={innerSx}>
+        {withoutAnimation ? (
+          <>{children}</>
+        ) : (
           <animated.div ref={ref} style={animatedStyles}>
             {children}
           </animated.div>
-        </Grid>
-        <Grid item lg={1.5} md={0.5} sm={0.5} xs={0.25} />
+        )}
       </Grid>
-    </ThemeModeWrapper >
+      <Grid item lg={1.5} md={0.5} sm={0.5} xs={0.25} />
+    </Grid>
   );
 };
 

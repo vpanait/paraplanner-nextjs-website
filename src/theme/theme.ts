@@ -1,64 +1,37 @@
 "use client";
-import { Theme, createTheme } from "@mui/material/styles";
-import {
-  amber,
-  common,
-  deepOrange,
-  green,
-  grey,
-  purple,
-  red,
-} from "@mui/material/colors";
-import { PaletteMode, ThemeOptions } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
+import { darken } from "@mui/material";
 import "@fontsource/libre-baskerville";
 
-const styleOverrides = (themeParam: Omit<Theme, "components">) => {
-  return `
-    hh1, hh2, hh3, hh4, hh5, hh6 {
-      color: ${themeParam.palette.primary.main};
-    }
-    hh1 {
-      font-size: 89px;
-    }
-    hh2 {
-      font-size: 67px;
-    }
-    hh3 {
-      font-size: 50px;
-    }
-    hh4 {
-      font-size: 38px;
-    }
-    hh5 {
-      font-size: 28px;
-    }
-    hh6 {
-      font-size: 21px;
-    }`;
-};
+export const GradientA = "#14376A";
+export const GradientB = "#4899A8";
+export const themeGradient = `linear-gradient(90deg, ${GradientA} 0%, ${GradientB} 100%)`;
 
 const theme = createTheme({
   typography: {
     fontFamily: "Libre Baskerville",
     h1: {
-      fontSize: 60,
+      fontSize: 89.76,
       fontWeight: 700,
-      marginBottom: 16,
     },
     h2: {
-      fontSize: 67,
+      fontSize: 67.34,
+      fontWeight: 700,
     },
     h3: {
-      fontSize: 50,
+      fontSize: 50.52,
+      fontWeight: 700,
     },
     h4: {
-      fontSize: 38,
+      fontSize: 37.9,
+      fontWeight: 700,
     },
     h5: {
-      fontSize: 28,
+      fontSize: 28.43,
+      fontWeight: 700,
     },
     h6: {
-      fontSize: 20,
+      fontSize: 21.33,
       fontWeight: 700,
     },
     subtitle1: {
@@ -66,7 +39,11 @@ const theme = createTheme({
       fontWeight: 400,
     },
     body1: {
-      fontSize: 14,
+      fontSize: 16,
+      fontWeight: 400,
+    },
+    body2: {
+      fontSize: 12,
       fontWeight: 400,
     },
     button: {
@@ -75,144 +52,67 @@ const theme = createTheme({
     },
   },
   palette: {
-    // primary: { main: purple[500] },
-    // secondary: { main: green[500] },
-    // text: { primary: "#1A1A1A" },
+    primary: { main: GradientA },
+    secondary: { main: GradientB },
+    text: { primary: "#1A1A1A" },
+    background: { default: "#E6E6E6" },
   },
   components: {
-    MuiCssBaseline: {
-      // styleOverrides: (themeParam) => styleOverrides(themeParam),
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          fontSize: 16,
+          borderRadius: 22,
+          minWidth: 200,
+        },
+        contained: {
+          background: themeGradient,
+        },
+        text: ({ theme }) => ({
+          ...{
+            color: theme.palette.text.primary,
+            fontWeight: 400,
+            "&:hover": {
+              backgroundColor: darken(theme.palette.background.default, 0.05),
+            },
+          },
+        }),
+      },
+    },
+    MuiList: {
+      styleOverrides: {
+        root: {
+          padding: 0,
+        },
+      },
+    },
+    MuiListItemButton: {
+      styleOverrides: {
+        root: ({ ownerState, theme }) => ({
+          ...{
+            color: theme.palette.text.primary,
+            fontSize: 16,
+            backgroundColor: "transparent",
+            "&:hover": {
+              backgroundColor: darken(theme.palette.background.default, 0.05),
+            },
+          },
+        }),
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          ...{
+            padding: theme.spacing(3),
+            backgroundColor: "transparent",
+            borderRadius: theme.spacing(3),
+            borderWidth: 4,
+          },
+        }),
+      },
     },
   },
 });
-
-interface IThemeColors {
-  DARK: string;
-  LIGHT: string;
-}
-
-export type TThemeMode = "DARK" | "LIGHT";
-
-interface IThemeProps {
-  PRIMARY: IThemeColors;
-  SECONDARY: IThemeColors;
-  TEXT: IThemeColors;
-  SUBTITLE: IThemeColors;
-  BODY: IThemeColors;
-  TEXT_ACCENT: IThemeColors;
-  MENU_BUTTON_BACKGROUND: IThemeColors;
-  MENU_BUTTON_BACKGROUND_HOVER: IThemeColors;
-  MENU_BUTTON_BACKGROUND_BORDER: IThemeColors;
-}
-
-export const THEME: IThemeProps = {
-  PRIMARY: {
-    DARK: common.white,
-    LIGHT: "#e89a00",
-  },
-  SECONDARY: {
-    DARK: common.white,
-    LIGHT: "#e89a00",
-  },
-  TEXT: {
-    DARK: common.white,
-    LIGHT: "#171717",
-  },
-  SUBTITLE: {
-    DARK: grey[300],
-    LIGHT: grey[700],
-  },
-  BODY: {
-    DARK: grey[200],
-    LIGHT: grey[700],
-  },
-  TEXT_ACCENT: {
-    DARK: "#e89a00",
-    LIGHT: "#e89a00",
-  },
-  MENU_BUTTON_BACKGROUND: {
-    DARK: '#121212',
-    LIGHT: "#e89a00",
-  },
-  MENU_BUTTON_BACKGROUND_HOVER: {
-    DARK: grey[800],
-    LIGHT: grey[200],
-  },
-  MENU_BUTTON_BACKGROUND_BORDER: {
-    DARK: "#9e9e9e",
-    LIGHT: "#9e9e9e",
-  },
-};
-
-export const getThemeOptions = (mode: PaletteMode) => {
-  const themeMode: TThemeMode = mode.toUpperCase() as TThemeMode;
-  const themeOptions: ThemeOptions = {
-    typography: theme.typography,
-    palette: {
-      // ...theme.palette,
-      mode,
-      ...(mode === "light"
-        ? {
-            // palette values for light mode
-            primary: { main: THEME.PRIMARY.LIGHT },
-            secondary: { main: green[500] },
-            text: {
-              primary: grey[900],
-              secondary: grey[800],
-            },
-            info: {
-              main: THEME.TEXT_ACCENT.LIGHT,
-            },
-          }
-        : {
-            // palette values for dark mode
-            primary: { main: THEME.PRIMARY.DARK },
-            secondary: { main: grey[800] },
-            info: {
-              main: THEME.TEXT_ACCENT.DARK,
-            },
-          }),
-    },
-    components: {
-      ...theme.components,
-      MuiTypography: {
-        styleOverrides: {
-          root: {
-            color: THEME.TEXT[themeMode],
-          },
-          subtitle1: {
-            color: THEME.SUBTITLE[themeMode],
-          },
-          body1: {
-            color: THEME.BODY[themeMode],
-          },
-        },
-      },
-      MuiButton: {
-        styleOverrides: {
-          root: {
-            fontSize: 16
-          },
-        },
-      },
-      MuiListItemButton: {
-        styleOverrides: {
-          root: {
-            border: "1px solid transparent",
-            backgroundColor: THEME.MENU_BUTTON_BACKGROUND[themeMode],
-            "&:hover": {
-              backgroundColor: THEME.MENU_BUTTON_BACKGROUND_HOVER[themeMode],
-              borderColor: THEME.MENU_BUTTON_BACKGROUND_BORDER[themeMode],
-            },
-          },
-        },
-      },
-    },
-  };
-
-  return themeOptions;
-};
-
-export const defaultTheme = createTheme(getThemeOptions("light"));
 
 export default theme;

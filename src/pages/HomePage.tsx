@@ -1,6 +1,5 @@
 "use client"
 import * as React from 'react';
-import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
 import SectionContainer from '@/components/SectionContainer';
 import {
@@ -8,13 +7,13 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
-  Button, Card, Divider, Grid, Stack, useTheme
+  Button, Card, Grid, Stack, useTheme
 } from '@mui/material';
 import t from '@/dictionaries/en.json';
-import { APP_SIGN_UP_URL, ROUTE } from '@/utils/constants';
+import { APP_SIGN_UP_URL, KITCES_URL, ROUTE } from '@/utils/constants';
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import ThemeModeWrapper from '@/theme/ThemeModeWrapper';
-import Carousel from '@/components/Carousel';
+import InfoBanner from '@/components/InfoBanner';
+import { themeGradient } from '@/theme/theme';
 
 
 export default function HomePage() {
@@ -22,75 +21,86 @@ export default function HomePage() {
 
   return (
     <>
-      <SectionContainer withoutAnimation>
-        <Grid container sx={{ justifyContent: 'space-between', rowGap: 2 }}>
-          <Grid item container md={6} sm={12} sx={{ flexDirection: 'column', justifyContent: 'center', gap: 3 }}>
-            <Typography variant="h1">
-              {t.homePage.hero.titleA} <span style={{ color: theme.palette.info.main }}>{t.homePage.hero.titleB}</span> {t.homePage.hero.titleC}
+      <SectionContainer
+        withoutAnimation
+        sx={{ minHeight: 'calc(100vh - 2 * 56px - 80px)' }}
+      >
+        <Grid container sx={{ justifyContent: 'space-between', rowGap: 2, height: '100%' }}>
+          <Grid item container md={12} sm={12} sx={{ flexDirection: 'column', justifyContent: 'center', gap: 1.5 }}>
+            <Typography variant="h2">
+              {t.homePage.hero.titleA}
             </Typography>
-            <Typography variant="subtitle1">
-
+            <Typography variant="h6">
               {t.homePage.hero.subtitle}
             </Typography>
-            <Button variant='contained' href={APP_SIGN_UP_URL} target="_blank">{t.homePage.hero.button}</Button>
-          </Grid>
 
-          <Grid item container md={5} sm={12} sx={{ flexDirection: 'column', justifyContent: 'center' }}>
-            <Box
-              component="img"
-              sx={{ maxWidth: { xs: 1 } }}
-              src="/img/undraw_home_run_acyh.svg"
-            />
+            <Grid item container sx={{ gap: 1.5, marginTop: 4.5 }}>
+              <Button variant='contained' href={APP_SIGN_UP_URL} target="_blank">{t.common.createPlan}</Button>
+              <Button variant='outlined' href={APP_SIGN_UP_URL} target="_blank">{t.common.bookCall}</Button>
+            </Grid>
+
+            <Button variant="text" href={KITCES_URL} target="_blank" sx={{ width: 'fit-content', marginTop: 4.5 }}>
+              <Stack direction="column" alignItems="center" spacing={1}>
+                <Box
+                  component="img"
+                  sx={{ maxWidth: { xs: 1 } }}
+                  src="/img/kitces.png"
+                />
+                <Typography variant='body2'>
+                  {t.homePage.hero.asSeenOn}
+                </Typography>
+              </Stack>
+            </Button>
           </Grid>
         </Grid>
       </SectionContainer>
 
-      <Carousel />
+      <InfoBanner>
+        <Typography variant="body1">
+          {t.homePage.usedBy}
+        </Typography>
+      </InfoBanner>
 
-      <SectionContainer mode='dark'>
-        <Grid container sx={{ justifyContent: 'space-between', rowGap: 2 }}>
-          <Grid item container xs={12} sm={12} sx={{ justifyContent: 'center' }}>
-            <Typography variant="h1">
-              {t.homePage.howWeSupport.titleA} <span style={{ color: theme.palette.info.main }}>{t.homePage.howWeSupport.titleB}</span>
-            </Typography>
-          </Grid>
 
-          <Grid item container xs={12} sm={12} sx={{ justifyContent: 'center' }}>
-            {['planning', 'acquisition', 'delegation'].map(item => {
-              const key = item as 'planning';
+      {/* <Carousel /> */}
+
+      <SectionContainer>
+        <Grid container sx={{ flexDirection: 'column', justifyContent: 'space-between', rowGap: 2 }}>
+          <Typography variant="body1">
+            {t.homePage.theProblem.title}
+          </Typography>
+          <Typography variant="h4">
+            {t.homePage.theProblem.subtitleA} <br />
+            {t.homePage.theProblem.subtitleB}
+          </Typography>
+
+          <Grid item container xs={12} sm={12} sx={{ marginTop: 7, justifyContent: 'space-between', gap: 6 }}>
+            {t.homePage.theProblem.box.map((box, index) => {
+              const nrBoxes = t.homePage.theProblem.box.length;
+              const gap = 6;
+              const actualGap = theme.spacing(gap);
 
               return (
-                <Grid key={key} item container md={4} sm={12} sx={{ flexDirection: 'column', justifyContent: 'center' }}>
-                  <Card variant="outlined" sx={{ height: '100%', marginX: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                    <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: 1, p: 2, height: '100%' }}>
-                      <Box>
-                        <Stack direction="row" justifyContent="space-between" alignItems="center">
-                          <Typography gutterBottom variant="h5" component="div">
-                            {t.homePage.howWeSupport[key]?.title}
-                          </Typography>
-                        </Stack>
-                        <Typography color="text.secondary" variant="body1">
-                          {t.homePage.howWeSupport[key]?.bodyA}
-                        </Typography>
-                        <Typography color="text.secondary" variant="body1" sx={{ fontStyle: 'italic' }}>
-                          {t.homePage.howWeSupport[key]?.bodyB}
-                        </Typography>
-                      </Box>
-
-                      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                        <Divider />
-                        <Button variant='outlined' href={APP_SIGN_UP_URL} target="_blank">{t.homePage.howWeSupport.button}</Button>
-                      </Box>
-                    </Box>
-                  </Card>
-                </Grid>
+                <Card
+                  variant="outlined"
+                  sx={{
+                    width: `calc((100% - ${nrBoxes - 1} * ${actualGap} ) / ${nrBoxes})`,
+                    display: 'flex',
+                    alignItems: 'center',
+                    background: `linear-gradient(${theme.palette.background.default} 0 0) padding-box,  ${themeGradient} border-box`
+                  }}
+                >
+                  <Typography variant="h6">
+                    {box}
+                  </Typography>
+                </Card>
               )
             })}
           </Grid>
-        </Grid>
-      </SectionContainer>
+        </Grid >
+      </SectionContainer >
 
-      <SectionContainer>
+      {/* <SectionContainer>
         <Grid container sx={{ justifyContent: 'space-between', rowGap: 2 }}>
           <Grid item container md={5} sm={12} sx={{ flexDirection: 'column', justifyContent: 'center' }}>
             <Box
@@ -114,7 +124,7 @@ export default function HomePage() {
       </SectionContainer>
 
 
-      <SectionContainer mode='dark'>
+      <SectionContainer>
         <Grid container sx={{ justifyContent: 'space-between', rowGap: 2 }}>
           <Grid item container sx={{ justifyContent: 'center' }}>
             <Typography variant="h1">
@@ -158,14 +168,12 @@ export default function HomePage() {
               />
 
               <Box>
-                <ThemeModeWrapper mode='light'>
-                  <Button variant='contained' href={ROUTE.FAQ}>{t.faqPage.button}</Button>
-                </ThemeModeWrapper>
+                <Button variant='contained' href={ROUTE.FAQ}>{t.faqPage.button}</Button>
               </Box>
             </Grid>
           </Grid>
         </Grid>
-      </SectionContainer>
+      </SectionContainer> */}
     </>
   );
 }

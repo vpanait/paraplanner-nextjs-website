@@ -1,5 +1,5 @@
 "use client"
-import React, { Fragment, ReactNode, useEffect, useMemo, useRef, useState } from "react";
+import React, { Fragment, ReactNode, useState } from "react";
 import {
   List,
   ListItem,
@@ -11,21 +11,22 @@ import {
   ListItemButton,
   Container,
   PaletteMode,
-  createTheme,
+  Typography,
 } from "@mui/material";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import MenuIcon from '@mui/icons-material/Menu';
 import NextLink from 'next/link';
 import SectionContainer from "@/components/SectionContainer";
-import { animated, useScroll, useSpring } from "@react-spring/web";
-import Image from 'next/image';
+import InfoBanner from "@/components/InfoBanner";
+import { animated, useSpring } from "@react-spring/web";
 import t from '@/dictionaries/en.json';
-import { APP_SIGN_IN_URL, APP_SIGN_UP_URL } from "@/utils/constants";
+import { APP_SIGN_IN_URL } from "@/utils/constants";
 import { usePathname } from 'next/navigation'
-import { getThemeOptions } from "@/theme/theme";
 import useWindowPosition from "@/hooks/useWindowPosition";
-import ThemeModeWrapper from "@/theme/ThemeModeWrapper";
+import { useTheme } from "@emotion/react";
+import { alpha } from '@mui/system';
+
 
 interface MenuItem {
   label: string;
@@ -40,22 +41,19 @@ interface IProps {
 
 const Navbar = ({ routes, mode = 'light' }: IProps) => {
   const pathname = usePathname();
-  const theme = useMemo(() => createTheme(getThemeOptions(mode)), [mode]);
+  const theme = useTheme();
 
   const windowPosition = useWindowPosition();
   const { padding } = useSpring({
-    padding: windowPosition > 0 ? 0 : 20,
+    padding: windowPosition > 0 ? 8 : 16,
   });
 
   const logo = (
-    <Image
-      src="/paraplanner.png"
-      alt="paraplanner.ai"
-      width={200}
-      height={35}
-      priority
-      style={{ cursor: 'pointer' }}
-    />
+    <NextLink href="/" style={{
+      textDecoration: 'none'
+    }}>
+      <Typography variant="h5" sx={{ color: theme => theme.palette.text.primary }}>{t.app.name}</Typography>
+    </NextLink>
   );
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -74,14 +72,14 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
       const hasSubItems: boolean = !!item.subItems && item?.subItems?.length > 0;
       const isActive = hasSubItems ? pathname?.includes(item.path) : pathname === item.path;
 
-      const sx = isActive ? { backgroundColor: theme.palette.secondary.main } : {};
+      const sx = isActive ? { backgroundColor: "primary.main" } : {};
 
       if (item.subItems && item?.subItems?.length > 0) {
         return (
           <div key={`${item?.path}-${item?.label}`} style={{ position: 'relative' }}>
             <ListItemButton onClick={() => handleSubItemClick(index)} sx={sx}>
               <ListItemText primary={item?.label} />
-              {openSubMenu === index ? <ExpandLess sx={{ color: theme.palette.primary.main }} /> : <ExpandMore sx={{ color: theme.palette.primary.main }} />}
+              {openSubMenu === index ? <ExpandLess sx={{ color: "primary.main" }} /> : <ExpandMore sx={{ color: "primary.main" }} />}
             </ListItemButton>
             <Collapse
               in={openSubMenu === index}
@@ -89,7 +87,7 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
               unmountOnExit
               sx={{
                 position: 'absolute',
-                background: theme.palette.secondary.main,
+                background: "secondary.main",
                 zIndex: 2,
                 width: '100%'
               }}
@@ -110,29 +108,16 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
 
     return isSubmenu ? renderedItems : [...renderedItems, (
       <Fragment key={`buttons`}>
-        <ThemeModeWrapper>
-          <Button variant="text" href={APP_SIGN_IN_URL} target="_blank"
-            sx={{ display: { xs: "none", md: "flex" }, marginLeft: 2 }}
-          >
-            {t.common.signIn}
-          </Button>
-          <Button variant="outlined" href={APP_SIGN_UP_URL} target="_blank"
-            sx={{ display: { xs: "none", md: "flex" }, borderRadius: 48, marginLeft: 2 }}
-          >
-            {t.common.signUp}
-          </Button>
-        </ThemeModeWrapper>
+        {/* <Button variant="text" href={APP_SIGN_IN_URL} target="_blank"
+          sx={{ display: { xs: "none", md: "flex" }, marginLeft: 2 }}
+        >
+          {t.common.signIn}
+        </Button> */}
         <ListItemButton component={NextLink} href={APP_SIGN_IN_URL} target="_blank"
           sx={{ display: { xs: "block", md: "none" }, flexGrow: 0 }}
           passHref
         >
           <ListItemText primary={t.common.signIn as ReactNode} />
-        </ListItemButton>
-        <ListItemButton component={NextLink} href={APP_SIGN_UP_URL} target="_blank"
-          sx={{ display: { xs: "block", md: "none" }, flexGrow: 0 }}
-          passHref
-        >
-          <ListItemText primary={t.common.signUp as ReactNode} />
         </ListItemButton>
       </Fragment>
     )];
@@ -140,9 +125,16 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
 
 
   return (
-    <AppBar position="sticky">
+    <AppBar position="sticky" sx={{
+      backgroundColor: theme => alpha(theme.palette.background.default, 0.9)
+    }}>
+      <InfoBanner>
+        <Typography variant="body1">
+          {t.homePage.banner}
+        </Typography>
+      </InfoBanner>
+
       <SectionContainer
-        mode={mode}
         withoutAnimation
         disablePaddingY
       >
@@ -153,14 +145,12 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
                 <ListItem sx={{ padding: 0 }}>
                   <Button
                     onClick={handleToggleMobileMenu}
-                    sx={{ marginRight: 1, color: 'white' }}
+                    sx={{ marginRight: 1 }}
                   >
                     <MenuIcon />
                     {mobileMenuOpen ? <ExpandLess /> : <ExpandMore />}
                   </Button>
-                  <NextLink href="/">
-                    {logo}
-                  </NextLink>
+                  {logo}
                 </ListItem>
                 <Collapse
                   in={mobileMenuOpen}
@@ -183,9 +173,7 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
               justifyContent: 'space-between',
               padding: { xs: 0 }
             }}>
-              <NextLink href="/">
-                {logo}
-              </NextLink>
+              {logo}
 
               <animated.div >
                 <List
@@ -193,9 +181,15 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
                   aria-labelledby="nested-list-subheader"
                   sx={{ display: 'flex', gap: 1 }}
                 >
-                  {renderMenuItems('largeMenu',routes)}
+                  {renderMenuItems('largeMenu', routes)}
                 </List>
               </animated.div>
+
+              <Button variant="text" href={APP_SIGN_IN_URL} target="_blank"
+                sx={{ paddingX: 2, paddingY: 1, minWidth: "auto", borderRadius: 0 }}
+              >
+                {t.common.signIn}
+              </Button>
             </Container>
           </Toolbar>
         </animated.div>

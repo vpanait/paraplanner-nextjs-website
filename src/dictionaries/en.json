@@ -4,11 +4,8 @@
         "title": "Save 10 hours a week"
     },
     "route": {
-        "security": "Security",
-        "about": "About",
-        "team": "Team",
-        "company": "Company",
-        "faq": "FAQ"
+        "security": "Security & Compliance",
+        "company": "Company"
     },
     "common": {
         "signUp": "Sign up",
@@ -19,15 +16,29 @@
         "linkedin": "LinkedIn",
         "twitter": "X (Twitter)",
         "terms": "Terms",
-        "privacy": "Privacy"
+        "privacy": "Privacy",
+        "createPlan": "Create a plan",
+        "bookCall": "Book an intro call"
     },
     "homePage": {
+        "banner": "paraplanner.ai welcomes 4 new financial advisors",
         "hero": {
-            "titleA": "Save",
+            "titleA": "Your fractional paraplanner",
             "titleB": "10 hours",
             "titleC": "a week",
-            "subtitle": "Delegate admin and planning tasks and focus on more important things",
-            "button": "Sign up and save my first hour"
+            "subtitle": "We help financial advisors create a personalized, comprehensive financial plan in 24 hours",
+            "asSeenOn": "As seen on Michael Kitces tech map"
+        },
+        "usedBy": "Used by AUM and Fee-only financial advisors",
+        "theProblem": {
+            "title": "The Problem",
+            "subtitleA": "Creating a financial plan takes a lot of time,",
+            "subtitleB": "which can be spent on winning new clients",
+            "box": [
+                "You’ve head that outsourcing creating a plan is expensive and time consuming",
+                "You don’t want to compromise on quality, and you want things done a certain way",
+                "You’re busy, and it takes time and effort to find the right partner to work with"
+            ]
         },
         "howWeSupport": {
             "titleA": "How we ",

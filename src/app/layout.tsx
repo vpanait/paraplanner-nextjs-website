@@ -3,7 +3,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import * as React from 'react';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import { ThemeProvider } from '@mui/material/styles';
-import { defaultTheme } from '@/theme/theme';
+import theme from '@/theme/theme';
 import Navbar from '../components/Navbar';
 import t from '@/dictionaries/en.json';
 import { ROUTE } from "@/utils/constants"
@@ -24,17 +24,17 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       path: ROUTE.SECURITY,
     },
     {
-      label: t.route.faq,
-      path: ROUTE.FAQ,
+      label: t.route.company,
+      path: ROUTE.COMPANY,
     },
-    {
-      label: t.route.about,
-      path: ROUTE.ABOUT.BASE,
-      subItems: [
-        { label: t.route.company, path: ROUTE.ABOUT.COMPANY },
-        { label: t.route.team, path: ROUTE.ABOUT.TEAM },
-      ],
-    },
+    // {
+    //   label: t.route.about,
+    //   path: ROUTE.ABOUT.BASE,
+    //   subItems: [
+    //     { label: t.route.company, path: ROUTE.ABOUT.COMPANY },
+    //     { label: t.route.team, path: ROUTE.ABOUT.TEAM },
+    //   ],
+    // },
   ];
 
 
@@ -42,13 +42,11 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     <html lang="en">
       <body>
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-          <ThemeProvider theme={defaultTheme}>
-            <ThemeProvider theme={defaultTheme}>
-              <CssBaseline />
-              <Navbar routes={routes} mode="dark" />
-              {props.children}
-              <Footer mode={'dark'} />
-            </ThemeProvider>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Navbar routes={routes} />
+            {props.children}
+            <Footer />
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

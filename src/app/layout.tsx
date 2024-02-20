@@ -1,12 +1,11 @@
 import "./globals.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import CssBaseline from '@mui/material/CssBaseline';
 import * as React from 'react';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import { ThemeProvider } from '@mui/material/styles';
-import theme from '@/theme/theme';
-import Navbar from '../components/Navbar';
-import t from '@/dictionaries/en.json';
-import { ROUTE } from "@/utils/constants"
+import { themeLight } from '@/theme/theme';
 import Footer from "@/components/Footer";
 
 export const metadata = {
@@ -18,34 +17,15 @@ export const metadata = {
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
-  const routes = [
-    {
-      label: t.route.security,
-      path: ROUTE.SECURITY,
-    },
-    {
-      label: t.route.company,
-      path: ROUTE.COMPANY,
-    },
-    // {
-    //   label: t.route.about,
-    //   path: ROUTE.ABOUT.BASE,
-    //   subItems: [
-    //     { label: t.route.company, path: ROUTE.ABOUT.COMPANY },
-    //     { label: t.route.team, path: ROUTE.ABOUT.TEAM },
-    //   ],
-    // },
-  ];
-
-
   return (
     <html lang="en">
       <body>
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-          <ThemeProvider theme={theme}>
+          <ThemeProvider theme={themeLight}>
             <CssBaseline />
-            <Navbar routes={routes} />
+
             {props.children}
+
             <Footer />
           </ThemeProvider>
         </AppRouterCacheProvider>

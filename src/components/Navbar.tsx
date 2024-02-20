@@ -12,6 +12,8 @@ import {
   Container,
   PaletteMode,
   Typography,
+  ThemeProvider,
+  Box,
 } from "@mui/material";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
@@ -21,11 +23,12 @@ import SectionContainer from "@/components/SectionContainer";
 import InfoBanner from "@/components/InfoBanner";
 import { animated, useSpring } from "@react-spring/web";
 import t from '@/dictionaries/en.json';
-import { APP_SIGN_IN_URL } from "@/utils/constants";
+import { APP_SIGN_IN_URL, ROUTE } from "@/utils/constants";
 import { usePathname } from 'next/navigation'
 import useWindowPosition from "@/hooks/useWindowPosition";
 import { useTheme } from "@emotion/react";
 import { alpha } from '@mui/system';
+import { themeLight } from "@/theme/theme";
 
 
 interface MenuItem {
@@ -34,24 +37,44 @@ interface MenuItem {
   subItems?: MenuItem[];
 }
 
-interface IProps {
-  routes: MenuItem[];
-  mode?: PaletteMode;
-}
 
-const Navbar = ({ routes, mode = 'light' }: IProps) => {
+const Navbar = () => {
+  const routes: MenuItem[] = [
+    {
+      label: t.route.security,
+      path: ROUTE.SECURITY,
+    },
+    {
+      label: t.route.company,
+      path: ROUTE.COMPANY,
+    },
+    // {
+    //   label: t.route.about,
+    //   path: ROUTE.ABOUT.BASE,
+    //   subItems: [
+    //     { label: t.route.company, path: ROUTE.ABOUT.COMPANY },
+    //     { label: t.route.team, path: ROUTE.ABOUT.TEAM },
+    //   ],
+    // },
+  ];
+
   const pathname = usePathname();
-  const theme = useTheme();
-
-  const windowPosition = useWindowPosition();
-  const { padding } = useSpring({
-    padding: windowPosition > 0 ? 8 : 16,
-  });
 
   const logo = (
     <NextLink href="/" style={{
-      textDecoration: 'none'
+      textDecoration: 'none',
+      position: 'relative',
+      display:' flex',
+      justifyContent: 'center'
     }}>
+      <Box
+        component="img"
+        src="/img/logo.png"
+        sx={{
+          maxWidth: { xs: 1 },
+          marginRight: 1,
+        }}
+      />
       <Typography variant="h5" sx={{ color: theme => theme.palette.text.primary }}>{t.app.name}</Typography>
     </NextLink>
   );
@@ -108,11 +131,6 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
 
     return isSubmenu ? renderedItems : [...renderedItems, (
       <Fragment key={`buttons`}>
-        {/* <Button variant="text" href={APP_SIGN_IN_URL} target="_blank"
-          sx={{ display: { xs: "none", md: "flex" }, marginLeft: 2 }}
-        >
-          {t.common.signIn}
-        </Button> */}
         <ListItemButton component={NextLink} href={APP_SIGN_IN_URL} target="_blank"
           sx={{ display: { xs: "block", md: "none" }, flexGrow: 0 }}
           passHref
@@ -125,74 +143,88 @@ const Navbar = ({ routes, mode = 'light' }: IProps) => {
 
 
   return (
-    <AppBar position="sticky" sx={{
-      backgroundColor: theme => alpha(theme.palette.background.default, 0.9)
+    <AppBar sx={{
+      position: 'relative',
+      backgroundColor: 'transparent',
+      boxShadow: 'none'
     }}>
-      <InfoBanner>
-        <Typography variant="body1">
-          {t.homePage.banner}
-        </Typography>
-      </InfoBanner>
+      <ThemeProvider theme={themeLight}>
+        <InfoBanner>
+          <Typography variant="subtitle2">
+            {t.homePage.banner}
+          </Typography>
+        </InfoBanner>
+      </ThemeProvider>
 
       <SectionContainer
         withoutAnimation
         disablePaddingY
       >
-        <animated.div style={{ paddingBlock: padding }}>
-          <Toolbar variant="dense" sx={{ padding: { xs: 0 } }}>
-            <Container sx={{ display: { xs: "block", md: "none" }, padding: { xs: 0 } }}>
-              <List>
-                <ListItem sx={{ padding: 0 }}>
-                  <Button
-                    onClick={handleToggleMobileMenu}
-                    sx={{ marginRight: 1 }}
-                  >
-                    <MenuIcon />
-                    {mobileMenuOpen ? <ExpandLess /> : <ExpandMore />}
-                  </Button>
-                  {logo}
-                </ListItem>
-                <Collapse
-                  in={mobileMenuOpen}
-                  timeout="auto"
-                  unmountOnExit
+        <Toolbar
+          variant="dense"
+          sx={{
+            padding: { xs: 0 },
+            minHeight: '83px',
+          }}
+        >
+          <Container
+            sx={{
+              display: { xs: "block", md: "none" },
+              padding: { xs: 0 },
+            }}
+          >
+            <List>
+              <ListItem sx={{ padding: 0 }}>
+                <Button
+                  onClick={handleToggleMobileMenu}
+                  sx={{ marginRight: 1, minWidth: 'auto' }}
                 >
-                  <List
-                    component="div"
-                    disablePadding
-                  >
-                    {renderMenuItems('smallMenu', routes)}
-                  </List>
-                </Collapse>
-              </List>
-            </Container>
-
-            <Container sx={{
-              display: { xs: "none", md: "flex" },
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: { xs: 0 }
-            }}>
-              {logo}
-
-              <animated.div >
-                <List
-                  component="nav"
-                  aria-labelledby="nested-list-subheader"
-                  sx={{ display: 'flex', gap: 1 }}
-                >
-                  {renderMenuItems('largeMenu', routes)}
-                </List>
-              </animated.div>
-
-              <Button variant="text" href={APP_SIGN_IN_URL} target="_blank"
-                sx={{ paddingX: 2, paddingY: 1, minWidth: "auto", borderRadius: 0 }}
+                  <MenuIcon />
+                  {mobileMenuOpen ? <ExpandLess /> : <ExpandMore />}
+                </Button>
+                {logo}
+              </ListItem>
+              <Collapse
+                in={mobileMenuOpen}
+                timeout="auto"
+                unmountOnExit
               >
-                {t.common.signIn}
-              </Button>
-            </Container>
-          </Toolbar>
-        </animated.div>
+                <List
+                  component="div"
+                  disablePadding
+                >
+                  {renderMenuItems('smallMenu', routes)}
+                </List>
+              </Collapse>
+            </List>
+          </Container>
+
+          <Container sx={{
+            display: { xs: "none", md: "flex" },
+            padding: { xs: 0 },
+            margin: { xs: 0 },
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}>
+            {logo}
+
+            <animated.div >
+              <List
+                component="nav"
+                aria-labelledby="nested-list-subheader"
+                sx={{ display: 'flex', gap: 1 }}
+              >
+                {renderMenuItems('largeMenu', routes)}
+              </List>
+            </animated.div>
+
+            <Button variant="text" href={APP_SIGN_IN_URL} target="_blank"
+              sx={{ paddingX: 2, paddingY: 1, minWidth: "auto", borderRadius: 0 }}
+            >
+              {t.common.signIn}
+            </Button>
+          </Container>
+        </Toolbar>
       </SectionContainer>
     </AppBar>
   );

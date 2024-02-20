@@ -1,38 +1,36 @@
 "use client"
 import React, { } from "react";
 import SectionContainer from "@/components/SectionContainer";
-import { themeGradient } from "@/theme/theme";
-import { Box, Grid, Typography } from "@mui/material";
-import t from '@/dictionaries/en.json';
-
+import { Stack, SxProps, Theme } from "@mui/material";
 
 interface IProps {
   children?: React.ReactNode;
+  centered?: boolean;
+  withoutAnimation?: boolean;
+  sx?: SxProps<Theme>;
 }
 
-const InfoBanner = ({ children }: IProps) => {
-
-
+const InfoBanner = ({ children, centered = true, withoutAnimation = true, sx }: IProps) => {
   return (
     <SectionContainer
-      withoutAnimation
+      withoutAnimation={withoutAnimation}
       disablePaddingY
       sx={{
-        backgroundImage: themeGradient,
-        color: "white"
-      }}
-      innerSx={{
-        justifyContent: "center",
-        alignItems: 'center'
+        color: (theme) => theme.palette.primary.main,
+        backgroundColor: (theme) => theme.palette.background.default,
+        minHeight: '48px',
+        ...sx
       }}
     >
-      <Grid container item sx={{
-        justifyContent: "center",
-        alignItems: 'center',
-        paddingY: 2
-      }}>
+      <Stack
+        sx={{
+          alignItems: centered ? 'center' : 'flex-start',
+          justifyContent: 'center',
+          height: '100%'
+        }}
+      >
         {children}
-      </Grid>
+      </Stack>
     </SectionContainer>
   );
 }

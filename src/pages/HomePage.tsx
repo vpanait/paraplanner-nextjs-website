@@ -3,127 +3,383 @@ import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import SectionContainer from '@/components/SectionContainer';
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Button, Card, Grid, Stack, useTheme
+  Box, Button, Card, Grid, Stack, Tab, Tabs, ThemeProvider, alpha, useTheme
 } from '@mui/material';
 import t from '@/dictionaries/en.json';
-import { APP_SIGN_UP_URL, KITCES_URL, ROUTE } from '@/utils/constants';
-import ExpandMore from "@mui/icons-material/ExpandMore";
+import { APP_SIGN_UP_URL, KITCES_URL } from '@/utils/constants';
 import InfoBanner from '@/components/InfoBanner';
-import { themeGradient } from '@/theme/theme';
+import { themeLight, themeDark, themeColors } from '@/theme/theme';
+import Navbar from '@/components/Navbar';
+import { useState } from 'react';
+import Slider from 'react-slick';
 
 
 export default function HomePage() {
-  const theme = useTheme();
+  const [solutionTabValue, setSolutionTabValue] = useState(0);
+  const sliderRef = React.useRef<Slider>(null);
+
+  React.useEffect(() => {
+    if (sliderRef.current) {
+      sliderRef.current.slickGoTo(solutionTabValue);
+    }
+  }, [solutionTabValue]);
 
   return (
     <>
-      <SectionContainer
-        withoutAnimation
-        sx={{ minHeight: 'calc(100vh - 2 * 56px - 80px)' }}
-      >
-        <Grid container sx={{ justifyContent: 'space-between', rowGap: 2, height: '100%' }}>
-          <Grid item container md={12} sm={12} sx={{ flexDirection: 'column', justifyContent: 'center', gap: 1.5 }}>
-            <Typography variant="h2">
-              {t.homePage.hero.titleA}
-            </Typography>
-            <Typography variant="h6">
-              {t.homePage.hero.subtitle}
-            </Typography>
+      <ThemeProvider theme={themeDark}>
+        <Stack
+          sx={{
+            background: themeColors.dark.heroGradient,
+            minHeight: '100vh',
+            justifyContent: 'space-between'
+          }}>
+          <Navbar />
 
-            <Grid item container sx={{ gap: 1.5, marginTop: 4.5 }}>
-              <Button variant='contained' href={APP_SIGN_UP_URL} target="_blank">{t.common.createPlan}</Button>
-              <Button variant='outlined' href={APP_SIGN_UP_URL} target="_blank">{t.common.bookCall}</Button>
-            </Grid>
+          <SectionContainer
+            withoutAnimation
+            sx={{
+              marginBottom: '43px'
+            }}
+          >
+            <Stack>
+              <Typography
+                variant="h2"
+                sx={{
+                  maxWidth: { xl: "none", xs: "530px" },
+                }}
+              >
+                {t.homePage.hero.titleA}
+              </Typography>
+              <Typography
+                variant="h6"
+                sx={{
+                  maxWidth: { xl: "none", xs: "530px" },
+                }}
+              >
+                {t.homePage.hero.subtitle}
+              </Typography>
 
-            <Button variant="text" href={KITCES_URL} target="_blank" sx={{ width: 'fit-content', marginTop: 4.5 }}>
-              <Stack direction="column" alignItems="center" spacing={1}>
-                <Box
-                  component="img"
-                  sx={{ maxWidth: { xs: 1 } }}
-                  src="/img/kitces.png"
-                />
-                <Typography variant='body2'>
-                  {t.homePage.hero.asSeenOn}
-                </Typography>
-              </Stack>
-            </Button>
-          </Grid>
-        </Grid>
-      </SectionContainer>
+              <Grid item container sx={{ gap: 1.5, marginTop: 7.5 }}>
+                <Button variant='contained' href={APP_SIGN_UP_URL} target="_blank">{t.common.createPlan}</Button>
+                <Button variant='outlined' href={APP_SIGN_UP_URL} target="_blank">{t.common.bookCall}</Button>
+              </Grid>
 
-      <InfoBanner>
-        <Typography variant="body1">
-          {t.homePage.usedBy}
-        </Typography>
-      </InfoBanner>
+              <Button
+                variant="text"
+                href={KITCES_URL}
+                target="_blank"
+                sx={{
+                  width: 'fit-content',
+                  marginTop: '42px',
+                  border: '1px solid transparent',
+                  "&:hover": {
+                    borderColor: alpha(themeColors.dark.text, 0.2),
+                  }
+                }}
+              >
+                <Stack alignItems="flex-start" spacing={1}>
+                  <Box
+                    component="img"
+                    sx={{ maxWidth: { xs: 1 } }}
+                    src="/img/kitces.png"
+                  />
+                  <Typography variant='body2'>
+                    {t.homePage.hero.asSeenOn}
+                  </Typography>
+                </Stack>
+              </Button>
+            </Stack>
+          </SectionContainer>
 
+          <ThemeProvider theme={themeLight}>
+            <InfoBanner sx={{
+              minHeight: '88px',
+            }}>
+              <Typography variant="h6">
+                {t.homePage.usedBy}
+              </Typography>
+            </InfoBanner>
+          </ThemeProvider>
+        </Stack>
+      </ThemeProvider>
 
-      {/* <Carousel /> */}
+      {/* <Divider
+        sx={{
+          background: themeColors.dark.heroGradient,
+          height: '5px',
+        }}
+      /> */}
 
       <SectionContainer>
-        <Grid container sx={{ flexDirection: 'column', justifyContent: 'space-between', rowGap: 2 }}>
-          <Typography variant="body1">
+        <Stack>
+          <Typography variant="subtitle1" sx={{ marginBottom: 1.5 }}>
             {t.homePage.theProblem.title}
           </Typography>
-          <Typography variant="h4">
-            {t.homePage.theProblem.subtitleA} <br />
-            {t.homePage.theProblem.subtitleB}
+          <Typography variant="h4" sx={{ marginBottom: 6, maxWidth: { xs: "840px" }, }}>
+            {t.homePage.theProblem.subtitle}
           </Typography>
 
-          <Grid item container xs={12} sm={12} sx={{ marginTop: 7, justifyContent: 'space-between', gap: 6 }}>
+          <Grid item container
+            sx={{
+              justifyContent: 'space-between',
+              gap: 6,
+              flexDirection: { xs: "column", md: 'row' }
+            }}
+          >
             {t.homePage.theProblem.box.map((box, index) => {
-              const nrBoxes = t.homePage.theProblem.box.length;
-              const gap = 6;
-              const actualGap = theme.spacing(gap);
-
               return (
-                <Card
-                  variant="outlined"
-                  sx={{
-                    width: `calc((100% - ${nrBoxes - 1} * ${actualGap} ) / ${nrBoxes})`,
-                    display: 'flex',
-                    alignItems: 'center',
-                    background: `linear-gradient(${theme.palette.background.default} 0 0) padding-box,  ${themeGradient} border-box`
-                  }}
-                >
-                  <Typography variant="h6">
-                    {box}
-                  </Typography>
-                </Card>
+                <ThemeProvider theme={themeDark} key={index}>
+                  <Card
+                    sx={{
+                      display: 'flex',
+                      background: themeColors.dark.problemsGradients?.[index],
+                      flex: 1,
+                    }}
+                  >
+                    <Stack alignItems="flex-start" spacing={1}>
+                      <Box
+                        component="img"
+                        sx={{ maxWidth: { xs: 1 } }}
+                        src={`/img/box${index}.png`}
+                      />
+                      <Typography variant="h6">
+                        {box}
+                      </Typography>
+                    </Stack>
+                  </Card>
+                </ThemeProvider>
               )
             })}
           </Grid>
-        </Grid >
+        </Stack >
       </SectionContainer >
 
-      {/* <SectionContainer>
-        <Grid container sx={{ justifyContent: 'space-between', rowGap: 2 }}>
-          <Grid item container md={5} sm={12} sx={{ flexDirection: 'column', justifyContent: 'center' }}>
-            <Box
-              component="img"
-              sx={{ maxWidth: { xs: 1 } }}
-              src="/img/undraw_secure_login_pdn4.svg"
-            />
-          </Grid>
+      <ThemeProvider theme={themeDark}>
+        <InfoBanner centered={false} withoutAnimation={false} sx={{
+          background: themeColors.dark.poweredByGradient,
+          paddingY: 6
+        }}>
+          <Typography variant="h3">
+            {t.homePage.poweredBy.title}
+          </Typography>
+          <Typography variant="h6" sx={{ marginTop: 1.5 }}>
+            {t.homePage.poweredBy.subtitle}
+          </Typography>
+        </InfoBanner>
+      </ThemeProvider>
 
-          <Grid item container md={6} sm={12} sx={{ flexDirection: 'column', justifyContent: 'center', gap: 3 }}>
-            <Typography variant="h1">
-              {t.homePage.security.titleA} <span style={{ color: theme.palette.info.main }}>{t.homePage.security.titleB}</span>
-            </Typography>
-            <Typography variant="subtitle1">
+      <SectionContainer>
+        <Stack>
+          <Typography variant="subtitle1" sx={{ marginBottom: 1.5 }}>
+            {t.homePage.ourSolution.title}
+          </Typography>
+          <Typography variant="h4" sx={{ marginBottom: 9, maxWidth: { xs: "1120px" }, }}>
+            {t.homePage.ourSolution.subtitle}
+          </Typography>
 
-              {t.homePage.security.subtitle}
-            </Typography>
-            <Button variant='contained' href={ROUTE.SECURITY}>{t.homePage.security.button}</Button>
+          <Grid item container
+            sx={{
+              justifyContent: 'space-between',
+              gap: 6,
+              flexDirection: { xs: "column", md: 'row' }
+            }}
+          >
+            <Box sx={{ width: '100%' }}>
+              <Tabs
+                variant="scrollable"
+                scrollButtons="auto"
+                value={solutionTabValue}
+                onChange={
+                  (event: React.SyntheticEvent, newValue: number) => {
+                    setSolutionTabValue(newValue);
+                  }}
+                sx={{
+                  "& .MuiTabs-flexContainer": {
+                    gap: 7.5
+                  },
+                  "& .MuiTab-root": {
+                    padding: 0
+                  },
+                  "& .MuiTabs-indicator": {
+                    background: "linear-gradient(89.88deg, #12222F 0%, #2849C2 68.79%, #449FE7 100%)"
+                  }
+                }}
+              >
+                {
+                  t.homePage.ourSolution.tabs.map((tab, index) =>
+                    <Tab
+                      key={`tab${index}`}
+                      disableRipple
+                      value={index}
+                      label={
+                        <Typography variant='h6'>
+                          {tab.heading}
+                        </Typography>
+                      }
+                      wrapped
+                    />
+                  )
+                }
+              </Tabs>
+
+              <Slider
+                dots={false}
+                swipe={false}
+                ref={sliderRef}
+              >
+                {t.homePage.ourSolution.tabs.map((tab, index) => {
+                  const maxWidth = [600, 535, 510]
+                  const maxWidthSubtitle = [500, 490, 510]
+
+                  return (
+                    <Stack sx={{
+                      alignItems: "flex-start",
+                      marginTop: 6,
+                      maxWidth: { xs: "none", md: `${maxWidth[index]}px` },
+                    }} >
+                      <Typography variant="h5">
+                        {tab.title}
+                      </Typography>
+
+                      <Typography variant="body1" sx={{
+                        marginTop: 3,
+                        maxWidth: { xs: "none", md: `${maxWidthSubtitle[index]}px` },
+                      }}>
+                        {tab.subtitle}
+                      </Typography>
+                    </Stack>
+                  )
+                })}
+              </Slider>
+            </Box>
           </Grid>
-        </Grid>
+        </Stack >
       </SectionContainer>
 
+      <ThemeProvider theme={themeDark}>
+        <InfoBanner centered={false} withoutAnimation={false} sx={{
+          background: themeColors.dark.supportGradient,
+          paddingY: 3
+        }}>
+          <Grid
+            item container
+            sx={{
+              justifyContent: 'space-between',
+              gap: 6,
+              flexDirection: { xs: "column", md: 'row' }
+            }}
+          >
+            {t.homePage.support.box.map((box, index) => {
+              return (
+                <Stack
+                  sx={{
+                    alignItems: "flex-start",
+                    maxWidth: { xs: "none", md: '400px' },
+                    flex: 1,
+                  }} >
+                  <Typography variant="subtitle2">
+                    {box.title}
+                  </Typography>
 
+                  <Typography variant="body1">
+                    {box.subtitle}
+                  </Typography>
+                </Stack>
+              )
+            })}
+          </Grid>
+        </InfoBanner>
+      </ThemeProvider>
+
+      <SectionContainer>
+
+        <Grid item container
+          sx={{
+            justifyContent: 'space-between',
+            gap: { xs: 6, lg: 12.5 },
+            flexDirection: { xs: "column", md: 'row' },
+            // paddingX: { xs: 0, lg: 10 },
+            flexWrap: 'nowrap'
+          }}
+        >
+          {['our', 'your'].map((who, index) => {
+            const texts = who === 'our' ? t.homePage.plans.our : t.homePage.plans.your
+            const title = t.homePage.plans.title.split('${placeholder}')
+            const subtitle = texts.subtitle.split('${placeholder}')
+
+            return (
+              <Box
+                key={`featureBox-${index}`}
+                sx={{
+                  display: 'flex',
+                  flex: 1,
+                }}
+              >
+                <Stack
+                  sx={{
+                    justifyContent: 'space-between'
+                  }}
+                >
+                  <Box>
+                    <Typography variant="h4" sx={{ marginBottom: 1.5 }}>
+                      {title[0]} <span style={{ color: themeColors.light.textAccent, textDecoration: 'underline' }}>{texts.titlePlaceholder}</span> {title[1]}
+                    </Typography>
+
+                    <Typography variant="h6" sx={{ marginBottom: 4.5 }}>
+                      {subtitle[0]} <span style={{ color: themeColors.light.textAccent, textDecoration: 'underline' }}>{texts.subtitlePlaceholder}</span> {subtitle[1]}
+                    </Typography>
+
+                    {texts.features.map((feature, featureIndex) => (
+                      <Stack sx={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        marginBottom: 1.5,
+                        gap: 3
+                      }}>
+                        <Box
+                          component="img"
+                          sx={{
+                            width: '16px',
+                            height: '16px'
+                          }}
+                          src="/img/checkbox.png"
+                        />
+                        <Typography key={`feature-${featureIndex}`} variant="subtitle2">
+                          {feature}
+                        </Typography>
+                      </Stack>
+                    ))}
+                  </Box>
+
+                  <Box>
+                    <Stack sx={{
+                      gap: 4.5,
+                      marginTop: 6.5
+                    }}>
+                      <Typography variant="h6">
+                        {texts.price} <span style={{ fontWeight: 400 }}>{texts.period} </span>
+                      </Typography>
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          gap: 1.5
+                        }}
+                      >
+                        <Button variant='contained' href={APP_SIGN_UP_URL} target="_blank">{t.common.getStarted}</Button>
+                        <Button variant='outlined' href={APP_SIGN_UP_URL} target="_blank">{t.common.bookCall}</Button>
+                      </Box>
+                    </Stack>
+                  </Box>
+                </Stack>
+              </Box>
+
+            )
+          })}
+        </Grid>
+
+      </SectionContainer >
+
+      {/* 
       <SectionContainer>
         <Grid container sx={{ justifyContent: 'space-between', rowGap: 2 }}>
           <Grid item container sx={{ justifyContent: 'center' }}>

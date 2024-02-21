@@ -15,6 +15,7 @@ import Slider from 'react-slick';
 
 
 export default function HomePage() {
+  const theme = useTheme();
   const [solutionTabValue, setSolutionTabValue] = useState(0);
   const sliderRef = React.useRef<Slider>(null);
 
@@ -43,7 +44,7 @@ export default function HomePage() {
           >
             <Stack>
               <Typography
-                variant="h2"
+                variant="h3"
                 sx={{
                   maxWidth: { xl: "1010px", xs: "540px" },
                   marginBottom: 1.5
@@ -60,10 +61,14 @@ export default function HomePage() {
                 {t.homePage.hero.subtitle}
               </Typography>
 
-              <Grid item container sx={{ gap: 1.5, marginTop: 4.5 }}>
+              <Stack sx={{
+                flexDirection: { sm: "row", xs: "column" },
+                gap: 1.5,
+                marginTop: 4.5
+              }}>
                 <Button variant='contained' href={CONTACT.GET_STARTED} target="_blank">{t.common.getStarted}</Button>
                 <Button variant='outlined' href={CONTACT.BOOK_INTRO_CALL} target="_blank">{t.common.bookIntroCall}</Button>
-              </Grid>
+              </Stack>
 
               <Button
                 variant="text"
@@ -111,12 +116,12 @@ export default function HomePage() {
         }}
       /> */}
 
-      <SectionContainer sx={{paddingTop: 13.5}}>
+      <SectionContainer sx={{ paddingTop: 13.5 }}>
         <Stack>
           <Typography variant="subtitle1" sx={{ marginBottom: 1.5 }}>
             {t.homePage.theProblem.title}
           </Typography>
-          <Typography variant="h4" sx={{ marginBottom: 6, maxWidth: { xs: "1090px" }, }}>
+          <Typography variant="h4" sx={{ marginBottom: 6, maxWidth: { xs: "1120px" }, }}>
             {t.homePage.theProblem.subtitle}
           </Typography>
 
@@ -160,10 +165,15 @@ export default function HomePage() {
           background: themeGradients.poweredByGradient,
           paddingY: 6
         }}>
-          <Typography variant="h3">
+          <Typography variant="h3" sx={{
+            maxWidth: { xl: "none", xs: "725px" }
+          }}>
             {t.homePage.poweredBy.title}
           </Typography>
-          <Typography variant="h6" sx={{ marginTop: 1.5 }}>
+          <Typography variant="h6" sx={{
+            marginTop: 1.5,
+            maxWidth: { xl: "none", xs: "725px" }
+          }}>
             {t.homePage.poweredBy.subtitle}
           </Typography>
         </InfoBanner>
@@ -174,7 +184,7 @@ export default function HomePage() {
           <Typography variant="subtitle1" sx={{ marginBottom: 1.5 }}>
             {t.homePage.ourSolution.title}
           </Typography>
-          <Typography variant="h4" sx={{ marginBottom: 9, maxWidth: { xs: "1120px" }, }}>
+          <Typography variant="h4" sx={{ marginBottom: 9, maxWidth: { xs: "1350px" }, }}>
             {t.homePage.ourSolution.subtitle}
           </Typography>
 
@@ -227,6 +237,7 @@ export default function HomePage() {
                 dots={false}
                 swipe={false}
                 ref={sliderRef}
+                arrows={false}
               >
                 {t.homePage.ourSolution.tabs.map((tab, index) => {
                   const maxWidth = [600, 535, 510]
@@ -302,7 +313,6 @@ export default function HomePage() {
             justifyContent: 'space-between',
             gap: { xs: 6, lg: 12.5 },
             flexDirection: { xs: "column", md: 'row' },
-            // paddingX: { xs: 0, lg: 10 },
             flexWrap: 'nowrap'
           }}
         >
@@ -365,15 +375,14 @@ export default function HomePage() {
                       <Typography variant="h6">
                         {texts.price} <span style={{ fontWeight: 400 }}>{texts.period} </span>
                       </Typography>
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          gap: 1.5
-                        }}
-                      >
+
+                      <Stack sx={{
+                        flexDirection: { sm: "row", xs: "column" },
+                        gap: 1.5,
+                      }}>
                         <Button variant='contained' href={CONTACT.GET_STARTED} target="_blank">{t.common.getStarted}</Button>
                         <Button variant='outlined' href={CONTACT.BOOK_INTRO_CALL} target="_blank">{t.common.bookIntroCall}</Button>
-                      </Box>
+                      </Stack>
                     </Stack>
                   </Box>
                 </Stack>
@@ -403,9 +412,9 @@ export default function HomePage() {
                 justifyContent: 'center'
               }}
             >
-              <Button variant='contained' href={`tel:${CONTACT.PHONE}`} rel="noopener noreferrer">{t.common.callUsNow}</Button>
-              <Button variant='outlined' href={CONTACT.BOOK_A_CALL} target="_blank">{t.common.bookCall}</Button>
-              <Button variant='outlined' href={`mailto:${CONTACT.EMAIL}?subject=${t.homePage.contact.subject}`} rel="noopener noreferrer">{t.common.contactViaEmail}</Button>
+              <Button variant='contained' href={`tel:${CONTACT.PHONE}`} rel="noopener noreferrer">{t.homePage.contact.callUsNow}</Button>
+              <Button variant='outlined' href={CONTACT.BOOK_A_CALL} target="_blank">{t.homePage.contact.bookCall}</Button>
+              <Button variant='outlined' href={`mailto:${CONTACT.EMAIL}?subject=${t.homePage.contact.emailSubject}`} rel="noopener noreferrer">{t.homePage.contact.contactViaEmail}</Button>
             </Box>
           </Stack>
         </InfoBanner>
@@ -420,40 +429,26 @@ export default function HomePage() {
           sx={{
             justifyContent: 'space-between',
             gap: { xs: 6, md: 4.5 },
-            flexDirection: { xs: "column", md: 'row' },
-            flexWrap: 'nowrap'
           }}
         >
-          {['1', '2'].map((box, index) => {
-            const length = t.faqPage.questions.length;
-            const half = Math.ceil(length / 2);
+          {t.faqPage.questions.map((question, index) => (
+            <Stack
+              key={`faq-${index}`}
+              sx={{
+                width: { xs: '100%', md: `calc(50% - ${theme.spacing(4.5 / 2)})` }
+              }}
+            >
+              <Typography variant="h6" sx={{ marginBottom: 1.5 }}>
+                {question.title}
+              </Typography>
 
-            return (
-              <Stack
-                key={`faqStack-${index}`}
-                spacing={6}
-                sx={{
-                  display: 'flex',
-                  flex: 1,
-                }}
-              >
-                {t.faqPage.questions.slice(box === '1' ? 0 : half, box === '1' ? half : length).map((question, qIndex) => (
-                  <Stack key={`faqStack-${index}-${qIndex}`}>
-                    <Typography variant="h6" sx={{ marginBottom: 1.5 }}>
-                      {question.title}
-                    </Typography>
-
-                    <Typography variant="body1">
-                      {question.body}
-                    </Typography>
-                  </Stack>
-                ))}
-              </Stack>
-            )
-          })}
+              <Typography variant="body1">
+                {question.body}
+              </Typography>
+            </Stack>
+          ))}
         </Grid>
       </SectionContainer >
-
     </>
   );
 }

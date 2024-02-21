@@ -17,7 +17,7 @@ export const CONTENT_WRAPPER_VISIBLE_ANIMATION = {
 };
 
 export const CONTENT_WRAPPER_HIDDEN_ANIMATION = {
-    y: CONTENT_WRAPPER_PADDING_Y,
+    y: CONTENT_WRAPPER_PADDING_Y * 0.8,
     opacity: 0,
 };
 

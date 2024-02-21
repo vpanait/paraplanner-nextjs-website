@@ -10,23 +10,24 @@
     "common": {
         "signUp": "Sign up",
         "signIn": "Sign in",
+        "bookIntroCall": "Book an intro call",
+        "getStarted": "Get started"
+    },
+    "footer": {
+        "emailSubject": "Hi - I have a question/want to learn more about paraplanner.ai",
         "contactUs": "Contact us",
         "followUs": "Follow us",
         "linkedin": "LinkedIn",
         "twitter": "X",
         "company": "Company",
+        "team": "Team",
+        "about": "About",
+        "faq": "FAQ",
         "legal": "Legal",
         "terms": "Terms of service",
         "privacy": "Privacy",
-        "createPlan": "Create a plan",
-        "bookCall": "Book a call",
-        "bookIntroCall": "Book an intro call",
-        "getStarted": "Get started",
-        "callUsNow": "Call us now",
-        "contactViaEmail": "Contact via email",
-        "team": "Team",
-        "about": "About",
-        "faq": "FAQ"
+        "freedomFighters": "Financial Freedom Fighters, Inc.",
+        "allRightsReserved": "All rights reserved"
     },
     "homePage": {
         "banner": "paraplanner.ai welcomes 4 new financial advisors",
@@ -124,7 +125,10 @@
         },
         "contact": {
             "title": "Have a question or want to learn more? Contact a member of the team",
-            "subject": "Hi - I have a question/want to learn more about paraplanner.ai"
+            "emailSubject": "Hi - I have a question/want to learn more about paraplanner.ai",
+            "callUsNow": "Call us now",
+            "bookCall": "Book a call",
+            "contactViaEmail": "Contact via email"
         },
         "security": {
             "titleA": "We focus on your",

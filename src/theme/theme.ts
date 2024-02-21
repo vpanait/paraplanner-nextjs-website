@@ -17,6 +17,7 @@ interface IColorScheme {
   textAccent: string;
   btnBackground: string;
   btnBackgroundHover: string;
+  btnOutlinedBackgroundHover: string;
   btnText: string;
 }
 
@@ -35,6 +36,7 @@ export const themeColors: IColors = {
     btnBackground:
       "linear-gradient(90deg, #12222F 0%, #2849C2 50%, #449FE7 100%)",
     btnBackgroundHover: "linear-gradient(90deg, #449FE7 0%, #449FE7 100%)",
+    btnOutlinedBackgroundHover: "linear-gradient(90deg, #449FE7 0%, #449FE7 100%)",
     btnText: "#FEFEFE",
   },
   dark: {
@@ -45,6 +47,7 @@ export const themeColors: IColors = {
     textAccent: "#2849C2",
     btnBackground: "#FEFEFE",
     btnBackgroundHover: darken("#FEFEFE", 0.1),
+    btnOutlinedBackgroundHover: "#449FE7",
     btnText: "#12222F",
   },
 };
@@ -88,6 +91,7 @@ const getTheme = (mode: PaletteMode) => {
       h1: {
         fontSize: 89.76,
         fontWeight: 700,
+        lineHeight: "111px",
       },
       h2: {
         fontSize: 67.34,
@@ -97,14 +101,17 @@ const getTheme = (mode: PaletteMode) => {
       h3: {
         fontSize: 50.52,
         fontWeight: 700,
+        lineHeight: "63px",
       },
       h4: {
         fontSize: 37.9,
         fontWeight: 700,
+        lineHeight: "47px",
       },
       h5: {
         fontSize: 28.43,
         fontWeight: 700,
+        lineHeight: "35px",
       },
       h6: {
         fontSize: 21.33,
@@ -115,18 +122,22 @@ const getTheme = (mode: PaletteMode) => {
         fontSize: 16,
         fontWeight: 700,
         color: colorScheme.textAccent,
+        lineHeight: "20px",
       },
       subtitle2: {
         fontSize: 16,
         fontWeight: 700,
+        lineHeight: "20px",
       },
       body1: {
         fontSize: 16,
         fontWeight: 400,
+        lineHeight: "20px",
       },
       body2: {
         fontSize: 12,
         fontWeight: 400,
+        lineHeight: "15px",
       },
       button: {
         textTransform: "none",
@@ -164,7 +175,7 @@ const getTheme = (mode: PaletteMode) => {
               backgroundColor:
                 mode === "light"
                   ? alpha(colorScheme.textAccent, 0.1)
-                  : alpha(colorScheme.background, 0.2),
+                  : colorScheme.btnOutlinedBackgroundHover,
             },
           },
           text: {

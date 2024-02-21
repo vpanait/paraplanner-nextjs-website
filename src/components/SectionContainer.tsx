@@ -24,7 +24,7 @@ const SectionContainer = ({
   disablePaddingY = false
 }: IProps) => {
 
-  const [ref, inView] = useInView({ amount: 0.2 });
+  const [ref, inView] = useInView({ amount: 0.01 });
   const [animatedStyles, api] = useSpring(() => ({
     from: withoutAnimation ? CONTENT_WRAPPER_VISIBLE_ANIMATION : CONTENT_WRAPPER_HIDDEN_ANIMATION,
     height: '100%'

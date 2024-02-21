@@ -101,7 +101,7 @@
                     "Securely share client information using an encrypted folder",
                     "Done in 24 hours"
                 ],
-                "price": 500,
+                "price": "500$",
                 "period": "per month"
             },
             "your": {
@@ -120,7 +120,7 @@
                     "Securely share access to your tools using an encrypted password manager",
                     "Done in 48 - 72 hours"
                 ],
-                "price": 1000,
+                "price": "1000$",
                 "period": "per month"
             }
         },

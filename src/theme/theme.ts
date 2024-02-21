@@ -3,10 +3,6 @@ import { createTheme } from "@mui/material/styles";
 import { PaletteMode, alpha, darken } from "@mui/material";
 import "@fontsource/libre-baskerville";
 
-export const GradientA = "#14376A";
-export const GradientB = "#4899A8";
-export const themeGradient = `linear-gradient(90deg, ${GradientA} 0%, ${GradientB} 100%)`;
-
 interface IColorScheme {
   text: string;
   background: string;
@@ -16,10 +12,6 @@ interface IColorScheme {
   btnBackground: string;
   btnBackgroundHover: string;
   btnText: string;
-  heroGradient?: string;
-  problemsGradients?: string[];
-  poweredByGradient?: string;
-  supportGradient?: string;
 }
 
 interface IColors {
@@ -38,9 +30,6 @@ export const themeColors: IColors = {
       "linear-gradient(90deg, #12222F 0%, #2849C2 50%, #449FE7 100%)",
     btnBackgroundHover: "linear-gradient(90deg, #449FE7 0%, #449FE7 100%)",
     btnText: "#FEFEFE",
-    heroGradient: "",
-    problemsGradients: [],
-    poweredByGradient: "",
   },
   dark: {
     text: "#FEFEFE",
@@ -51,19 +40,34 @@ export const themeColors: IColors = {
     btnBackground: "#FEFEFE",
     btnBackgroundHover: darken("#FEFEFE", 0.1),
     btnText: "#12222F",
-    heroGradient:
-      "linear-gradient(72.44deg, #12222F 16%, #2849C2 58.92%, #449FE7 100%)",
-    problemsGradients: [
-      "linear-gradient(85.33deg, #449FE7 0%, #2849C2 8.93%, #12222F 43%, #2849C2 79.32%, #449FE7 100%)",
-      "linear-gradient(88.13deg, #12222F 1.58%, #2849C2 51.77%, #449FE7 100%)",
-      "linear-gradient(88.14deg, #2849C2 0%, #12222F 12.87%, #2849C2 65.71%, #449FE7 100%)",
-    ],
-    poweredByGradient:
-      "linear-gradient(83.57deg, #12222F 5.06%, #2849C2 59.34%, #449FE7 100%)",
-    supportGradient:
-      "linear-gradient(89.88deg, #12222F 0%, #2849C2 68.79%, #449FE7 100%)",
   },
 };
+
+interface IGradients {
+  heroGradient: string;
+  problemsGradients: string[];
+  poweredByGradient: string;
+  supportGradient: string;
+  contactGradient: string;
+  footerGradient: string;
+}
+
+export const themeGradients: IGradients = {
+  heroGradient:
+    "linear-gradient(72.44deg, #12222F 16%, #2849C2 58.92%, #449FE7 100%)",
+  problemsGradients: [
+    "linear-gradient(85.33deg, #449FE7 0%, #2849C2 8.93%, #12222F 43%, #2849C2 79.32%, #449FE7 100%)",
+    "linear-gradient(88.13deg, #12222F 1.58%, #2849C2 51.77%, #449FE7 100%)",
+    "linear-gradient(88.14deg, #2849C2 0%, #12222F 12.87%, #2849C2 65.71%, #449FE7 100%)",
+  ],
+  poweredByGradient:
+    "linear-gradient(83.57deg, #12222F 5.06%, #2849C2 59.34%, #449FE7 100%)",
+  supportGradient:
+    "linear-gradient(89.88deg, #12222F 0%, #2849C2 68.79%, #449FE7 100%)",
+    contactGradient:"linear-gradient(72.47deg, #12222F 23.55%, #2849C2 68.59%, #449FE7 100%)",
+    footerGradient:"linear-gradient(73.08deg, #12222F 46.47%, #2849C2 78.01%, #449FE7 100%)"
+};
+
 
 const getTheme = (mode: PaletteMode) => {
   const colorScheme = themeColors[mode];
@@ -161,6 +165,13 @@ const getTheme = (mode: PaletteMode) => {
                 backgroundColor: alpha(colorScheme.background, 0.5),
               },
             },
+          },
+        },
+      },
+      MuiLink: {
+        styleOverrides: {
+          root: {
+            color: colorScheme.text
           },
         },
       },

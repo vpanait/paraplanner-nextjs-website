@@ -21,7 +21,8 @@ export const CONTENT_WRAPPER_HIDDEN_ANIMATION = {
     opacity: 0,
 };
 
-export const FOOTER = {
+export const CONTACT = {
+    BOOK: "https://calendly.com/",
     EMAIL: "hello@paraplanner.ai",
     PHONE: "(737) 373-3353",
     LINKEDIN: 'https://linkedin.com/company/paraplannerai',

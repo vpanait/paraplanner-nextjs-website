@@ -6,9 +6,9 @@ import {
   Box, Button, Card, Grid, Stack, Tab, Tabs, ThemeProvider, alpha, useTheme
 } from '@mui/material';
 import t from '@/dictionaries/en.json';
-import { APP_SIGN_UP_URL, KITCES_URL } from '@/utils/constants';
+import { APP_SIGN_UP_URL, CONTACT, KITCES_URL } from '@/utils/constants';
 import InfoBanner from '@/components/InfoBanner';
-import { themeLight, themeDark, themeColors } from '@/theme/theme';
+import { themeLight, themeDark, themeColors, themeGradients } from '@/theme/theme';
 import Navbar from '@/components/Navbar';
 import { useState } from 'react';
 import Slider from 'react-slick';
@@ -29,7 +29,7 @@ export default function HomePage() {
       <ThemeProvider theme={themeDark}>
         <Stack
           sx={{
-            background: themeColors.dark.heroGradient,
+            background: themeGradients.heroGradient,
             minHeight: '100vh',
             justifyContent: 'space-between'
           }}>
@@ -60,8 +60,8 @@ export default function HomePage() {
               </Typography>
 
               <Grid item container sx={{ gap: 1.5, marginTop: 7.5 }}>
-                <Button variant='contained' href={APP_SIGN_UP_URL} target="_blank">{t.common.createPlan}</Button>
-                <Button variant='outlined' href={APP_SIGN_UP_URL} target="_blank">{t.common.bookCall}</Button>
+                <Button variant='contained' href={CONTACT.BOOK} target="_blank">{t.common.createPlan}</Button>
+                <Button variant='outlined' href={CONTACT.BOOK} target="_blank">{t.common.bookIntroCall}</Button>
               </Grid>
 
               <Button
@@ -105,7 +105,7 @@ export default function HomePage() {
 
       {/* <Divider
         sx={{
-          background: themeColors.dark.heroGradient,
+          background: themeGradients.heroGradient,
           height: '5px',
         }}
       /> */}
@@ -132,7 +132,7 @@ export default function HomePage() {
                   <Card
                     sx={{
                       display: 'flex',
-                      background: themeColors.dark.problemsGradients?.[index],
+                      background: themeGradients.problemsGradients?.[index],
                       flex: 1,
                     }}
                   >
@@ -156,7 +156,7 @@ export default function HomePage() {
 
       <ThemeProvider theme={themeDark}>
         <InfoBanner centered={false} withoutAnimation={false} sx={{
-          background: themeColors.dark.poweredByGradient,
+          background: themeGradients.poweredByGradient,
           paddingY: 6
         }}>
           <Typography variant="h3">
@@ -232,11 +232,13 @@ export default function HomePage() {
                   const maxWidthSubtitle = [500, 490, 510]
 
                   return (
-                    <Stack sx={{
-                      alignItems: "flex-start",
-                      marginTop: 6,
-                      maxWidth: { xs: "none", md: `${maxWidth[index]}px` },
-                    }} >
+                    <Stack
+                      key={`solution-${index}`}
+                      sx={{
+                        alignItems: "flex-start",
+                        marginTop: 6,
+                        maxWidth: { xs: "none", md: `${maxWidth[index]}px` },
+                      }} >
                       <Typography variant="h5">
                         {tab.title}
                       </Typography>
@@ -258,7 +260,7 @@ export default function HomePage() {
 
       <ThemeProvider theme={themeDark}>
         <InfoBanner centered={false} withoutAnimation={false} sx={{
-          background: themeColors.dark.supportGradient,
+          background: themeGradients.supportGradient,
           paddingY: 3
         }}>
           <Grid
@@ -272,6 +274,7 @@ export default function HomePage() {
             {t.homePage.support.box.map((box, index) => {
               return (
                 <Stack
+                  key={`support-${index}`}
                   sx={{
                     alignItems: "flex-start",
                     maxWidth: { xs: "none", md: '400px' },
@@ -330,12 +333,14 @@ export default function HomePage() {
                     </Typography>
 
                     {texts.features.map((feature, featureIndex) => (
-                      <Stack sx={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        marginBottom: 1.5,
-                        gap: 3
-                      }}>
+                      <Stack
+                        key={`feature-${featureIndex}`}
+                        sx={{
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                          marginBottom: 1.5,
+                          gap: 3
+                        }}>
                         <Box
                           component="img"
                           sx={{
@@ -365,71 +370,89 @@ export default function HomePage() {
                           gap: 1.5
                         }}
                       >
-                        <Button variant='contained' href={APP_SIGN_UP_URL} target="_blank">{t.common.getStarted}</Button>
-                        <Button variant='outlined' href={APP_SIGN_UP_URL} target="_blank">{t.common.bookCall}</Button>
+                        <Button variant='contained' href={CONTACT.BOOK} target="_blank">{t.common.getStarted}</Button>
+                        <Button variant='outlined' href={CONTACT.BOOK} target="_blank">{t.common.bookIntroCall}</Button>
                       </Box>
                     </Stack>
                   </Box>
                 </Stack>
               </Box>
-
             )
           })}
         </Grid>
+      </SectionContainer>
 
+      <ThemeProvider theme={themeDark}>
+        <InfoBanner withoutAnimation={false} sx={{
+          background: themeGradients.contactGradient,
+          paddingTop: 4,
+          paddingBottom: 15,
+        }}>
+          <Stack sx={{
+            gap: 7.5,
+          }}>
+            <Typography variant="h6"  >
+              {t.homePage.contact.title}
+            </Typography>
+
+            <Box
+              sx={{
+                display: 'flex',
+                gap: 1.5,
+                justifyContent: 'center'
+              }}
+            >
+              <Button variant='contained' href={`tel:${CONTACT.PHONE}`} rel="noopener noreferrer">{t.common.callUsNow}</Button>
+              <Button variant='outlined' href={CONTACT.BOOK} target="_blank">{t.common.bookCall}</Button>
+              <Button variant='outlined' href={`mailto:${CONTACT.EMAIL}`} rel="noopener noreferrer">{t.common.contactViaEmail}</Button>
+            </Box>
+          </Stack>
+        </InfoBanner>
+      </ThemeProvider>
+
+      <SectionContainer>
+        <Typography variant="h4" sx={{ marginBottom: 6 }}>
+          {t.faqPage.title}
+        </Typography>
+
+        <Grid item container
+          sx={{
+            justifyContent: 'space-between',
+            gap: { xs: 6, md: 4.5 },
+            flexDirection: { xs: "column", md: 'row' },
+            flexWrap: 'nowrap'
+          }}
+        >
+          {['1', '2'].map((box, index) => {
+            const length = t.faqPage.questions.length;
+            const half = Math.ceil(length / 2);
+
+            return (
+              <Stack
+                key={`faqStack-${index}`}
+                spacing={6}
+                sx={{
+                  display: 'flex',
+                  flex: 1,
+                }}
+              >
+                {t.faqPage.questions.slice(box === '1' ? 0 : half, box === '1' ? half : length).map((question, qIndex) => (
+                  <Stack key={`faqStack-${index}-${qIndex}`}>
+                    <Typography variant="h6" sx={{ marginBottom: 1.5 }}>
+                      {question.title}
+                    </Typography>
+
+                    <Typography variant="body1">
+                      {question.body}
+                    </Typography>
+                  </Stack>
+                ))}
+              </Stack>
+            )
+          })}
+        </Grid>
       </SectionContainer >
 
-      {/* 
-      <SectionContainer>
-        <Grid container sx={{ justifyContent: 'space-between', rowGap: 2 }}>
-          <Grid item container sx={{ justifyContent: 'center' }}>
-            <Typography variant="h1">
-              <span style={{ color: theme.palette.info.main }}>{t.faqPage.title}</span>
-            </Typography>
-          </Grid>
-
-          <Grid container sx={{ justifyContent: 'space-between', rowGap: 2 }}>
-            <Grid item container xs={12} sm={7} sx={{ justifyContent: 'center' }}>
-              {['q1', 'q2', 'q3'].map((item, index) => {
-                const key = item as 'q1';
-
-                return (
-                  <Box key={key} sx={{ marginBottom: 1 }}>
-                    <Accordion defaultExpanded={index === 0}>
-                      <AccordionSummary
-                        expandIcon={<ExpandMore />}
-                        aria-controls="panel1-content"
-                        id="panel1-header"
-                      >
-                        <Typography variant='h5' sx={{ fontSize: 16 }}>
-                          {t.faqPage[key]?.title}
-                        </Typography>
-                      </AccordionSummary>
-                      <AccordionDetails>
-                        <Typography variant='body1'>
-                          {t.faqPage[key]?.body}
-                        </Typography>
-                      </AccordionDetails>
-                    </Accordion>
-                  </Box>
-                )
-              })}
-            </Grid>
-
-            <Grid item container xs={12} sm={4} sx={{ justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'column', rowGap: 2 }}>
-              <Box
-                component="img"
-                sx={{ maxWidth: { xs: 1 } }}
-                src="/img/undraw_questions_re_1fy7.svg"
-              />
-
-              <Box>
-                <Button variant='contained' href={ROUTE.FAQ}>{t.faqPage.button}</Button>
-              </Box>
-            </Grid>
-          </Grid>
-        </Grid>
-      </SectionContainer> */}
     </>
   );
 }

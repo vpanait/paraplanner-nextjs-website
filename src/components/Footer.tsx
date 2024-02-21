@@ -3,70 +3,92 @@ import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import SectionContainer from '@/components/SectionContainer';
 import {
-  Grid, Link, PaletteMode, Stack
+  Box,
+  Button,
+  Grid, Link, PaletteMode, Stack, ThemeProvider
 } from '@mui/material';
 import t from '@/dictionaries/en.json';
-import { FOOTER } from '@/utils/constants';
+import { CONTACT } from '@/utils/constants';
+import { themeDark, themeGradients } from '@/theme/theme';
+import InfoBanner from './InfoBanner';
 
+interface IFooterContainer {
+  title: React.ReactNode,
+  children?: React.ReactNode,
+}
+
+const FooterContainer = ({ children, title }: IFooterContainer) => {
+  return (
+    <Grid item container lg={3} sm={6} sx={{ flexDirection: 'row', justifyContent: { xs: 'center', md: 'flex-start' } }}>
+      <Stack spacing={1.5} alignItems={{ xs: 'center', md: 'flex-start' }}>
+        <Typography variant="subtitle2">
+          {title}
+        </Typography>
+
+        {children}
+      </Stack>
+    </Grid>
+  )
+}
 
 const Footer = () => {
-  const linkXs = {
-    color: 'white', 
-    textDecoration: 'none'
-  }
-
   return (
-    // <SectionContainer withoutAnimation>
-      <Grid container sx={{ justifyContent: 'space-between', rowGap: 2 }}>
-        <Grid item container md={4} sm={12} sx={{ flexDirection: 'column', justifyContent: 'center', alignItems: { xs: 'center', md: 'flex-start' } }}>
-          <Typography variant="h6" sx={{ marginBottom: 1 }}>
-            {t.common.contactUs}
-          </Typography>
-
-          <Stack spacing={1} alignItems={{ xs: 'center', md: 'flex-start' }}>
-            <Link href={`mailto:${FOOTER.EMAIL}`} rel="noopener noreferrer" style={linkXs}>
-              {FOOTER.EMAIL}
+    <ThemeProvider theme={themeDark}>
+      <InfoBanner withoutAnimation={false} sx={{
+        background: themeGradients.footerGradient,
+        paddingTop: 10,
+        paddingBottom: 30,
+      }}>
+        <Grid
+          container
+          sx={{ rowGap: 6 }}
+        >
+          <FooterContainer title={t.common.contactUs}>
+            <Link href={`mailto:${CONTACT.EMAIL}`} rel="noopener noreferrer" variant='body1'>
+              {CONTACT.EMAIL}
             </Link>
 
-            <Link href={`tel:${FOOTER.PHONE}`} rel="noopener noreferrer" style={linkXs}>
-              {FOOTER.PHONE}
+            <Link href={`tel:${CONTACT.PHONE}`} rel="noopener noreferrer" variant='body1'>
+              {CONTACT.PHONE}
             </Link>
-          </Stack>
-        </Grid>
+          </FooterContainer>
 
-        <Grid item container md={4} sm={12} sx={{ flexDirection: 'column', justifyContent: 'center', alignItems: { xs: 'center', md: 'flex-start' } }}>
-          <Typography variant="h6" sx={{ marginBottom: 1 }}>
-            {t.common.socials}
-          </Typography>
-
-          <Stack spacing={1} alignItems={{ xs: 'center', md: 'flex-start' }}>
-            <Link href={FOOTER.LINKEDIN} rel="noopener noreferrer" style={linkXs} target="_blank">
+          <FooterContainer title={t.common.followUs}>
+            <Link href={CONTACT.LINKEDIN} rel="noopener noreferrer" variant='body1' target="_blank">
               {t.common.linkedin}
             </Link>
 
-            <Link href={FOOTER.TWITTER} rel="noopener noreferrer" style={linkXs} target="_blank">
+            <Link href={CONTACT.TWITTER} rel="noopener noreferrer" variant='body1' target="_blank">
               {t.common.twitter}
             </Link>
-          </Stack>
-        </Grid>
+          </FooterContainer>
 
-        <Grid item container md={4} sm={12} sx={{ flexDirection: 'column', justifyContent: 'center', alignItems: { xs: 'center', md: 'flex-start' } }}>
-          <Typography variant="h6" sx={{ marginBottom: 1 }}>
-            {t.common.other}
-          </Typography>
+          <FooterContainer title={t.common.company}>
+            <Link href={'/'} rel="noopener noreferrer" variant='body1' target="_blank">
+              {t.common.team}
+            </Link>
 
-          <Stack spacing={1} alignItems={{ xs: 'center', md: 'flex-start' }}>
-            <Link href={FOOTER.TERMS} rel="noopener noreferrer" style={linkXs} target="_blank">
+            <Link href={'/'} rel="noopener noreferrer" variant='body1' target="_blank">
+              {t.common.about}
+            </Link>
+
+            <Link href={'/'} rel="noopener noreferrer" variant='body1' target="_blank">
+              {t.common.faq}
+            </Link>
+          </FooterContainer>
+
+          <FooterContainer title={t.common.legal}>
+            <Link href={CONTACT.TERMS} rel="noopener noreferrer" variant='body1' target="_blank">
               {t.common.terms}
             </Link>
 
-            <Link href={FOOTER.PRIVACY} rel="noopener noreferrer" style={linkXs} target="_blank">
+            <Link href={CONTACT.PRIVACY} rel="noopener noreferrer" variant='body1' target="_blank">
               {t.common.privacy}
             </Link>
-          </Stack>
+          </FooterContainer>
         </Grid>
-      </Grid>
-    // </SectionContainer >
+      </InfoBanner>
+    </ThemeProvider>
   );
 }
 

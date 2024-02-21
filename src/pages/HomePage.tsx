@@ -45,23 +45,24 @@ export default function HomePage() {
               <Typography
                 variant="h2"
                 sx={{
-                  maxWidth: { xl: "none", xs: "530px" },
+                  maxWidth: { xl: "1010px", xs: "540px" },
+                  marginBottom: 1.5
                 }}
               >
-                {t.homePage.hero.titleA}
+                {t.homePage.hero.title}
               </Typography>
               <Typography
                 variant="h6"
                 sx={{
-                  maxWidth: { xl: "none", xs: "530px" },
+                  maxWidth: { xl: "1010px", xs: "525px" },
                 }}
               >
                 {t.homePage.hero.subtitle}
               </Typography>
 
-              <Grid item container sx={{ gap: 1.5, marginTop: 7.5 }}>
-                <Button variant='contained' href={CONTACT.BOOK} target="_blank">{t.common.createPlan}</Button>
-                <Button variant='outlined' href={CONTACT.BOOK} target="_blank">{t.common.bookIntroCall}</Button>
+              <Grid item container sx={{ gap: 1.5, marginTop: 4.5 }}>
+                <Button variant='contained' href={CONTACT.GET_STARTED} target="_blank">{t.common.getStarted}</Button>
+                <Button variant='outlined' href={CONTACT.BOOK_INTRO_CALL} target="_blank">{t.common.bookIntroCall}</Button>
               </Grid>
 
               <Button
@@ -110,12 +111,12 @@ export default function HomePage() {
         }}
       /> */}
 
-      <SectionContainer>
+      <SectionContainer sx={{paddingTop: 13.5}}>
         <Stack>
           <Typography variant="subtitle1" sx={{ marginBottom: 1.5 }}>
             {t.homePage.theProblem.title}
           </Typography>
-          <Typography variant="h4" sx={{ marginBottom: 6, maxWidth: { xs: "840px" }, }}>
+          <Typography variant="h4" sx={{ marginBottom: 6, maxWidth: { xs: "1090px" }, }}>
             {t.homePage.theProblem.subtitle}
           </Typography>
 
@@ -136,7 +137,7 @@ export default function HomePage() {
                       flex: 1,
                     }}
                   >
-                    <Stack alignItems="flex-start" spacing={1}>
+                    <Stack alignItems="flex-start" spacing={1.5}>
                       <Box
                         component="img"
                         sx={{ maxWidth: { xs: 1 } }}
@@ -370,8 +371,8 @@ export default function HomePage() {
                           gap: 1.5
                         }}
                       >
-                        <Button variant='contained' href={CONTACT.BOOK} target="_blank">{t.common.getStarted}</Button>
-                        <Button variant='outlined' href={CONTACT.BOOK} target="_blank">{t.common.bookIntroCall}</Button>
+                        <Button variant='contained' href={CONTACT.GET_STARTED} target="_blank">{t.common.getStarted}</Button>
+                        <Button variant='outlined' href={CONTACT.BOOK_INTRO_CALL} target="_blank">{t.common.bookIntroCall}</Button>
                       </Box>
                     </Stack>
                   </Box>
@@ -385,11 +386,10 @@ export default function HomePage() {
       <ThemeProvider theme={themeDark}>
         <InfoBanner withoutAnimation={false} sx={{
           background: themeGradients.contactGradient,
-          paddingTop: 4,
-          paddingBottom: 15,
+          paddingY: 4,
         }}>
           <Stack sx={{
-            gap: 7.5,
+            gap: 3,
           }}>
             <Typography variant="h6"  >
               {t.homePage.contact.title}
@@ -398,13 +398,14 @@ export default function HomePage() {
             <Box
               sx={{
                 display: 'flex',
+                flexDirection: { xs: 'column', md: 'row' },
                 gap: 1.5,
                 justifyContent: 'center'
               }}
             >
               <Button variant='contained' href={`tel:${CONTACT.PHONE}`} rel="noopener noreferrer">{t.common.callUsNow}</Button>
-              <Button variant='outlined' href={CONTACT.BOOK} target="_blank">{t.common.bookCall}</Button>
-              <Button variant='outlined' href={`mailto:${CONTACT.EMAIL}`} rel="noopener noreferrer">{t.common.contactViaEmail}</Button>
+              <Button variant='outlined' href={CONTACT.BOOK_A_CALL} target="_blank">{t.common.bookCall}</Button>
+              <Button variant='outlined' href={`mailto:${CONTACT.EMAIL}?subject=${t.homePage.contact.subject}`} rel="noopener noreferrer">{t.common.contactViaEmail}</Button>
             </Box>
           </Stack>
         </InfoBanner>

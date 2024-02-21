@@ -19,7 +19,7 @@ interface IFooterContainer {
 
 const FooterContainer = ({ children, title }: IFooterContainer) => {
   return (
-    <Grid item container lg={3} sm={6} sx={{ flexDirection: 'row', justifyContent: { xs: 'center', md: 'flex-start' } }}>
+    <Grid item container lg={2.4} sm={6} sx={{ flexDirection: 'row', justifyContent: { xs: 'center', md: 'flex-start' } }}>
       <Stack spacing={1.5} alignItems={{ xs: 'center', md: 'flex-start' }}>
         <Typography variant="subtitle2">
           {title}
@@ -49,7 +49,7 @@ const Footer = () => {
             </Link>
 
             <Link href={`tel:${CONTACT.PHONE}`} rel="noopener noreferrer" variant='body1'>
-              {CONTACT.PHONE}
+              {CONTACT.PHONE_DISPLAY}
             </Link>
           </FooterContainer>
 

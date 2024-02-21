@@ -31,29 +31,27 @@
     "homePage": {
         "banner": "paraplanner.ai welcomes 4 new financial advisors",
         "hero": {
-            "titleA": "Your fractional paraplanner",
-            "titleB": "10 hours",
-            "titleC": "a week",
-            "subtitle": "We help financial advisors create a personalized, comprehensive financial plan in 24 hours",
+            "title": "Your fractional paraplanner",
+            "subtitle": "We help financial advisors create and update personalized, comprehensive financial plans in 24 hours - in just a few clicks",
             "asSeenOn": "As seen on Michael Kitces tech map"
         },
         "usedBy": "Used by AUM and Fee-only financial advisors",
         "theProblem": {
             "title": "The Problem",
-            "subtitle": "Creating a financial plan takes a lot of time, which can be spent on winning new clients",
+            "subtitle": "Creating and updating financial plans takes a lot of time, which can be spent on winning new clients",
             "box": [
-                "You’ve heard that outsourcing creating a plan is expensive and complicated",
+                "You’ve heard that outsourcing a financial plan is expensive and complicated",
                 "You don’t want to compromise on quality and you want things done a certain way",
                 "You’re busy, and it takes time and effort to find the right partner"
             ]
         },
         "poweredBy": {
-            "title": "Powered by humans. Enhanced by tools.",
+            "title": "Created by humans. Enhanced by automations.",
             "subtitle": "Our financial plans are created by humans, and we use compliant automations to help make planning faster"
         },
         "ourSolution": {
             "title": "Our Solution",
-            "subtitle": "We’ve built an easy way to delegate creating and updating personalized, comprehensive financial plans",
+            "subtitle": "You can delegate creating and updating plans in a few simple steps. We’ll then create a personalised, comprehensive plan in 24 hours.",
             "tabs": [{
                     "heading": "Step 1: You’ll share a brief",
                     "title": "You’ll brief us on your client strategy, and how you want the plan created",
@@ -93,15 +91,15 @@
                 "subtitle": "For financial advisors that want to quickly create personalized, comprehensive financial plans",
                 "subtitlePlaceholder": "",
                 "features": [
-                    "Create new, comprehensive financial plans",
-                    "Migrate and complete a partially completed financial plans",
+                    "Create new, personalized comprehensive financial plans",
+                    "Migrate and complete partially completed financial plans",
                     "Update existing financial plans created with us",
                     "Real time communications via integrated chat",
                     "Direct phone line to your planner",
                     "Securely share client information using an encrypted folder",
                     "Done in 24 hours"
                 ],
-                "price": "500$",
+                "price": "$1,000",
                 "period": "per month"
             },
             "your": {
@@ -109,7 +107,7 @@
                 "subtitle": "For financial advisors that want to build personalized, comprehensive financial plans in ${placeholder}",
                 "subtitlePlaceholder": "their tools",
                 "features": [
-                    "Create new comprehensive financial plans",
+                    "Create new, personalized comprehensive financial plans",
                     "Complete existing, partially completed financial plans",
                     "Update existing financial plans",
                     "Use RightCapital, eMoney and MoneyGuidePro",
@@ -120,12 +118,13 @@
                     "Securely share access to your tools using an encrypted password manager",
                     "Done in 48 - 72 hours"
                 ],
-                "price": "1000$",
+                "price": "$2,500",
                 "period": "per month"
             }
         },
         "contact": {
-            "title": "Have a question or want to learn more? Contact a member of the team"
+            "title": "Have a question or want to learn more? Contact a member of the team",
+            "subject": "Hi - I have a question/want to learn more about paraplanner.ai"
         },
         "security": {
             "titleA": "We focus on your",

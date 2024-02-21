@@ -1,7 +1,13 @@
 "use client";
 import { createTheme } from "@mui/material/styles";
 import { PaletteMode, alpha, darken } from "@mui/material";
-import "@fontsource/libre-baskerville";
+import { Libre_Baskerville } from "next/font/google";
+
+const libreBaskerville = Libre_Baskerville({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+});
 
 interface IColorScheme {
   text: string;
@@ -56,18 +62,19 @@ export const themeGradients: IGradients = {
   heroGradient:
     "linear-gradient(72.44deg, #12222F 16%, #2849C2 58.92%, #449FE7 100%)",
   problemsGradients: [
-    "linear-gradient(85.33deg, #449FE7 0%, #2849C2 8.93%, #12222F 43%, #2849C2 79.32%, #449FE7 100%)",
-    "linear-gradient(88.13deg, #12222F 1.58%, #2849C2 51.77%, #449FE7 100%)",
     "linear-gradient(88.14deg, #2849C2 0%, #12222F 12.87%, #2849C2 65.71%, #449FE7 100%)",
+    "linear-gradient(88.13deg, #12222F 1.58%, #2849C2 51.77%, #449FE7 100%)",
+    "linear-gradient(85.33deg, #449FE7 0%, #2849C2 8.93%, #12222F 43%, #2849C2 79.32%, #449FE7 100%)",
   ],
   poweredByGradient:
     "linear-gradient(83.57deg, #12222F 5.06%, #2849C2 59.34%, #449FE7 100%)",
   supportGradient:
     "linear-gradient(89.88deg, #12222F 0%, #2849C2 68.79%, #449FE7 100%)",
-    contactGradient:"linear-gradient(72.47deg, #12222F 23.55%, #2849C2 68.59%, #449FE7 100%)",
-    footerGradient:"linear-gradient(73.08deg, #12222F 46.47%, #2849C2 78.01%, #449FE7 100%)"
+  contactGradient:
+    "linear-gradient(72.47deg, #12222F 23.55%, #2849C2 68.59%, #449FE7 100%)",
+  footerGradient:
+    "linear-gradient(73.08deg, #12222F 46.47%, #2849C2 78.01%, #449FE7 100%)",
 };
-
 
 const getTheme = (mode: PaletteMode) => {
   const colorScheme = themeColors[mode];
@@ -77,7 +84,7 @@ const getTheme = (mode: PaletteMode) => {
       allVariants: {
         color: colorScheme.text,
       },
-      fontFamily: "Libre Baskerville",
+      fontFamily: libreBaskerville.style.fontFamily,
       h1: {
         fontSize: 89.76,
         fontWeight: 700,
@@ -85,6 +92,7 @@ const getTheme = (mode: PaletteMode) => {
       h2: {
         fontSize: 67.34,
         fontWeight: 700,
+        lineHeight: "84px",
       },
       h3: {
         fontSize: 50.52,
@@ -101,6 +109,7 @@ const getTheme = (mode: PaletteMode) => {
       h6: {
         fontSize: 21.33,
         fontWeight: 700,
+        lineHeight: "26px",
       },
       subtitle1: {
         fontSize: 16,
@@ -137,6 +146,7 @@ const getTheme = (mode: PaletteMode) => {
             fontSize: 16,
             borderRadius: 22,
             minWidth: 200,
+            minHeight: 48,
           },
           contained: {
             background: colorScheme.btnBackground,
@@ -171,7 +181,7 @@ const getTheme = (mode: PaletteMode) => {
       MuiLink: {
         styleOverrides: {
           root: {
-            color: colorScheme.text
+            color: colorScheme.text,
           },
         },
       },

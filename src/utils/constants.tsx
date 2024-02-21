@@ -22,9 +22,12 @@ export const CONTENT_WRAPPER_HIDDEN_ANIMATION = {
 };
 
 export const CONTACT = {
-    BOOK: "https://calendly.com/",
+    GET_STARTED: "https://calendly.com/paraplannerai/your-fractional-paraplanner-introductory-call",
+    BOOK_INTRO_CALL: "https://calendly.com/paraplannerai/your-fractional-paraplanner-introductory-call",
+    BOOK_A_CALL: "https://calendly.com/paraplannerai/your-fractional-paraplanner-introductory-call",
     EMAIL: "hello@paraplanner.ai",
-    PHONE: "(737) 373-3353",
+    PHONE: "+17373733370",
+    PHONE_DISPLAY: "(737) 373-3370",
     LINKEDIN: 'https://linkedin.com/company/paraplannerai',
     TWITTER: 'https://twitter.com/paraplannerai',
     TERMS: 'https://docs.google.com/document/d/1ux_Fa1C688s_Q8knfiDp9lQuTS0-tQyP/edit?usp=sharing&ouid=110062069340887754675&rtpof=true&sd=true',

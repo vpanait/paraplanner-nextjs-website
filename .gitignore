@@ -1,5 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 # Push to 2 remotes: https://stackoverflow.com/questions/14290113/git-pushing-code-to-two-remotes
+# git push all main
 
 # dependencies
 /node_modules

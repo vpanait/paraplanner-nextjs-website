@@ -1,5 +1,5 @@
 {
-    "name": "material-ui-nextjs-ts",
+    "name": "paraplanner-ai-landing-page-nextjs-ts",
     "version": "5.0.0",
     "private": true,
     "scripts": {
@@ -13,20 +13,17 @@
         "@emotion/cache": "latest",
         "@emotion/react": "latest",
         "@emotion/styled": "latest",
-        "@fontsource/libre-baskerville": "^5.0.8",
         "@formatjs/intl-localematcher": "0.2.32",
         "@mui/icons-material": "latest",
         "@mui/material": "latest",
         "@mui/material-nextjs": "latest",
         "@react-spring/web": "^9.7.3",
-        "@types/react-swipeable-views": "^0.13.5",
         "negotiator": "0.6.3",
         "next": "latest",
         "react": "latest",
         "react-dom": "latest",
         "react-slick": "^0.30.2",
         "react-spring-carousel": "^2.0.19",
-        "react-swipeable-views-react-18-fix": "^0.14.1",
         "slick-carousel": "^1.8.1"
     },
     "devDependencies": {

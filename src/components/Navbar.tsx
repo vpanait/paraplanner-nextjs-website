@@ -67,14 +67,14 @@ const Navbar = () => {
       display:' flex',
       justifyContent: 'center'
     }}>
-      <Box
+      {/* <Box
         component="img"
         src="/img/logo.png"
         sx={{
           maxWidth: { xs: 1 },
           marginRight: 1,
         }}
-      />
+      /> */}
       <Typography variant="h5" sx={{ color: theme => theme.palette.text.primary }}>{t.app.name}</Typography>
     </NextLink>
   );

@@ -2,6 +2,8 @@ export const ROUTE = {
     HOME: '/',
     SECURITY: '/security',
     COMPANY: '/company',
+    TEAM: '/team',
+    ABOUT: '/about',
     FAQ: '/faq'
 }
 

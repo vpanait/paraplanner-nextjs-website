@@ -12,9 +12,6 @@ import {
   Container,
   Typography,
   ThemeProvider,
-  useMediaQuery,
-  useTheme,
-  alpha,
   darken,
 } from "@mui/material";
 import ExpandLess from "@mui/icons-material/ExpandLess";
@@ -48,8 +45,6 @@ const routes: MenuItem[] = [
 
 const Navbar = () => {
   const pathname = usePathname();
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const logo = (
     <NextLink href="/" style={{
@@ -66,7 +61,12 @@ const Navbar = () => {
           marginRight: 1,
         }}
       /> */}
-      <Typography variant={isSmallScreen ? "h6" : "h5"} sx={{ color: theme => theme.palette.text.primary }}>{t.app.title}</Typography>
+      <Container disableGutters sx={{ display: { xs: "none", md: "block" } }}>
+        <Typography variant="h5" sx={{ color: theme => theme.palette.text.primary }}>{t.app.title}</Typography>
+      </Container>
+      <Container disableGutters sx={{ display: { xs: "block", md: "none" } }}>
+        <Typography variant="h6" sx={{ color: theme => theme.palette.text.primary }}>{t.app.title}</Typography>
+      </Container>
     </NextLink>
   );
 

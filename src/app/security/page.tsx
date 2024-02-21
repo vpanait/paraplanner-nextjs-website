@@ -1,8 +1,8 @@
 import * as React from 'react';
-import SecurityPage from '@/pages/SecurityPage';
+import HomePage from '@/pages/HomePage';
 
 export default async function Home() {
   return (
-    <SecurityPage /> 
+    <HomePage /> 
   );
 }

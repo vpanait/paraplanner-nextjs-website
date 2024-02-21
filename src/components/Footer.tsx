@@ -5,7 +5,7 @@ import {
   Grid, Link, Stack, ThemeProvider
 } from '@mui/material';
 import t from '@/dictionaries/en.json';
-import { CONTACT } from '@/utils/constants';
+import { CONTACT, ROUTE } from '@/utils/constants';
 import { themeDark, themeGradients } from '@/theme/theme';
 import InfoBanner from './InfoBanner';
 
@@ -59,15 +59,15 @@ const Footer = () => {
           </FooterContainer>
 
           <FooterContainer title={t.footer.company}>
-            <Link href={'/'} rel="noopener noreferrer" variant='body1' target="_blank">
+            <Link href={ROUTE.TEAM} rel="noopener noreferrer" variant='body1'>
               {t.footer.team}
             </Link>
 
-            <Link href={'/'} rel="noopener noreferrer" variant='body1' target="_blank">
+            <Link href={ROUTE.ABOUT} rel="noopener noreferrer" variant='body1'>
               {t.footer.about}
             </Link>
 
-            <Link href={'/'} rel="noopener noreferrer" variant='body1' target="_blank">
+            <Link href={ROUTE.FAQ} rel="noopener noreferrer" variant='body1'>
               {t.footer.faq}
             </Link>
           </FooterContainer>

@@ -8,6 +8,11 @@ import { ThemeProvider } from '@mui/material/styles';
 import { themeLight } from '@/theme/theme';
 import Footer from "@/components/Footer";
 import t from '@/dictionaries/en.json';
+import type { Viewport } from 'next'
+
+export const viewport: Viewport = {
+  themeColor: "#12222F"
+}
 
 export const metadata = {
   title: t.app.title,

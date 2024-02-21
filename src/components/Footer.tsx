@@ -32,7 +32,7 @@ const Footer = () => {
     <ThemeProvider theme={themeDark}>
       <InfoBanner withoutAnimation={false} sx={{
         background: themeGradients.footerGradient,
-        paddingY: 10,
+        paddingY: { xs: 5, sm: 10 }
       }}>
         <Grid
           container
@@ -84,8 +84,8 @@ const Footer = () => {
 
           <Stack
             sx={{
-              marginTop: 11.5,
-              flexDirection:{ xs: 'column', sm: 'row' },
+              marginTop: { xs: 5, sm: 11.5 },
+              flexDirection: { xs: 'column', sm: 'row' },
               width: '100%',
               justifyContent: { xs: 'center', md: 'flex-start' },
               alignItems: { xs: 'center', md: 'flex-start' },

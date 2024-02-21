@@ -3,7 +3,7 @@ import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import SectionContainer from '@/components/SectionContainer';
 import {
-  Box, Button, Card, Grid, Stack, Tab, Tabs, ThemeProvider, alpha, useTheme
+  Box, Button, Card, Grid, Stack, Tab, Tabs, ThemeProvider, alpha, useMediaQuery, useTheme
 } from '@mui/material';
 import t from '@/dictionaries/en.json';
 import { APP_SIGN_UP_URL, CONTACT, KITCES_URL } from '@/utils/constants';
@@ -16,6 +16,7 @@ import Slider from 'react-slick';
 
 export default function HomePage() {
   const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const [solutionTabValue, setSolutionTabValue] = useState(0);
   const sliderRef = React.useRef<Slider>(null);
 
@@ -99,9 +100,9 @@ export default function HomePage() {
 
           <ThemeProvider theme={themeLight}>
             <InfoBanner sx={{
-              minHeight: '88px',
+              minHeight: { xs: "68px", sm: '88px' },
             }}>
-              <Typography variant="h6">
+              <Typography variant="h6" sx={{ textAlign: 'center', paddingY: 1 }}>
                 {t.homePage.usedBy}
               </Typography>
             </InfoBanner>
@@ -116,7 +117,7 @@ export default function HomePage() {
         }}
       /> */}
 
-      <SectionContainer sx={{ paddingTop: 13.5 }}>
+      <SectionContainer sx={{ paddingTop: { xs: 6.5, sm: 13.5 } }}>
         <Stack>
           <Typography variant="subtitle1" sx={{ marginBottom: 1.5 }}>
             {t.homePage.theProblem.title}
@@ -128,7 +129,7 @@ export default function HomePage() {
           <Grid item container
             sx={{
               justifyContent: 'space-between',
-              gap: 6,
+              gap: { xs: 3, sm: 6 },
               flexDirection: { xs: "column", md: 'row' }
             }}
           >
@@ -235,9 +236,13 @@ export default function HomePage() {
 
               <Slider
                 dots={false}
-                swipe={false}
+                swipe={isSmallScreen}
                 ref={sliderRef}
                 arrows={false}
+                infinite={false}
+                afterChange={(slideIndex) => {
+                  setSolutionTabValue(slideIndex)
+                }}
               >
                 {t.homePage.ourSolution.tabs.map((tab, index) => {
                   const maxWidth = [600, 535, 510]
@@ -395,12 +400,12 @@ export default function HomePage() {
       <ThemeProvider theme={themeDark}>
         <InfoBanner withoutAnimation={false} sx={{
           background: themeGradients.contactGradient,
-          paddingY: 4,
+          paddingY: 6.5,
         }}>
           <Stack sx={{
             gap: 3,
           }}>
-            <Typography variant="h6"  >
+            <Typography variant="h6" sx={{ textAlign: 'center' }} >
               {t.homePage.contact.title}
             </Typography>
 

@@ -10,10 +10,12 @@ import {
   Button,
   ListItemButton,
   Container,
-  PaletteMode,
   Typography,
   ThemeProvider,
-  Box,
+  useMediaQuery,
+  useTheme,
+  alpha,
+  darken,
 } from "@mui/material";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
@@ -21,15 +23,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import NextLink from 'next/link';
 import SectionContainer from "@/components/SectionContainer";
 import InfoBanner from "@/components/InfoBanner";
-import { animated, useSpring } from "@react-spring/web";
+import { animated } from "@react-spring/web";
 import t from '@/dictionaries/en.json';
 import { APP_SIGN_IN_URL, ROUTE } from "@/utils/constants";
 import { usePathname } from 'next/navigation'
-import useWindowPosition from "@/hooks/useWindowPosition";
-import { useTheme } from "@emotion/react";
-import { alpha } from '@mui/system';
-import { themeLight } from "@/theme/theme";
-
+import { themeColors, themeLight } from "@/theme/theme";
 
 interface MenuItem {
   label: string;
@@ -37,34 +35,27 @@ interface MenuItem {
   subItems?: MenuItem[];
 }
 
+const routes: MenuItem[] = [
+  {
+    label: t.route.security,
+    path: ROUTE.SECURITY,
+  },
+  {
+    label: t.route.company,
+    path: ROUTE.COMPANY,
+  }
+];
 
 const Navbar = () => {
-  const routes: MenuItem[] = [
-    {
-      label: t.route.security,
-      path: ROUTE.SECURITY,
-    },
-    {
-      label: t.route.company,
-      path: ROUTE.COMPANY,
-    },
-    // {
-    //   label: t.route.about,
-    //   path: ROUTE.ABOUT.BASE,
-    //   subItems: [
-    //     { label: t.route.company, path: ROUTE.ABOUT.COMPANY },
-    //     { label: t.route.team, path: ROUTE.ABOUT.TEAM },
-    //   ],
-    // },
-  ];
-
   const pathname = usePathname();
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const logo = (
     <NextLink href="/" style={{
       textDecoration: 'none',
       position: 'relative',
-      display:' flex',
+      display: ' flex',
       justifyContent: 'center'
     }}>
       {/* <Box
@@ -75,7 +66,7 @@ const Navbar = () => {
           marginRight: 1,
         }}
       /> */}
-      <Typography variant="h5" sx={{ color: theme => theme.palette.text.primary }}>{t.app.title}</Typography>
+      <Typography variant={isSmallScreen ? "h6" : "h5"} sx={{ color: theme => theme.palette.text.primary }}>{t.app.title}</Typography>
     </NextLink>
   );
 
@@ -149,8 +140,8 @@ const Navbar = () => {
       boxShadow: 'none'
     }}>
       <ThemeProvider theme={themeLight}>
-        <InfoBanner>
-          <Typography variant="subtitle2">
+        <InfoBanner sx={{ minHeight: { xs: '60px', sm: '48px' } }}>
+          <Typography variant="subtitle2" sx={{ textAlign: 'center' }}>
             {t.homePage.banner}
           </Typography>
         </InfoBanner>
@@ -177,7 +168,13 @@ const Navbar = () => {
               <ListItem sx={{ padding: 0 }}>
                 <Button
                   onClick={handleToggleMobileMenu}
-                  sx={{ marginRight: 1, minWidth: 'auto' }}
+                  sx={{
+                    marginRight: 1,
+                    minWidth: 'auto',
+                    "&:hover": {
+                      background: 'transparent'
+                    }
+                  }}
                 >
                   <MenuIcon />
                   {mobileMenuOpen ? <ExpandLess /> : <ExpandMore />}
@@ -188,10 +185,22 @@ const Navbar = () => {
                 in={mobileMenuOpen}
                 timeout="auto"
                 unmountOnExit
+                sx={{
+                  position: 'absolute',
+                  backgroundColor: themeColors.dark.btnOutlinedBackgroundHover,
+                  border: `1px solid ${darken(themeColors.dark.btnOutlinedBackgroundHover, 0.5)}`,
+                  zIndex: 2,
+                  width: '100%'
+                }}
               >
                 <List
                   component="div"
                   disablePadding
+                  sx={{
+                    "& .MuiListItemButton-root:hover": {
+                      borderBottomColor: 'transparent'
+                    }
+                  }}
                 >
                   {renderMenuItems('smallMenu', routes)}
                 </List>
@@ -226,7 +235,7 @@ const Navbar = () => {
           </Container>
         </Toolbar>
       </SectionContainer>
-    </AppBar>
+    </AppBar >
   );
 }
 

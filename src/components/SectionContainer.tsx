@@ -48,8 +48,9 @@ const SectionContainer = ({
       container
       ref={sectionRef}
       sx={{
-        // backgroundColor: theme.palette.background.default,
-        paddingY: (disablePaddingY ? 0 : `${CONTENT_WRAPPER_PADDING_Y}px`),
+        ...(!disablePaddingY && {
+          paddingY: { xs: `${CONTENT_WRAPPER_PADDING_Y / 2}px`, sm: `${CONTENT_WRAPPER_PADDING_Y}px` }
+        }),
         ...sx
       }}
     >
@@ -64,7 +65,7 @@ const SectionContainer = ({
         )}
       </Grid>
       <Grid item lg={1.5} md={0.5} sm={0.5} xs={0.25} />
-    </Grid>
+    </Grid >
   );
 };
 

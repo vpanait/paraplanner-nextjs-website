@@ -7,12 +7,13 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import { ThemeProvider } from '@mui/material/styles';
 import { themeLight } from '@/theme/theme';
 import Footer from "@/components/Footer";
+import t from '@/dictionaries/en.json';
 
 export const metadata = {
-  title: 'paraplanner.ai',
+  title: t.app.title,
   openGraph: {
-    title: 'paraplanner.ai',
-    description: 'Delegate admin and planning tasks and focus on more important things',
+    title: t.app.title,
+    description: t.app.description,
   },
 }
 

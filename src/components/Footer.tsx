@@ -1,11 +1,8 @@
 "use client"
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
-import SectionContainer from '@/components/SectionContainer';
 import {
-  Box,
-  Button,
-  Grid, Link, PaletteMode, Stack, ThemeProvider
+  Grid, Link, Stack, ThemeProvider
 } from '@mui/material';
 import t from '@/dictionaries/en.json';
 import { CONTACT } from '@/utils/constants';

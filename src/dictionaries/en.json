@@ -1,7 +1,7 @@
 {
     "app": {
-        "name": "paraplanner.ai",
-        "title": "Save 10 hours a week"
+        "title": "paraplanner.ai",
+        "description": "your fractional paraplanner - create plans in 24 hours, in just a few clicks"
     },
     "route": {
         "security": "Security & Compliance",
@@ -13,22 +13,7 @@
         "bookIntroCall": "Book an intro call",
         "getStarted": "Get started"
     },
-    "footer": {
-        "emailSubject": "Hi - I have a question/want to learn more about paraplanner.ai",
-        "contactUs": "Contact us",
-        "followUs": "Follow us",
-        "linkedin": "LinkedIn",
-        "twitter": "X",
-        "company": "Company",
-        "team": "Team",
-        "about": "About",
-        "faq": "FAQ",
-        "legal": "Legal",
-        "terms": "Terms of service",
-        "privacy": "Privacy",
-        "freedomFighters": "Financial Freedom Fighters, Inc.",
-        "allRightsReserved": "All rights reserved"
-    },
+
     "homePage": {
         "banner": "paraplanner.ai welcomes 4 new financial advisors",
         "hero": {
@@ -199,5 +184,21 @@
             "title": "What support does paraplanner.ai provide during onboarding?",
             "body": "Our dedicated onboarding team offers comprehensive training and personalized guidance to ensure a smooth transition and maximize platform utilization."
         }
+    },
+    "footer": {
+        "emailSubject": "Hi - I have a question/want to learn more about paraplanner.ai",
+        "contactUs": "Contact us",
+        "followUs": "Follow us",
+        "linkedin": "LinkedIn",
+        "twitter": "X",
+        "company": "Company",
+        "team": "Team",
+        "about": "About",
+        "faq": "FAQ",
+        "legal": "Legal",
+        "terms": "Terms of service",
+        "privacy": "Privacy",
+        "freedomFighters": "Financial Freedom Fighters, Inc.",
+        "allRightsReserved": "All rights reserved"
     }
 }

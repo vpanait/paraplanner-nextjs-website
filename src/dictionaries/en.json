@@ -37,7 +37,7 @@
         },
         "ourSolution": {
             "title": "Our Solution",
-            "subtitle": "You can delegate creating and updating plans in a few simple steps. We’ll then create a personalised, comprehensive plan in 24 hours.",
+            "subtitle": "You can delegate creating and updating plans in a few simple steps. We’ll create a personalized, comprehensive plan in 24 hours.",
             "tabs": [{
                     "heading": "Step 1: You’ll share a brief",
                     "title": "You’ll brief us on your client strategy, and how you want the plan created",
@@ -49,9 +49,9 @@
                     "subtitle": "We’ll take the direction, information, and your plan creation preferences to produce a first draft within 24 hours"
                 },
                 {
-                    "heading": "Step 3: We’ll finalise the plan",
+                    "heading": "Step 3: We’ll finalize the plan",
                     "title": "We’ll walk you through the plan, and finalize - ready to present",
-                    "subtitle": "We’ll walk you through the financial plan and brief you on how it was constructed. We’ll implement any changes and finanlize making it ready to deliver to your client"
+                    "subtitle": "We’ll walk you through the financial plan and brief you on how it was constructed. We’ll implement any changes and finalize making it ready to deliver to your client"
                 }
             ]
         },
@@ -79,11 +79,11 @@
                 "features": [
                     "Create new, personalized comprehensive financial plans",
                     "Migrate and complete partially completed financial plans",
-                    "Update existing financial plans created with us",
+                    "Update existing financial plans created",
                     "Real time communications via integrated chat",
                     "Direct phone line to your planner",
                     "Securely share client information using an encrypted folder",
-                    "Done in 24 hours"
+                    "Created in 24 hours"
                 ],
                 "price": "$1,000",
                 "period": "per month"
@@ -102,7 +102,7 @@
                     "Direct phone line to your planner",
                     "Securely share client information using an encrypted folder",
                     "Securely share access to your tools using an encrypted password manager",
-                    "Done in 48 - 72 hours"
+                    "Created in 48 - 72 hours"
                 ],
                 "price": "$2,500",
                 "period": "per month"
@@ -145,7 +145,7 @@
                 "body": "Our tools are built from the ground up with financial advisors in mind, and follow and exceed security and compliance standards. We’re currently undergoing a voluntary audit to obtain SOC2 certification, which can be provided on request."
             },
             {
-                "title": "Are you insured?",
+                "title": "Are you insured/covered?",
                 "body": "We are fully insured, most importantly covering privacy, and security."
             }
         ]

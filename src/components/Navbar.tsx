@@ -75,7 +75,7 @@ const Navbar = () => {
           marginRight: 1,
         }}
       /> */}
-      <Typography variant="h5" sx={{ color: theme => theme.palette.text.primary }}>{t.app.name}</Typography>
+      <Typography variant="h5" sx={{ color: theme => theme.palette.text.primary }}>{t.app.title}</Typography>
     </NextLink>
   );
 

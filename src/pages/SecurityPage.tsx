@@ -1,19 +1,12 @@
 "use client"
 import * as React from 'react';
-import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
 import SectionContainer from '@/components/SectionContainer';
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
   Box,
-  Button, Card, Divider, Grid, Stack, useTheme
+  Grid, useTheme
 } from '@mui/material';
 import t from '@/dictionaries/en.json';
-import { APP_SIGN_UP_URL, ROUTE } from '@/utils/constants';
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import ThemeModeWrapper from '@/theme/ThemeModeWrapper';
 
 
 export default function SecurityPage() {

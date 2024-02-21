@@ -1,6 +1,5 @@
 "use client"
 import * as React from 'react';
-import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
 import SectionContainer from '@/components/SectionContainer';
 import {
@@ -8,12 +7,10 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
-  Button, Card, Divider, Grid, Stack, useTheme
+  Grid, useTheme
 } from '@mui/material';
 import t from '@/dictionaries/en.json';
-import { APP_SIGN_UP_URL, ROUTE } from '@/utils/constants';
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import ThemeModeWrapper from '@/theme/ThemeModeWrapper';
 
 
 export default function FAQPage() {
@@ -29,7 +26,7 @@ export default function FAQPage() {
             </Typography>
           </Grid>
 
-          <Grid container sx={{ justifyContent: 'space-between', rowGap: 2 }} >
+          {/* <Grid container sx={{ justifyContent: 'space-between', rowGap: 2 }} >
             <Grid item container xs={12} sm={7} sx={{ justifyContent: 'center' }}>
               {new Array(8).fill(undefined).map((item, index) => {
                 const key = `q${index + 1}` as 'q1';
@@ -63,7 +60,7 @@ export default function FAQPage() {
                 src="/img/undraw_home_run_acyh.svg"
               />
             </Grid>
-          </Grid>
+          </Grid> */}
         </Grid>
       </SectionContainer>
     </>

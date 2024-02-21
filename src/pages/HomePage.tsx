@@ -100,9 +100,13 @@ export default function HomePage() {
 
           <ThemeProvider theme={themeLight}>
             <InfoBanner sx={{
-              minHeight: { xs: "68px", sm: '88px' },
+              minHeight: { xs: "68px", sm: '88px' }
             }}>
-              <Typography variant="h6" sx={{ textAlign: 'center', paddingY: 1 }}>
+              <Typography variant="h6" sx={{
+                textAlign: 'center',
+                paddingY: 1,
+                maxWidth: { xs: '320px', sm: 'none' }
+              }}>
                 {t.homePage.usedBy}
               </Typography>
             </InfoBanner>

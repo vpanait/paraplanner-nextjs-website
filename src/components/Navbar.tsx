@@ -141,7 +141,10 @@ const Navbar = () => {
     }}>
       <ThemeProvider theme={themeLight}>
         <InfoBanner sx={{ minHeight: { xs: '60px', sm: '48px' } }}>
-          <Typography variant="subtitle2" sx={{ textAlign: 'center' }}>
+          <Typography variant="subtitle2" sx={{
+            textAlign: 'center',
+            maxWidth: { xs: '220px', sm: 'none' }
+          }}>
             {t.homePage.banner}
           </Typography>
         </InfoBanner>

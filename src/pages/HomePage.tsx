@@ -12,6 +12,7 @@ import { themeLight, themeDark, themeColors, themeGradients } from '@/theme/them
 import Navbar from '@/components/Navbar';
 import { useState } from 'react';
 import Slider from 'react-slick';
+import { sendGAEvent } from '@next/third-parties/google'
 
 
 export default function HomePage() {
@@ -67,7 +68,13 @@ export default function HomePage() {
                 gap: 1.5,
                 marginTop: 4.5
               }}>
-                <Button variant='contained' href={CONTACT.GET_STARTED} target="_blank">{t.common.getStarted}</Button>
+                <Button
+                  variant='contained'
+                  href={CONTACT.GET_STARTED}
+                  target="_blank"
+                  onClick={() => sendGAEvent({ event: 'x' })}>
+                  {t.common.getStarted}
+                </Button>
                 <Button variant='outlined' href={CONTACT.BOOK_INTRO_CALL} target="_blank">{t.common.bookIntroCall}</Button>
               </Stack>
 

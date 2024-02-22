@@ -36,7 +36,8 @@ export const themeColors: IColors = {
     btnBackground:
       "linear-gradient(90deg, #12222F 0%, #2849C2 50%, #449FE7 100%)",
     btnBackgroundHover: "linear-gradient(90deg, #449FE7 0%, #449FE7 100%)",
-    btnOutlinedBackgroundHover: "linear-gradient(90deg, #449FE7 0%, #449FE7 100%)",
+    btnOutlinedBackgroundHover:
+      "linear-gradient(90deg, #449FE7 0%, #449FE7 100%)",
     btnText: "#FEFEFE",
   },
   dark: {

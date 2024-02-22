@@ -1,7 +1,9 @@
 {
     "app": {
         "title": "paraplanner.ai",
-        "description": "your fractional paraplanner - create plans in 24 hours, in just a few clicks"
+        "description": "your fractional paraplanner - create plans in 24 hours, in just a few clicks",
+        "website": "https://paraplanner.ai/",
+        "ogImage": "https://paraplanner.ai/"
     },
     "route": {
         "security": "Security & Compliance",

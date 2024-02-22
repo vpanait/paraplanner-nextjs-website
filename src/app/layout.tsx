@@ -20,9 +20,41 @@ export const viewport: Viewport = {
 
 export const metadata = {
   title: t.app.title,
+  description: t.app.description,
+  generator: t.app.title,
+  applicationName: t.app.title,
+  referrer: 'origin-when-cross-origin',
+  keywords: ['financial', 'advisor', 'paraplanner'],
   openGraph: {
     title: t.app.title,
     description: t.app.description,
+    url: t.app.website,
+    siteName: t.app.title,
+    // images: [
+    //   {
+    //     url: t.app.ogImage,
+    //     width: 800,
+    //     height: 600,
+    //   }
+    // ],
+    type: 'website',
+  },
+  metadataBase: new URL(t.app.website),
+  alternates: {
+    canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 }
 

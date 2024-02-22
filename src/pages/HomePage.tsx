@@ -345,11 +345,11 @@ export default function HomePage() {
                 >
                   <Box>
                     <Typography variant="h4" sx={{ marginBottom: 1.5 }}>
-                      {title[0]} <span style={{ color: themeColors.light.textAccent, textDecoration: 'underline' }}>{texts.titlePlaceholder}</span> {title[1]}
+                      {title[0]} <span style={{ color: themeColors.light.textAccent }}>{texts.titlePlaceholder}</span> {title[1]}
                     </Typography>
 
                     <Typography variant="h6" sx={{ marginBottom: 4.5 }}>
-                      {subtitle[0]} <span style={{ color: themeColors.light.textAccent, textDecoration: 'underline' }}>{texts.subtitlePlaceholder}</span> {subtitle[1]}
+                      {subtitle[0]} <span style={{ color: themeColors.light.textAccent }}>{texts.subtitlePlaceholder}</span> {subtitle[1]}
                     </Typography>
 
                     {texts.features.map((feature, featureIndex) => (

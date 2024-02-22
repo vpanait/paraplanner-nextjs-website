@@ -1,5 +1,3 @@
-export const GA4 = "G-JVXYN9NV3F";
-
 export const ROUTE = {
     HOME: '/',
     SECURITY: '/security',

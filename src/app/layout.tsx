@@ -10,8 +10,7 @@ import Footer from "@/components/Footer";
 import t from '@/dictionaries/en.json';
 import type { Viewport } from 'next'
 import { GoogleAnalytics } from '@next/third-parties/google'
-import { GA4 } from "@/utils/constants";
-
+import { GA4 } from "@/utils/ga4";
 
 
 export const viewport: Viewport = {

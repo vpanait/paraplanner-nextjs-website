@@ -12,7 +12,8 @@ import { themeLight, themeDark, themeColors, themeGradients } from '@/theme/them
 import Navbar from '@/components/Navbar';
 import { useState } from 'react';
 import Slider from 'react-slick';
-import { sendGAEvent } from '@next/third-parties/google'
+import { sendGAEvent } from '@/utils/ga4';
+// import { sendGAEvent } from '@next/third-parties/google'
 
 
 export default function HomePage() {
@@ -72,11 +73,11 @@ export default function HomePage() {
                   variant='contained'
                   href={CONTACT.GET_STARTED}
                   target="_blank"
-                  onClick={() => sendGAEvent({ event: EVENT.HOME.HERO.GET_STARTED })}>
+                  onClick={() => sendGAEvent('event', EVENT.HOME.HERO.GET_STARTED)}>
                   {t.common.getStarted}
                 </Button>
                 <Button
-                  onClick={() => sendGAEvent({ event: EVENT.HOME.HERO.BOOK_CALL })}
+                  onClick={() => sendGAEvent('event', EVENT.HOME.HERO.BOOK_CALL)}
                   variant='outlined' href={CONTACT.BOOK_INTRO_CALL} target="_blank"
                 >
                   {t.common.bookIntroCall}
@@ -95,7 +96,7 @@ export default function HomePage() {
                     borderColor: alpha(themeColors.dark.text, 0.2),
                   }
                 }}
-                onClick={() => sendGAEvent({ event: EVENT.HOME.HERO.TECH_MAP })}
+                onClick={() => sendGAEvent('event', EVENT.HOME.HERO.TECH_MAP)}
               >
                 <Stack alignItems="flex-start" spacing={1}>
                   <Box
@@ -159,7 +160,6 @@ export default function HomePage() {
                       background: themeGradients.problemsGradients?.[index],
                       flex: 1,
                     }}
-                    onClick={() => sendGAEvent({ event: 'card-click' })}
                   >
                     <Stack alignItems="flex-start" spacing={1.5}>
                       <Box
@@ -222,7 +222,7 @@ export default function HomePage() {
                 onChange={
                   (event: React.SyntheticEvent, newValue: number) => {
                     setSolutionTabValue(newValue);
-                    sendGAEvent({ event: EVENT.HOME.SOLUTION.TAB_CLICK, value: t.homePage.ourSolution.tabs[newValue].heading })
+                    sendGAEvent('event', EVENT.HOME.SOLUTION.TAB_CLICK, { value: t.homePage.ourSolution.tabs[newValue].heading })
                   }}
                 sx={{
                   "& .MuiTabs-flexContainer": {
@@ -261,7 +261,7 @@ export default function HomePage() {
                 infinite={false}
                 afterChange={(slideIndex) => {
                   setSolutionTabValue(slideIndex),
-                    sendGAEvent({ event: EVENT.HOME.SOLUTION.SLIDER_SWIPE, value: t.homePage.ourSolution.tabs[slideIndex].heading })
+                    sendGAEvent('event', EVENT.HOME.SOLUTION.SLIDER_SWIPE, { value: t.homePage.ourSolution.tabs[slideIndex].heading })
                 }}
               >
                 {t.homePage.ourSolution.tabs.map((tab, index) => {
@@ -293,7 +293,7 @@ export default function HomePage() {
             </Box>
           </Grid>
         </Stack >
-      </SectionContainer>
+      </SectionContainer >
 
       <ThemeProvider theme={themeDark}>
         <InfoBanner centered={false} withoutAnimation={false} sx={{
@@ -409,20 +409,14 @@ export default function HomePage() {
                           variant='contained' href={CONTACT.GET_STARTED} target="_blank"
                           onClick={
                             () =>
-                              sendGAEvent({
-                                event: EVENT.HOME.PLAN.GET_STARTED,
-                                value: who
-                              })
+                              sendGAEvent('event', EVENT.HOME.PLAN.GET_STARTED, { value: who })
                           }
                         >{t.common.getStarted}</Button>
                         <Button
                           variant='outlined' href={CONTACT.BOOK_INTRO_CALL} target="_blank"
                           onClick={
                             () =>
-                              sendGAEvent({
-                                event: EVENT.HOME.PLAN.BOOK_INTRO_CALL,
-                                value: who
-                              })
+                              sendGAEvent('event', EVENT.HOME.PLAN.BOOK_INTRO_CALL, { value: who })
                           }
                         >
                           {t.common.bookIntroCall}
@@ -459,26 +453,26 @@ export default function HomePage() {
             >
               <Button
                 variant='contained' href={`tel:${CONTACT.PHONE}`} rel="noopener noreferrer"
-                onClick={() => sendGAEvent({ event: EVENT.HOME.CONTACT.CALL_NOW })}
+                onClick={() => sendGAEvent('event', EVENT.HOME.CONTACT.CALL_NOW)}
               >
                 {t.homePage.contact.callUsNow}
               </Button>
               <Button
                 variant='outlined' href={CONTACT.BOOK_A_CALL} target="_blank"
-                onClick={() => sendGAEvent({ event: EVENT.HOME.CONTACT.BOOK_CALL })}
+                onClick={() => sendGAEvent('event', EVENT.HOME.CONTACT.BOOK_CALL)}
               >
                 {t.homePage.contact.bookCall}
               </Button>
               <Button
                 variant='outlined' href={`mailto:${CONTACT.EMAIL}?subject=${t.homePage.contact.emailSubject}`} rel="noopener noreferrer"
-                onClick={() => sendGAEvent({ event: EVENT.HOME.CONTACT.VIA_EMAIL })}
+                onClick={() => sendGAEvent('event', EVENT.HOME.CONTACT.VIA_EMAIL)}
               >
                 {t.homePage.contact.contactViaEmail}
               </Button>
             </Box>
-          </Stack>
-        </InfoBanner>
-      </ThemeProvider>
+          </Stack >
+        </InfoBanner >
+      </ThemeProvider >
 
       <SectionContainer>
         <Typography variant="h4" sx={{ marginBottom: 6 }}>

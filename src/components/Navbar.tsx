@@ -162,6 +162,7 @@ const Navbar = () => {
           }}
         >
           <Container
+            maxWidth={false}
             sx={{
               display: { xs: "block", md: "none" },
               padding: { xs: 0 },
@@ -211,7 +212,7 @@ const Navbar = () => {
             </List>
           </Container>
 
-          <Container sx={{
+          <Container maxWidth={false} sx={{
             display: { xs: "none", md: "flex" },
             padding: { xs: 0 },
             margin: { xs: 0 },

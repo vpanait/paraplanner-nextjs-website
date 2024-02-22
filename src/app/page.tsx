@@ -1,5 +1,4 @@
 import * as React from 'react';
-// import "./globals.css";
 import HomePage from '@/pages/HomePage';
 
 export default async function Home() {

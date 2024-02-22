@@ -9,6 +9,12 @@ import { themeLight } from '@/theme/theme';
 import Footer from "@/components/Footer";
 import t from '@/dictionaries/en.json';
 import type { Viewport } from 'next'
+import mixpanel from 'mixpanel-browser';
+import Script from 'next/script'
+import { GoogleAnalytics } from '@next/third-parties/google'
+import { GA4 } from "@/utils/constants";
+
+
 
 export const viewport: Viewport = {
   themeColor: "#12222F"
@@ -35,6 +41,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
             <Footer />
           </ThemeProvider>
         </AppRouterCacheProvider>
+        <GoogleAnalytics gaId={GA4} />
       </body>
     </html>
   );

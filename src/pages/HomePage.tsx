@@ -6,7 +6,7 @@ import {
   Box, Button, Card, Grid, Stack, Tab, Tabs, ThemeProvider, alpha, useMediaQuery, useTheme
 } from '@mui/material';
 import t from '@/dictionaries/en.json';
-import { APP_SIGN_UP_URL, CONTACT, KITCES_URL } from '@/utils/constants';
+import { CONTACT, KITCES_URL } from '@/utils/constants';
 import InfoBanner from '@/components/InfoBanner';
 import { themeLight, themeDark, themeColors, themeGradients } from '@/theme/theme';
 import Navbar from '@/components/Navbar';

@@ -1,3 +1,5 @@
+export const GA4 = "G-JVXYN9NV3F";
+
 export const ROUTE = {
     HOME: '/',
     SECURITY: '/security',
@@ -7,7 +9,6 @@ export const ROUTE = {
     FAQ: '/faq'
 }
 
-export const APP_SIGN_UP_URL = "https://app.paraplanner.ai/sign-up?source=generaladminplanning";
 export const APP_SIGN_IN_URL = "https://app.paraplanner.ai/";
 export const KITCES_URL = "https://www.kitces.com/fintechmap/";
 

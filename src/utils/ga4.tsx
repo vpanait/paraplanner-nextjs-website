@@ -1,4 +1,4 @@
-export const GA4 = "G-JVXYN9NV3F";
+export const GA4 = "G-XP0J11QLHT";
 
 export const sendGAEvent = (
   type: 'event' | 'page_view', // Specify the allowed event types

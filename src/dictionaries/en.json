@@ -59,8 +59,8 @@
         },
         "support": {
             "box": [{
-                    "title": "Real time support",
-                    "subtitle": "You can reach us in real time via chat or phone at any stage during the plan creation process"
+                    "title": "Real-time support",
+                    "subtitle": "You can reach us in real-time via chat or phone at any stage during the plan creation process"
                 },
                 {
                     "title": "Built in-house",
@@ -73,7 +73,7 @@
             ]
         },
         "plans": {
-            "title": "Create a plan using ${placeholder} tools",
+            "title": "Create a plan using ${placeholder} systems",
             "our": {
                 "titlePlaceholder": "our",
                 "subtitle": "For financial advisors that want to quickly create personalized, comprehensive financial plans",
@@ -82,7 +82,7 @@
                     "Create new, personalized comprehensive financial plans",
                     "Migrate and complete partially completed financial plans",
                     "Update existing financial plans created",
-                    "Real time communications via integrated chat",
+                    "Real-time communications via integrated chat",
                     "Direct phone line to your planner",
                     "Securely share client information using an encrypted folder",
                     "Created in 24 hours"
@@ -93,14 +93,14 @@
             "your": {
                 "titlePlaceholder": "your",
                 "subtitle": "For financial advisors that want to build personalized, comprehensive financial plans in ${placeholder}",
-                "subtitlePlaceholder": "their tools",
+                "subtitlePlaceholder": "their systems",
                 "features": [
                     "Create new, personalized comprehensive financial plans",
                     "Complete existing, partially completed financial plans",
                     "Update existing financial plans",
                     "Use RightCapital, eMoney and MoneyGuidePro",
                     "Support for other tools available",
-                    "Real time communications via integrated chat",
+                    "Real-time communications via integrated chat",
                     "Direct phone line to your planner",
                     "Securely share client information using an encrypted folder",
                     "Securely share access to your tools using an encrypted password manager",
@@ -128,7 +128,7 @@
         "title": "Frequently Asked Questions",
         "questions": [{
                 "title": "What planning software do you use to create financial plans?",
-                "body": "We use inStream to create the core of the financial plan. Depending on the plan complexity and requirement, we use additional tools to create comprehensive financial plans."
+                "body": "We use inStream to create the core of the financial plan. Depending on the plan's complexity and requirement, we use additional tools to create comprehensive financial plans."
             },
             {
                 "title": "I want to build the financial plan in my tools - what do you support?",
@@ -144,7 +144,7 @@
             },
             {
                 "title": "Are your automated tools secure and compliant?",
-                "body": "Our tools are built from the ground up with financial advisors in mind, and follow and exceed security and compliance standards. We’re currently undergoing a voluntary audit to obtain SOC2 certification, which can be provided on request."
+                "body": "Our tools are built from the ground up with financial advisors in mind and follow and exceed security and compliance standards. We’re currently undergoing a voluntary audit to obtain SOC2 certification, which can be provided on request."
             },
             {
                 "title": "Are you insured/covered?",

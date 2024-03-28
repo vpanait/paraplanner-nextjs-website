@@ -190,6 +190,7 @@
     "footer": {
         "emailSubject": "Hi - I have a question/want to learn more about paraplanner.ai",
         "contactUs": "Contact us",
+        "support": "Support",
         "followUs": "Follow us",
         "linkedin": "LinkedIn",
         "twitter": "X",
@@ -197,6 +198,7 @@
         "team": "Team",
         "about": "About",
         "faq": "FAQ",
+        "documentation": "Documentation",
         "legal": "Legal",
         "terms": "Terms of service",
         "privacy": "Privacy policy",

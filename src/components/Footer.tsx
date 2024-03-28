@@ -52,6 +52,12 @@ const Footer = () => {
             >
               {CONTACT.PHONE_DISPLAY}
             </Link>
+
+            <Link href={ROUTE.SUPPORT} rel="noopener noreferrer" variant='body1'
+              onClick={() => sendGAEvent('event', EVENT.FOOTER.CONTACT_SUPPORT)}
+            >
+              {t.footer.support}
+            </Link>
           </FooterContainer>
 
           <FooterContainer title={t.footer.followUs}>
@@ -86,10 +92,16 @@ const Footer = () => {
             >
               {t.footer.faq}
             </Link>
+
+            <Link href={ROUTE.DOCUMENTATION} rel="noopener noreferrer" variant='body1'
+              onClick={() => sendGAEvent('event', EVENT.FOOTER.COMPANY_DOCUMENTATION)}
+            >
+              {t.footer.documentation}
+            </Link>
           </FooterContainer>
 
           <FooterContainer title={t.footer.legal}>
-          <Link href={ROUTE.TERMS} rel="noopener noreferrer" variant='body1'
+            <Link href={ROUTE.TERMS} rel="noopener noreferrer" variant='body1'
               onClick={() => sendGAEvent('event', EVENT.FOOTER.LEGAL_TERMS)}
             >
               {t.footer.terms}

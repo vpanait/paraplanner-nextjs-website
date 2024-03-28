@@ -6,7 +6,9 @@ export const ROUTE = {
     ABOUT: '/about',
     FAQ: '/faq',
     TERMS: '/terms-of-service',
-    PRIVACY: '/privacy-policy'
+    PRIVACY: '/privacy-policy',
+    SUPPORT: '/support',
+    DOCUMENTATION: '/documentation',
 }
 
 export const APP_SIGN_IN_URL = "https://app.paraplanner.ai/";
@@ -62,11 +64,13 @@ export const EVENT = {
     FOOTER: {
         CONTACT_EMAIL: 'footer_contact_via-email',
         CONTACT_PHONE: 'footer_contact_via-phone',
+        CONTACT_SUPPORT: 'footer_contact_support',
         FOLLOW_LINKEDIN: 'footer_follow_linkedin',
         FOLLOW_X: 'footer_follow_x',
         COMPANY_TEAM: 'footer_company_team',
         COMPANY_ABOUT: 'footer_company_about',
         COMPANY_FAQ: 'footer_company_faq',
+        COMPANY_DOCUMENTATION: 'footer_company_documentation',
         LEGAL_TERMS: 'footer_legal_terms',
         LEGAL_PRIVACY: 'footer_legal_privacy',
     }

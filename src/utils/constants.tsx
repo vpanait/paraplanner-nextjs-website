@@ -4,7 +4,9 @@ export const ROUTE = {
     COMPANY: '/company',
     TEAM: '/team',
     ABOUT: '/about',
-    FAQ: '/faq'
+    FAQ: '/faq',
+    TERMS: '/terms-of-service',
+    PRIVACY: '/privacy-policy'
 }
 
 export const APP_SIGN_IN_URL = "https://app.paraplanner.ai/";

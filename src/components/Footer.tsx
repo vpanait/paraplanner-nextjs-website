@@ -89,13 +89,13 @@ const Footer = () => {
           </FooterContainer>
 
           <FooterContainer title={t.footer.legal}>
-            <Link href={CONTACT.TERMS} rel="noopener noreferrer" variant='body1' target="_blank"
+          <Link href={ROUTE.TERMS} rel="noopener noreferrer" variant='body1'
               onClick={() => sendGAEvent('event', EVENT.FOOTER.LEGAL_TERMS)}
             >
               {t.footer.terms}
             </Link>
 
-            <Link href={CONTACT.PRIVACY} rel="noopener noreferrer" variant='body1' target="_blank"
+            <Link href={ROUTE.PRIVACY} rel="noopener noreferrer" variant='body1'
               onClick={() => sendGAEvent('event', EVENT.FOOTER.LEGAL_PRIVACY)}
             >
               {t.footer.privacy}

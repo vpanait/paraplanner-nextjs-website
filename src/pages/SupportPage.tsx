@@ -7,6 +7,7 @@ import Navbar from '@/components/Navbar';
 import DocHeader from '@/components/DocHeader';
 import DocItem from '@/components/DocItem';
 import DocList from '@/components/DocList';
+import { CONTACT } from '@/utils/constants';
 
 export default function SupportPage() {
   return (
@@ -55,7 +56,7 @@ export default function SupportPage() {
             Support Phone Number:
           </DocItem>
           <DocList><li>
-            If you need to speak with a support representative, call us at: (737) 373-3370 (737) 373-3370 (available 9 AM - 5 PM CST, Monday through Friday).
+            If you need to speak with a support representative, call us at: <a href={`tel:${CONTACT.PHONE}`} rel="noopener noreferrer">{CONTACT.PHONE_DISPLAY}</a> (available 9 AM - 5 PM CST, Monday through Friday).
           </li></DocList>
 
 

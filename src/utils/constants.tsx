@@ -26,10 +26,26 @@ export const CONTENT_WRAPPER_HIDDEN_ANIMATION = {
     opacity: 0,
 };
 
+// TODO: justin links
+export const CALENDARLY: {
+    [key: string]: {
+        GET_STARTED: string;
+        BOOK_INTRO_CALL: string;
+        BOOK_A_CALL: string;
+    };
+} = {
+    DEFAULT: {
+        GET_STARTED: "https://calendly.com/paraplanner-ai-seth-lead-paraplanner/paraplanner-ai-meeting",
+        BOOK_INTRO_CALL: "https://calendly.com/paraplanner-ai-seth-lead-paraplanner/paraplanner-ai-meeting",
+        BOOK_A_CALL: "https://calendly.com/paraplanner-ai-seth-lead-paraplanner/paraplanner-ai-meeting",
+    },
+    JUSTIN: {
+        GET_STARTED: "https://calendly.com/paraplanner-ai-seth-lead-paraplanner/paraplanner-ai-meeting",
+        BOOK_INTRO_CALL: "https://calendly.com/paraplanner-ai-seth-lead-paraplanner/paraplanner-ai-meeting",
+        BOOK_A_CALL: "https://calendly.com/paraplanner-ai-seth-lead-paraplanner/paraplanner-ai-meeting",
+    }
+}
 export const CONTACT = {
-    GET_STARTED: "https://calendly.com/paraplanner-ai-seth-lead-paraplanner/paraplanner-ai-meeting",
-    BOOK_INTRO_CALL: "https://calendly.com/paraplanner-ai-seth-lead-paraplanner/paraplanner-ai-meeting",
-    BOOK_A_CALL: "https://calendly.com/paraplanner-ai-seth-lead-paraplanner/paraplanner-ai-meeting",
     EMAIL: "hello@paraplanner.ai",
     PHONE: "+17373733370",
     PHONE_DISPLAY: "(737) 373-3370",

@@ -6,7 +6,7 @@ import {
   Box, Button, Card, Grid, Stack, Tab, Tabs, ThemeProvider, alpha, useMediaQuery, useTheme
 } from '@mui/material';
 import t from '@/dictionaries/en.json';
-import { CONTACT, EVENT, KITCES_URL } from '@/utils/constants';
+import { CALENDARLY, CONTACT, EVENT, KITCES_URL } from '@/utils/constants';
 import InfoBanner from '@/components/InfoBanner';
 import { themeLight, themeDark, themeColors, themeGradients } from '@/theme/theme';
 import Navbar from '@/components/Navbar';
@@ -21,6 +21,37 @@ export default function HomePage() {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const [solutionTabValue, setSolutionTabValue] = useState(0);
   const sliderRef = React.useRef<Slider>(null);
+  const [referrer, setReferrer] = useState<string | null>('')
+  const [calendarlyLinks, setCalendarlyLinks] = useState(CALENDARLY.DEFAULT);
+
+  React.useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const referrerParam = urlParams.get('ref');
+    const referrerStorage = localStorage.getItem('referrer');
+    const referrerExpireStorage = localStorage.getItem('referrerExpire');
+
+    if (referrerParam) {
+      setReferrer(referrerParam);
+
+      const expiryDate = Date.now() + 10 * 24 * 60 * 60 * 1000; // 10 days
+      localStorage.setItem('referrer', referrerParam)
+      localStorage.setItem('referrerExpire', expiryDate?.toString())
+    } else {
+      if (referrerExpireStorage && parseInt(referrerExpireStorage || '0', 10) > Date.now()) {
+        setReferrer(referrerStorage)
+      }
+    }
+  }, []);
+
+  React.useEffect(() => {
+    const upperCaseReferrer = referrer?.toUpperCase();
+    if (upperCaseReferrer && Object.keys(CALENDARLY).includes(upperCaseReferrer)) {
+      setCalendarlyLinks(CALENDARLY[upperCaseReferrer]);
+    } else {
+      setCalendarlyLinks(CALENDARLY.DEFAULT);
+    }
+  }, [referrer]);
+
 
   React.useEffect(() => {
     if (sliderRef.current) {
@@ -71,14 +102,14 @@ export default function HomePage() {
               }}>
                 <Button
                   variant='contained'
-                  href={CONTACT.GET_STARTED}
+                  href={calendarlyLinks?.GET_STARTED}
                   target="_blank"
                   onClick={() => sendGAEvent('event', EVENT.HOME.HERO.GET_STARTED)}>
                   {t.common.getStarted}
                 </Button>
                 <Button
                   onClick={() => sendGAEvent('event', EVENT.HOME.HERO.BOOK_CALL)}
-                  variant='outlined' href={CONTACT.BOOK_INTRO_CALL} target="_blank"
+                  variant='outlined' href={calendarlyLinks?.BOOK_INTRO_CALL} target="_blank"
                 >
                   {t.common.bookIntroCall}
                 </Button>
@@ -406,14 +437,14 @@ export default function HomePage() {
                         gap: 1.5,
                       }}>
                         <Button
-                          variant='contained' href={CONTACT.GET_STARTED} target="_blank"
+                          variant='contained' href={calendarlyLinks?.GET_STARTED} target="_blank"
                           onClick={
                             () =>
                               sendGAEvent('event', EVENT.HOME.PLAN.GET_STARTED, { value: who })
                           }
                         >{t.common.getStarted}</Button>
                         <Button
-                          variant='outlined' href={CONTACT.BOOK_INTRO_CALL} target="_blank"
+                          variant='outlined' href={calendarlyLinks?.BOOK_INTRO_CALL} target="_blank"
                           onClick={
                             () =>
                               sendGAEvent('event', EVENT.HOME.PLAN.BOOK_INTRO_CALL, { value: who })
@@ -458,7 +489,7 @@ export default function HomePage() {
                 {t.homePage.contact.callUsNow}
               </Button>
               <Button
-                variant='outlined' href={CONTACT.BOOK_A_CALL} target="_blank"
+                variant='outlined' href={calendarlyLinks?.BOOK_A_CALL} target="_blank"
                 onClick={() => sendGAEvent('event', EVENT.HOME.CONTACT.BOOK_CALL)}
               >
                 {t.homePage.contact.bookCall}

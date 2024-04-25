@@ -33,7 +33,7 @@ export default function HomePage() {
     if (referrerParam) {
       setReferrer(referrerParam);
 
-      const expiryDate = Date.now() + 10 * 24 * 60 * 60 * 1000; // 10 days
+      const expiryDate = Date.now() + 90 * 24 * 60 * 60 * 1000; // 90 days
       localStorage.setItem('referrer', referrerParam)
       localStorage.setItem('referrerExpire', expiryDate?.toString())
     } else {

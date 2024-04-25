@@ -40,9 +40,9 @@ export const CALENDARLY: {
         BOOK_A_CALL: "https://calendly.com/paraplanner-ai-seth-lead-paraplanner/paraplanner-ai-meeting",
     },
     JUSTIN: {
-        GET_STARTED: "https://calendly.com/paraplanner-ai-seth-lead-paraplanner/paraplanner-ai-meeting",
-        BOOK_INTRO_CALL: "https://calendly.com/paraplanner-ai-seth-lead-paraplanner/paraplanner-ai-meeting",
-        BOOK_A_CALL: "https://calendly.com/paraplanner-ai-seth-lead-paraplanner/paraplanner-ai-meeting",
+        GET_STARTED: "https://calendly.com/paraplannerai/paraplanner-ai-intro-meeting-jb",
+        BOOK_INTRO_CALL: "https://calendly.com/paraplannerai/paraplanner-ai-intro-meeting-jb",
+        BOOK_A_CALL: "https://calendly.com/paraplannerai/paraplanner-ai-intro-meeting-jb",
     }
 }
 export const CONTACT = {
